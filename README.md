@@ -12,7 +12,7 @@ Main source for inormation: http://r-pkgs.had.co.nz
 
 - [ ] DESCRIPTION: authors, pkg summary
 
-- [ ] Introductiory vignette
+- [ ] Introductiory vignette (`vignettes/intro.Rmd`)
 
 - [ ] Vignette: How to perform daily updates (see section below)
 
