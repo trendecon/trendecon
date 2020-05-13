@@ -2,9 +2,7 @@
 # in the future, it may be sufficient to store aggregations only.
 
 proc_aggregate_raw <- function(keyword = "Insolvenz") {
-
   aggregate_raw_one <- function(suffix_start) {
-
     files <- normalizePath(list.files(path_data_raw("indicator_raw"), pattern = "csv$", full.names = TRUE))
     files <- grep(paste0(keyword, "_", suffix_start), files, fixed = TRUE, value = TRUE)
 
@@ -22,5 +20,4 @@ proc_aggregate_raw <- function(keyword = "Insolvenz") {
   aggregate_raw_one("d")
   aggregate_raw_one("w")
   aggregate_raw_one("m")
-
 }

@@ -12,7 +12,7 @@
 #' @param wait waiting time until retry
 ts_gtrends_windows <- function(keyword = NA,
                                category = "0",
-                               geo = 'CH',
+                               geo = "CH",
                                from = "2019-01-01",
                                prevent_window_shrinkage = FALSE,
                                stepsize = 7,
@@ -32,7 +32,7 @@ ts_gtrends_windows <- function(keyword = NA,
     # truncate end date to Sys.Date() to avoid google errors
     mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
     (function(x) {
-      if(prevent_window_shrinkage) {
+      if (prevent_window_shrinkage) {
         distinct(x, end_date, .keep_all = TRUE)
       } else {
         x

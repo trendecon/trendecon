@@ -1,6 +1,5 @@
 # proc functions work on the file system
 proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
-
   today <- Sys.Date()
 
   message("Downloading keyword: ", keyword)
@@ -34,5 +33,4 @@ proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
     prevent_window_shrinkage = FALSE
   )
   write_csv(m, path_data_raw("indicator_raw", sprintf("%s_m_%s.csv", keyword, today)))
-
 }

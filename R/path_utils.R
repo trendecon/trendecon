@@ -37,7 +37,7 @@ read_keywords <- function(keywords, suffix = "sa", id = NULL) {
       select(keyword, id, time, value)
 
     if (!is.null(id)) {
-      ans <- filter(ans, id == !! id) %>%
+      ans <- filter(ans, id == !!id) %>%
         select(-id)
     }
     ans
@@ -49,4 +49,3 @@ read_keywords <- function(keywords, suffix = "sa", id = NULL) {
 write_keyword <- function(x, keyword, suffix = "sa") {
   write_csv(x, path_keyword(keyword, suffix))
 }
-

@@ -2,7 +2,6 @@
 #
 # seas_adj_file("Insolvenz")
 proc_seas_adj <- function(keyword = "Insolvenz") {
-
   message("seasonal adjustment keyword: ", keyword)
 
   library(prophet)
@@ -25,7 +24,7 @@ proc_seas_adj <- function(keyword = "Insolvenz") {
   m <-
     # prophet(holidays = holidays, daily.seasonality = FALSE) %>%
     prophet(daily.seasonality = FALSE) %>%
-    add_country_holidays(country_name = 'CH') %>%
+    add_country_holidays(country_name = "CH") %>%
     fit.prophet(df)
 
   # forecast <- predict(m, df)
@@ -35,14 +34,11 @@ proc_seas_adj <- function(keyword = "Insolvenz") {
 
   sa <-
     z %>%
-    transmute(time = as.Date(ds), trend, seas_comp = additive_terms) %>%    # additive_terms = yhat - trend,
+    transmute(time = as.Date(ds), trend, seas_comp = additive_terms) %>% # additive_terms = yhat - trend,
     left_join(data, by = "time") %>%
     rename(orig = value) %>%
     mutate(seas_adj = orig - seas_comp) %>%
     ts_long()
 
   write_keyword(sa, keyword, "sa")
-
-
 }
-

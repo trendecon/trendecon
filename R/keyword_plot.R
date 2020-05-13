@@ -1,5 +1,4 @@
 keyword_plot <- function(keyword = NULL, x = NULL, target = NULL, invert = FALSE, freq = "quarter") {
-
   if (!is.null(keyword)) {
     x <- ts_frequency(ts_gtrends(keyword = keyword, time = "2007-01-01 2020-04-05"), freq)
   } else {
@@ -35,6 +34,5 @@ keyword_plot <- function(keyword = NULL, x = NULL, target = NULL, invert = FALSE
 
   ts_plot(dta, title = paste("Keyword:", keyword))
 
-  options(op)  # restore defaults
-
+  options(op) # restore defaults
 }

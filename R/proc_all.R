@@ -33,7 +33,4 @@ proc_all <- function(path = ".") {
     index_script <- system.file("script", paste0(index, ".R"), package = "gtrendecon")
     source(index_script, encoding = "UTF-8")
   }
-
 }
-
-

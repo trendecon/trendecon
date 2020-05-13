@@ -1,6 +1,6 @@
 # Example: We want to turn scripts in `inst/script` into functions, like this one
 proc_index_clothing <- function() {
-  keywords <- c( "Mango", "Zara", "H&M", "PKZ", "Blue Tomato","Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
+  keywords <- c("Mango", "Zara", "H&M", "PKZ", "Blue Tomato", "Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
 
   # update indicators
   lapply(keywords, proc_keyword)

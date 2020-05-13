@@ -1,7 +1,6 @@
 # proc functions work on the file system
 #' @export
 proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
-
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
   d <- ts_gtrends_windows(
@@ -34,9 +33,4 @@ proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
   )
   write_csv(m, path_data_raw("indicator_raw", paste0(keyword, "_m.csv")))
   write_keyword(aggregate_windows(m), keyword, "m")
-
-
-
 }
-
-

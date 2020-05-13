@@ -1,6 +1,5 @@
 # proc_combine_freq("Insolvenz")
 proc_combine_freq <- function(keyword = "Insolvenz") {
-
   message("combining frequencies of keyword: ", keyword)
 
   library(tempdisagg)
@@ -27,5 +26,4 @@ proc_combine_freq <- function(keyword = "Insolvenz") {
   # mwd_old <- read_keyword(keyword, "mwd")
   # write_csv(ts_c(mwd_old, mwd), "data/indicator_doc/mwd_old.csv")
   # ts_dygraphs(read_csv("data/indicator_doc/mwd_old.csv"))
-
 }

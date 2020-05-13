@@ -1,9 +1,8 @@
 # online tutorial for analyzing google trends in R:
 # https://www.datacareer.ch/blog/analyzing-google-trends-with-r-retrieve-and-plot-with-gtrendsr/
 
-ts_gtrends <- function(keyword = NA, category = "0", geo = 'CH', time = "today+5-y",
+ts_gtrends <- function(keyword = NA, category = "0", geo = "CH", time = "today+5-y",
                        retry = 5, wait = 5, quiet = FALSE) {
-
   library(tidyverse)
   library(tsbox)
   library(gtrendsR)
@@ -18,7 +17,9 @@ ts_gtrends <- function(keyword = NA, category = "0", geo = 'CH', time = "today+5
   }
 
   get_ts_from_gtrends <- function(x) {
-    if (is.null(x$interest_over_time)) return(NULL)
+    if (is.null(x$interest_over_time)) {
+      return(NULL)
+    }
     transmute(x$interest_over_time, time = as.Date(date), value = ensure_numeric(hits))
   }
 
@@ -29,10 +30,10 @@ ts_gtrends <- function(keyword = NA, category = "0", geo = 'CH', time = "today+5
   # Use defaults for backing off
   # multiple categories
   if (length(category) > 1) {
-    gtrendslist <- setNames(lapply(category, function(e) gtrends_with_backoff(keyword = keyword, category = e, gprop = 'web', geo = geo, time = time, onlyInterest = TRUE, retry = retry, wait = wait, quiet = quiet)), category)
-  # multiple (or one) keyword(s)
+    gtrendslist <- setNames(lapply(category, function(e) gtrends_with_backoff(keyword = keyword, category = e, gprop = "web", geo = geo, time = time, onlyInterest = TRUE, retry = retry, wait = wait, quiet = quiet)), category)
+    # multiple (or one) keyword(s)
   } else {
-    gtrendslist <- setNames(lapply(keyword, function(e) gtrends_with_backoff(keyword = e, category = category, gprop = 'web', geo = geo, time = time,  onlyInterest = TRUE, retry = retry, wait = wait, quiet = quiet)), keyword)
+    gtrendslist <- setNames(lapply(keyword, function(e) gtrends_with_backoff(keyword = e, category = category, gprop = "web", geo = geo, time = time, onlyInterest = TRUE, retry = retry, wait = wait, quiet = quiet)), keyword)
   }
 
   # results to tsboxable tibble
@@ -47,9 +48,4 @@ ts_gtrends <- function(keyword = NA, category = "0", geo = 'CH', time = "today+5
 
 
   ts_tbl(tslist)
-
 }
-
-
-
-
