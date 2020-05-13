@@ -1,0 +1,35 @@
+---
+title: "intro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(trendecon)
+```
+
+
+## Keyword search
+
+How to do this:
+
+```{r}
+
+#' ## Mobility
+keywords <- c("Fahrplan","taxi","sixt","google maps")
+#' target: seco categories 7 traffic
+keywords <- ts_gtrends(keyword = keywords, time = "2007-01-01 2020-04-05")
+x_prcomp <- filter(ts_prcomp(keywords), id == "PC1")
+keyword_plot(x = x_prcomp, freq = "quarter", target = traffic)
+
+```
