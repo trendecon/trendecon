@@ -2,12 +2,16 @@
 % Please edit documentation in R/proc_combine_freq.R
 \name{proc_combine_freq}
 \alias{proc_combine_freq}
-\title{2. bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthy series}
+\title{\enumerate{
+\item bend daily series (which fullfills weekly constraint) so that monthly
+values are identical to monthy series
+}}
 \usage{
 proc_combine_freq(keyword = "Insolvenz")
 }
 \description{
-2. bend daily series (which fullfills weekly constraint) so that monthly
+\enumerate{
+\item bend daily series (which fullfills weekly constraint) so that monthly
 values are identical to monthy series
+}
 }
