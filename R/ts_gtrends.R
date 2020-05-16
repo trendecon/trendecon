@@ -9,6 +9,18 @@
 #'  mulitple queries are sent to Google, and each series is individually
 #'  normalized.
 #'
+#' @param category A character vector, listing the categories, defaults to “0”.
+#'
+#' @return A tibble of time series for the different keywords. If only one keyword and one category are specified,
+#'     the tibble has columns \emph{italics}{time} and \emph{italics}{value}. If either more than one keywords,
+#'     or more than one category are given, an additional column \emph{italics}{id} indicates either the keyword,
+#'     or the category.
+#'
+#'
+#' @section Categories:
+#' A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,
+#' not the names. For example, "Arts & Entertainment" has to be specified as "2".
+#'
 #' @seealso [gtrendsR::gtrends()], `browseVignettes("intro")`
 #' @seealso [Online tutorial for analyzing google trends in R](https://www.datacareer.ch/blog/analyzing-google-trends-with-r-retrieve-and-plot-with-gtrendsr/)
 #' @export

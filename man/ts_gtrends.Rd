@@ -19,12 +19,19 @@ ts_gtrends(
 keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if different keywords are used,
 mulitple queries are sent to Google, and each series is individually
 normalized.}
+
+\item{category}{A character vector, listing the categories, defaults to “0”.}
 }
 \description{
 Wrapper around \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}} that modifies the original function by
 a) vectorizing it, b) converting the result to tsboxable tibble and c)
 retries if no result is returned.
 }
+\section{Categories}{
+
+A list with all categories can be obtained using \code{data("categories")}.
+}
+
 \examples{
 
 ts_gtrends("Rezession")
