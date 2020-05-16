@@ -1,8 +1,27 @@
-# online tutorial for analyzing google trends in R:
-# https://www.datacareer.ch/blog/analyzing-google-trends-with-r-retrieve-and-plot-with-gtrendsr/
-
-ts_gtrends <- function(keyword = NA, category = "0", geo = "CH", time = "today+5-y",
-                       retry = 5, wait = 5, quiet = FALSE) {
+#' Download Google Trend Data
+#'
+#' Wrapper around [gtrendsR::gtrends()] that modifies the original function by
+#' a) vectorizing it, b) converting the result to tsboxable tibble and c)
+#' retries if no result is returned.
+#'
+#' @param keyword A character vector with the actual Google Trends query
+#'  keywords. Contrary to [gtrendsR::gtrends()], if different keywords are used,
+#'  mulitple queries are sent to Google, and each series is individually
+#'  normalized.
+#'
+#' @seealso [gtrendsR::gtrends()], `browseVignettes("intro")`
+#' @seealso [Online tutorial for analyzing google trends in R](https://www.datacareer.ch/blog/analyzing-google-trends-with-r-retrieve-and-plot-with-gtrendsr/)
+#' @export
+#' @examples
+#'
+#' ts_gtrends("Rezession")
+ts_gtrends <- function(keyword = NA,
+                       category = "0",
+                       geo = "CH",
+                       time = "today+5-y",
+                       retry = 5,
+                       wait = 5,
+                       quiet = FALSE) {
   library(tidyverse)
   library(tsbox)
   library(gtrendsR)
