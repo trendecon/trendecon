@@ -11,11 +11,10 @@
 #'
 #' @param category A character vector, listing the categories, defaults to “0”.
 #'
-#' @return A tibble of time series for the different keywords. If only one keyword and one category are specified,
-#'     the tibble has columns \emph{italics}{time} and \emph{italics}{value}. If either more than one keywords,
-#'     or more than one category are given, an additional column \emph{italics}{id} indicates either the keyword,
-#'     or the category.
-#'
+#' @return A tibble of time series for the different keywords or categories. If only a single keyword and a single
+#'      category are specified, the tibble has columns \emph{time} and \emph{value}. If either more
+#'      than one keyword, or more than one category are given, an additional column \emph{id} indicates
+#'      either the keyword, or the category.
 #'
 #' @section Categories:
 #' A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,

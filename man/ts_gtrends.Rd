@@ -22,6 +22,12 @@ normalized.}
 
 \item{category}{A character vector, listing the categories, defaults to “0”.}
 }
+\value{
+A tibble of time series for the different keywords or categories. If only a single keyword and a single
+category are specified, the tibble has columns \emph{time} and \emph{value}. If either more
+than one keywords, or more than one category are given, an additional column \emph{id} indicates
+either the keyword, or the category.
+}
 \description{
 Wrapper around \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}} that modifies the original function by
 a) vectorizing it, b) converting the result to tsboxable tibble and c)
@@ -29,7 +35,8 @@ retries if no result is returned.
 }
 \section{Categories}{
 
-A list with all categories can be obtained using \code{data("categories")}.
+A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,
+not the names. For example, "Arts & Entertainment" has to be specified as "2".
 }
 
 \examples{
