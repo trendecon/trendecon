@@ -29,18 +29,18 @@
 #'
 #' @param retry Number of attempts, in case the query request does not succeed.
 #'
-#' @param wait Seconds to wait between attempts, where waiting time is \code{attempt * wait}.
+#' @param wait Seconds to wait between attempts, where waiting time is `attempt * wait`.
 #'
 #' @param quiet If TRUE won't display messages related to server interactions. Default is FALSE.
 #'
 #' @return A tibble of time series for the different keywords or categories. If only a single keyword and a single
-#'      category are specified, the tibble has columns \emph{time} and \emph{value}. If either more
-#'      than one keyword, or more than one category are given, an additional column \emph{id} indicates
+#'      category are specified, the tibble has columns *time* and *value*. If either more
+#'      than one keyword, or more than one category are given, an additional column *id* indicates
 #'      either the keyword, or the category.
 #'
 #' @section Notes:
 #' \itemize{
-#' \item {A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,
+#' \item {A list with all categories can be obtained using `data("categories")`. The function takes the id's as strings,
 #' not the names. For example, "Arts & Entertainment" has to be specified as "2".}
 #' \item {Multiple keywords or multiple categories can be specified, but not both.}
 #' }
