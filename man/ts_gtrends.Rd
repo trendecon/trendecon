@@ -21,11 +21,33 @@ mulitple queries are sent to Google, and each series is individually
 normalized.}
 
 \item{category}{A character vector, listing the categories, defaults to “0”.}
+
+\item{geo}{A character vector denoting geographic regions for the query, default is “CH”.}
+
+\item{time}{A string specifying the time span of the query. Possible values are:
+\describe{
+\item{"now 1-H"}{Last hour}
+\item{"now 4-H"}{Last four hours}
+\item{"now 1-d"}{Last day}
+\item{"now 7-d"}{Last seven days}
+\item{"today 1-m"}{Past 30 days}
+\item{"today 3-m"}{Past 90 days}
+\item{"today 12-m"}{Past 12 months}
+\item{"today+5-y"}{Last five years (default)}
+\item{"all"}{Since the beginning of Google Trends (2004)}
+\item{"Y-m-d Y-m-d"}{Time span between two dates (ex.: "2010-01-01 2010-04-03")}
+}}
+
+\item{retry}{Number of attempts, in case the query request does not succeed.}
+
+\item{wait}{Seconds to wait between attempts, where waiting time is \code{attempt * wait}.}
+
+\item{quiet}{If TRUE won't display messages related to server interactions. Default is FALSE.}
 }
 \value{
 A tibble of time series for the different keywords or categories. If only a single keyword and a single
 category are specified, the tibble has columns \emph{time} and \emph{value}. If either more
-than one keywords, or more than one category are given, an additional column \emph{id} indicates
+than one keyword, or more than one category are given, an additional column \emph{id} indicates
 either the keyword, or the category.
 }
 \description{
@@ -33,10 +55,13 @@ Wrapper around \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}} that modifies
 a) vectorizing it, b) converting the result to tsboxable tibble and c)
 retries if no result is returned.
 }
-\section{Categories}{
+\section{Notes}{
 
-A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,
-not the names. For example, "Arts & Entertainment" has to be specified as "2".
+\itemize{
+\item {A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,
+not the names. For example, "Arts & Entertainment" has to be specified as "2".}
+\item {Multiple keywords or multiple categories can be specified, but not both.}
+}
 }
 
 \examples{
