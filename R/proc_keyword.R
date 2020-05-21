@@ -1,5 +1,14 @@
-# proc_keyword("Insolvenz")
+#' Processes the data for a single keyword.
+#'
+#' Processing includes
+#' - donwloading the latest data
+#' - aggregating
+#' - combining
+#' - seasonal adjustment
 
+#' @param keyword A single keyword for which to process the data.
+#' @param n_windows TODO
+#'
 #' @export
 
 
