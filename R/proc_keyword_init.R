@@ -1,14 +1,30 @@
 #' Download daily, weekly and monthly Google Trends data for a keyword.
 #'
 #' Downloads daily, weekly and monthly Google Trends data for a keyword
-#' and writes the raw data to csv files.
-#' TODO where are these files stored
+#' and writes the data to csv files.
+#'
+#' By default, the data is stored in
+#' folders `data-raw/indicator_raw` and `data-raw/indicator`. File suffixes
+#' are `_d` for daily, `_w` for weekly, and `_m` for monthly data.
+#'
+#' - `data-raw/indicator_raw` contains time series in time-windows, as returned
+#'     by [trendecon::ts_gtrends_windows].
+#' -  `data-raw/indicator` contains time series aggregated within time-windows
+##'     by [trendecon::aggregate_windows].
 #'
 #' @inheritParams ts_gtrends_windows
-#
-# proc functions work on the file system
+#' @param keyword A single keyword to query Google Trends.
+#'
+#' @seealso [ts_gtrends_windows]
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' proc_keyword_init(keyword = "Insolvenz", from = "2006-01-01")
+#' }
+#'
 proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
+  if (length(keyword) > 1) stop("Only a single keyword is allowed.")
   create_data_dirs()
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
