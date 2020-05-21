@@ -63,7 +63,15 @@ ts_gtrends <- function(keyword = NA,
     if (is.null(x$interest_over_time)) {
       return(NULL)
     }
-    transmute(x$interest_over_time, time = as.Date(date), value = ensure_numeric(hits))
+
+    # hourly data
+    if (median(as.numeric(diff(x$interest_over_time$date))) == 1) {
+      z <- transmute(x$interest_over_time, time = date, value = ensure_numeric(hits))
+    # otherwise, convert to date
+    } else {
+      z <- transmute(x$interest_over_time, time = as.Date(date), value = ensure_numeric(hits))
+    }
+    z
   }
 
   if ((length(keyword) > 1) && (length(category) > 1)) {
