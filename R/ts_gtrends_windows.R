@@ -36,6 +36,7 @@ ts_gtrends_windows <- function(keyword = NA,
                                quiet = FALSE,
                                wait = 60,
                                retry = 5) {
+
   tbl <- prepare_windows_tbl(
     from,
     n_windows,
@@ -74,6 +75,7 @@ prepare_windows_tbl <- function(from,
     start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
   ) %>%
     rowwise() %>%
+    filter(start_date<=Sys.Date()) %>%
     mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
     ungroup() %>%
     mutate(end_date = as.Date(as.numeric(end_date), origin = "1970-01-01")) %>%
