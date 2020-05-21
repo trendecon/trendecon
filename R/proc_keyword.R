@@ -3,40 +3,30 @@
 #' @export
 
 
+
 proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
   stop_if_no_data(keyword)
 
-  if (!exists(".latest_google_date")) .latest_google_date <<- as.Date("2099-01-01")
-
-  # only process once a day
-
-
-  previous_google_date <- latest_google_date(keyword)
-  message()
-
-  # if this happens, shift .latest_google_date
-  if (previous_google_date > .latest_google_date) .latest_google_date <<- previous_google_date
-
-  message(".latest_google_date: ", .latest_google_date)
-  message("previous_google_date: ", previous_google_date)
+  previous_google_date <- check_when_last_processed(keyword)
 
   if (previous_google_date == .latest_google_date) {
     message("keyword ", keyword, " already processed today. skipping.")
     return(TRUE)
+  } else {
+
+    proc_keyword_latest(keyword = keyword, n_windows = n_windows)
+
+    # for now
+    proc_aggregate_raw(keyword = keyword)
+
+    proc_combine_freq(keyword = keyword)
+
+    proc_seas_adj(keyword = keyword)
+
+    # store globally: next proc_keyword() run will only update if newer
+    .latest_google_date <<- latest_google_date(keyword)
+    return(invisible(TRUE))
   }
-
-  proc_keyword_latest(keyword = keyword, n_windows = n_windows)
-
-  # for now
-  proc_aggregate_raw(keyword = keyword)
-
-  proc_combine_freq(keyword = keyword)
-
-  proc_seas_adj(keyword = keyword)
-
-  # store globally: next proc_keyword() run will only update if newer
-  .latest_google_date <<- latest_google_date(keyword)
-  return(invisible(TRUE))
 }
 
 stop_if_no_data <- function(keyword) {
@@ -45,6 +35,16 @@ stop_if_no_data <- function(keyword) {
   if (length(files_indicator) == 0 & (length(files_indicator_raw) == 0)) {
     stop("No existing files found for keyword '", keyword, "' Have you run proc_keyword_init()?")
   }
+}
+
+check_when_last_processed <- function(keyword) {
+  if (!exists(".latest_google_date")) .latest_google_date <<- as.Date("2099-01-01")
+  previous_google_date <- latest_google_date(keyword)
+  message()
+  if (previous_google_date > .latest_google_date) .latest_google_date <<- previous_google_date
+  message(".latest_google_date: ", .latest_google_date)
+  message("previous_google_date: ", previous_google_date)
+  return(previous_google_date)
 }
 
 latest_google_date <- function(keyword) {
