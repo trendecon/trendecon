@@ -73,9 +73,8 @@ prepare_windows_tbl <- function(from,
   ) %>%
     rowwise() %>%
     mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
-    ungroup()
-
-  tbl <- tbl[1:nrow(tbl),] %>%
+    ungroup() %>%
+    mutate(end_date = as.Date(as.numeric(end_date), origin = "1970-01-01")) %>%
     mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
     (function(x) {
       if (prevent_window_shrinkage) {
@@ -98,6 +97,7 @@ prepare_windows_tbl <- function(from,
     window = sprintf("%s %s", as.Date(start_date, origin = "1970-01-01"),
                      as.Date(end_date, origin = "1970-01-01"))) %>%
     rowwise()
+
 
   return(tbl)
 }
