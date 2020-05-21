@@ -1,7 +1,11 @@
 # proc_keyword("Insolvenz")
 
 #' @export
+
+
 proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
+  stop_if_no_data(keyword)
+
   if (!exists(".latest_google_date")) .latest_google_date <<- as.Date("2099-01-01")
 
   # only process once a day
@@ -29,15 +33,6 @@ proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
     return(TRUE)
   }
 
-  files_indicator <- grep(keyword, list.files(path_data_raw("indicator")), value = TRUE, fixed = TRUE)
-
-  files_raw <- grep(keyword, list.files(path_data_raw("indicator_raw")), value = TRUE, fixed = TRUE)
-
-  if (length(files_indicator) == 0 & (length(files_raw) == 0)) {
-    stop("No existing files found for keyword '", keyword, "' Have you run proc_keyword_init()?")
-  }
-
-
   proc_keyword_latest(keyword = keyword, n_windows = n_windows)
 
   # for now
@@ -50,4 +45,12 @@ proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
   # store globally: next proc_keyword() run will only update if newer
   .latest_google_date <<- latest_google_date(keyword)
   return(invisible(TRUE))
+}
+
+stop_if_no_data <- function(keyword) {
+  files_indicator <- grep(keyword, list.files(path_data_raw("indicator")), value = TRUE, fixed = TRUE)
+  files_indicator_raw <- grep(keyword, list.files(path_data_raw("indicator_raw")), value = TRUE, fixed = TRUE)
+  if (length(files_indicator) == 0 & (length(files_indicator_raw) == 0)) {
+    stop("No existing files found for keyword '", keyword, "' Have you run proc_keyword_init()?")
+  }
 }
