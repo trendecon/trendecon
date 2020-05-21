@@ -18,18 +18,20 @@ Description: To construct long daily time series from Google Trends. Robustness 
 Imports:
   gtrendsR,
   tempdisagg,
-  seasonal,
   tsbox,
   here,
   dplyr,
   tidyr,
-License: GPL-3
+  fs
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:
-    knitr,
-    rmarkdown,
-    testthat
+  knitr,
+  rmarkdown,
+  testthat,
+  prophet,
+  seasonal
 URL: https://www.trendecon.org
 BugReports: https://github.com/trendecon/trendecon/issues
 VignetteBuilder: knitr

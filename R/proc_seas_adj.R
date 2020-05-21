@@ -4,7 +4,7 @@
 proc_seas_adj <- function(keyword = "Insolvenz") {
   message("seasonal adjustment keyword: ", keyword)
 
-  library(prophet)
+  tsbox::load_suggested("prophet")
 
   data <- read_keyword(keyword, "mwd")
 
@@ -23,9 +23,9 @@ proc_seas_adj <- function(keyword = "Insolvenz") {
 
   m <-
     # prophet(holidays = holidays, daily.seasonality = FALSE) %>%
-    prophet(daily.seasonality = FALSE) %>%
-    add_country_holidays(country_name = "CH") %>%
-    fit.prophet(df)
+    prophet::prophet(daily.seasonality = FALSE) %>%
+    prophet::add_country_holidays(country_name = "CH") %>%
+    prophet::fit.prophet(df)
 
   # forecast <- predict(m, df)
   # prophet_plot_components(m, forecast)
