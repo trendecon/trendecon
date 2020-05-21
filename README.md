@@ -30,7 +30,7 @@ The project was inititated during the
 [\#versusvirus](https://www.versusvirus.ch) and got
 [funding](https://www.versusvirus.ch/funding) from the hackathon.
 
-## Install
+### Installation
 
 You can install the trendecon package from GitHub.
 
@@ -39,7 +39,7 @@ You can install the trendecon package from GitHub.
 remotes::install_github("trendecon/trendecon")
 ```
 
-## Usage
+### Usage
 
 To download a series from Google Trends:
 
@@ -52,7 +52,7 @@ tsbox::ts_plot(x)
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
-## Documentation
+### Documentation
 
 The [introductory
 vignette](https://trendecon.github.io/trendecon/articles/intro.html)

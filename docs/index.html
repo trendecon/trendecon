@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">trendecon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
       </span>
     </div>
 
@@ -81,7 +81,6 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-
 <div id="create-daily-series-from-google-trends" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-daily-series-from-google-trends" class="anchor"></a>Create Daily Series from Google Trends</h2>
@@ -90,17 +89,16 @@
 <p>This package contains R code to construct long daily time series from Google Trends. Robustness of the data is achieved by querying Google mulitple times. The queries are sampled at daily, weekly and monthy frequencies and then harmonized such that the long term trend is preserved.</p>
 <p>The website <a href="https://www.trendecon.org">www.trendecon.org</a> applies the package and provides a set of indicators for Switzerland and is updated daily. During the Covid-19 pandemic, such high-frequency indicators have been in high demand. The economic and social situation has changed very rapidly and most economic statistics could not provide timely information since they are collected on a much lower frequency and published with a lag. We use Google search trends to create meaningful indicators that don’t suffer from this problem. In particular, we extract daily search data on keywords reflecting consumers’ perception of the economic situation.</p>
 <p>The project was inititated during the <a href="https://www.versusvirus.ch">#versusvirus</a> and got <a href="https://www.versusvirus.ch/funding">funding</a> from the hackathon.</p>
-</div>
-<div id="install" class="section level2">
-<h2 class="hasAnchor">
-<a href="#install" class="anchor"></a>Install</h2>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <p>You can install the trendecon package from GitHub.</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("remotes")</span>
 <span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"trendecon/trendecon"</span>)</pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div id="usage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h3>
 <p>To download a series from Google Trends:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trendecon</span>)
 <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ts_gtrends.html">ts_gtrends</a></span>(<span class="st">"cinema"</span>, <span class="kw">geo</span> <span class="kw">=</span> <span class="st">"CH"</span>)
@@ -108,13 +106,13 @@
 <span class="kw pkg">tsbox</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="no">x</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 </div>
-<div id="documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<div id="documentation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h3>
 <p>The <a href="https://trendecon.github.io/trendecon/articles/intro.html">introductory vignette</a> describes the basic use of the package.</p>
 <p>To create and update long daily series from Google Trends, see the <a href="https://trendecon.github.io/trendecon/articles/daily-series.html">vignette on daily series</a>.</p>
 </div>
-
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
