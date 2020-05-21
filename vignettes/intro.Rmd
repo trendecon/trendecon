@@ -53,7 +53,7 @@ Alternatively to a search term also predefined Goolge product categories can be 
 
 
 
-```{r}
+```r
 
 #' ## Mobility
 keywords <- c("Fahrplan","taxi","sixt","google maps")

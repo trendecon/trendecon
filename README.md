@@ -1,8 +1,10 @@
-# trendecon
-code to power trendecon
+## Create Daily Series from Google Trends
+
+During the Covid-19 pandemic, information and the (economic and social) situation has changed rapidly. Traditional (economic) indicators are not sufficiently frequent to monitor and forecast (economic and social) activity at high frequency. We use Google search trends to overcome this data gap and create meaningful indicators. We extract daily search data on keywords reflecting consumers' perception of the economic situation.
 
 
 ## TODO
+
 
 Main source for inormation: http://r-pkgs.had.co.nz
 
@@ -35,56 +37,4 @@ Main source for inormation: http://r-pkgs.had.co.nz
 - [ ] a very few tests of the basic functions (optional)
 
 
-
-## Daily update of indices
-
-For each index, we have a small script in `inst/script`.
-
-To include a new series, each keyword must be initiated, which causes a lot of queries to google, so this may be called on several computers.
-
-E.g.,
-```r
-library(trendecon)
-proc_keyword_init("Mango")
-```
-
-Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.
-
-To source all scripts, use:
-
-```r
-# remotes::install_local()   # build the package, only do once
-gtrendecon::proc_all()
-```
-
-The first argument to `proc_all()` is the path to the `trendecon` folder, the folder that contains the repos `data` and `data-raw`. If you call it from your `gtrendecon` project, use:
-```r
-# remotes::install_local()   # build the package, only do once
-gtrendecon::proc_all("..")
-```
-
-Updates can be performed from the command line, too:
-
-```r
-cd ~/git/trendecon/gtrendecon
-rscript -e 'gtrendecon::proc_all()'
-```
-
-
-
-## Open Questions
-
-
-How to auto commit stuff to the data repo? `git2r::push()` needs credentials.
-
-```
-git2r::add(path = list.files(".", recursive = TRUE))
-git2r::commit(message = paste("auto data upd: ", Sys.Date()))
-git2r::push()
-```
-
-How to run on a daily basis?
-
-- Own machine?
-- GitHub Actions?
 

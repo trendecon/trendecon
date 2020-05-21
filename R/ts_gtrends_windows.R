@@ -21,7 +21,6 @@ ts_gtrends_windows <- function(keyword = NA,
                                quiet = FALSE,
                                wait = 60,
                                retry = 5) {
-  library(tidyverse)
 
   x <- tibble(
     start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
