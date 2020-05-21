@@ -16,7 +16,13 @@ path_data <- function(...) {
   path_trendecon("data", ...)
 }
 
-
+create_data_dirs <- function(){
+  message("Creating data directories if not there.")
+  dir.create(file.path(path_trendecon("data-raw")), showWarnings = FALSE)
+  dir.create(file.path(path_trendecon("data")), showWarnings = FALSE)
+  dir.create(file.path(path_data_raw("indicator_raw")), showWarnings = FALSE)
+  dir.create(file.path(path_data_raw("indicator")), showWarnings = FALSE)
+}
 
 #' @export
 path_keyword <- function(keyword, suffix) {

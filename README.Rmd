@@ -27,8 +27,7 @@ The website [www.trendecon.org](https://www.trendecon.org) provides a set of eco
 
 This project was inititated during the #versusvirus[https://www.versusvirus.ch] and got [funding](https://www.versusvirus.ch/funding) from the hackathon.
 
-This package contains the R code to construct long daily time series from Google Trends. Robustness of the data is achieved by query Google mulitple times. In order to reflect the long term trends of the series, the queries are sent at various frequencies (daily, weekly and monthy). The actual download is done by the [gtrendsR](https://cran.r-project.org/package=gtrendsR) package.
-
+This package contains R code to construct long daily time series from Google Trends. Robustness of the data is achieved by querying Google mulitple times. The queries are sampled at daily, weekly and monthy frequencies and then harmonized such that the long term trend is preserved.
 
 ## Install
 
