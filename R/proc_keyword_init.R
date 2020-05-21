@@ -1,3 +1,11 @@
+#' Download daily, weekly and monthly Google Trends data for a keyword.
+#'
+#' Downloads daily, weekly and monthly Google Trends data for a keyword
+#' and writes the raw data to csv files.
+#' TODO where are these files stored
+#'
+#' @inheritParams ts_gtrends_windows
+#
 # proc functions work on the file system
 #' @export
 proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
