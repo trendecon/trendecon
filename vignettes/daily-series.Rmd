@@ -1,0 +1,87 @@
+---
+title: "Creating long daily series"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating long daily series}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(trendecon)
+```
+
+
+## Intro
+
+Google search results are available on a daily, weekly or monthly frequency. As with individual samples, querying Google at a different frequency will lead to substantially different results.
+
+Our goal is to produce long daily time series, ideally from 2006. This is mostly because we want to use the financial crisis of 2008 and 2009 as a benchmark for the Covid-19 crisis. However, Google does not provide daily or weekly data for such a long time period. We circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
+
+Since the daily, weekly and monthly series are still very different, we want to combine them into a single daily series.
+
+Our next steps are based on the following assumptions:
+
+- Monthly data catches the long term trend in search activity in the most accurate way.
+
+- Weekly data is best to analyze the searches over the medium term, i.e., over a few months.
+
+- Daily data is best to analyze short term behavior over a few days and weeks.
+
+With this in mind, we apply the following methodology. In a first step, we "bend" the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series.
+
+
+
+## Setting the Data Path
+
+```r
+my_data_dir <- tempdir()
+options(path_trendecon = my_data_dir)
+```
+
+- `proc_` functions will write and read to this directory.
+
+
+## Initial Download
+
+To get started, a ke
+
+```r
+
+proc_keyword_init("Rezession", "DE")  # FIXME make sure this works countries other than "CH", not sure if this is passed down correctly
+
+```
+
+## Daily Update
+
+
+```r
+proc_keyword_latest()
+
+```
+
+
+## Further Steps
+
+- Bending
+
+- Seasonal Adjustment
+
+- Index creation
+
+
+## Reading and Writing
+
+`read_keyword`
+`write_keyword`
+
+
+
+
