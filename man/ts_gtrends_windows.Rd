@@ -2,7 +2,7 @@
 % Please edit documentation in R/ts_gtrends_windows.R
 \name{ts_gtrends_windows}
 \alias{ts_gtrends_windows}
-\title{Get approximate daily series over a large window}
+\title{Download approximate daily series over a sequence of time-windows}
 \usage{
 ts_gtrends_windows(
   keyword = NA,
@@ -30,7 +30,8 @@ normalized.}
 
 \item{from}{start of timeframe in YYYY-mm-dd form}
 
-\item{prevent_window_shrinkage}{TODO}
+\item{prevent_window_shrinkage}{If \code{TRUE}, ensures that the last time-window is large enough to yield the desired
+frequency. Default is \code{FALSE}.}
 
 \item{stepsize}{Number of days (integer) between the start days of the respective time-windows.}
 
@@ -45,14 +46,18 @@ normalized.}
 \item{retry}{Number of attempts, in case the query request does not succeed.}
 }
 \value{
-A tibble of time series with columns \emph{window}, \emph{time}, \emph{value},  where \emph{window} is the time window
+A tibble of time series with columns \emph{window}, \emph{time}, \emph{value}, where \emph{window} is the time window
 indicated by start and end date of the window.
 }
 \description{
-This function downloads
+Downloads approximate daily series over a sequence of time-windows by first constructing the appropriate time
+windows and then downloading daily data for each time-window using \code{\link[trendecon:ts_getrends]{trendecon::ts_getrends()}}.
 }
 \section{Notes}{
 
 Time-windows may overlap - and will do so if \code{stepsize} < \code{windowsize}.
 }
 
+\seealso{
+\code{\link[trendecon:ts_gtrends]{trendecon::ts_gtrends()}}
+}

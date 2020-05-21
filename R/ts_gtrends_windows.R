@@ -1,19 +1,25 @@
-#' Get approximate daily series over a large window
+#' Download approximate daily series over a sequence of time-windows
 #'
-#' This function downloads
+#' Downloads approximate daily series over a sequence of time-windows by first constructing the appropriate time
+#' windows and then downloading daily data for each time-window using [trendecon::ts_gtrends()].
+#'
 #' @inheritParams ts_gtrends
 #'
-#' @param from start of timeframe in YYYY-mm-dd form
-#' @param prevent_window_shrinkage TODO
+#' @param from Start of timeframe in YYYY-mm-dd form.
+#' @param prevent_window_shrinkage If `TRUE`, ensures that the last time-window is large enough to yield the desired
+#'     frequency. Default is `FALSE`.
 #' @param stepsize Number of days (integer) between the start days of the respective time-windows.
 #' @param windowsize Number of days (integer) from start date to end date of each window.
 #' @param n_windows Number (integer) of time-windows.
 #'
-#' @return A tibble of time series with columns *window*, *time*, *value*,  where *window* is the time window
+#' @return A tibble of time series with columns *window*, *time*, *value*, where *window* is the time window
 #' indicated by start and end date of the window.
 #'
 #' @section Notes:
 #' Time-windows may overlap - and will do so if `stepsize` < `windowsize`.
+#'
+#' @seealso [trendecon::ts_gtrends()]
+
 
 
 ts_gtrends_windows <- function(keyword = NA,
@@ -67,8 +73,8 @@ prepare_windows_tbl <- function(from, n_windows, prevent_window_shrinkage, steps
     ungroup() %>%
     transmute(
     # Using as.Date because the different variations of if(_)else each have their problems
-    window = sprintf("%s %s", as.Date(start_date, origin = "1970-01-01"), as.Date(end_date, origin = "1970-01-01"))
-    ) %>%
+    window = sprintf("%s %s", as.Date(start_date, origin = "1970-01-01"),
+                     as.Date(end_date, origin = "1970-01-01"))) %>%
     rowwise()
 
   return(tbl)
