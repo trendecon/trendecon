@@ -57,7 +57,7 @@
       <a href="articles/daily-series.html">Creating long daily series</a>
     </li>
     <li>
-      <a href="articles/intro.html">intro</a>
+      <a href="articles/intro.html">Introduction to trendecon</a>
     </li>
   </ul>
 </li>
@@ -87,38 +87,64 @@
 <a href="#create-daily-series-from-google-trends" class="anchor"></a>Create Daily Series from Google Trends</h2>
 <!-- badges: start -->
 
-<p>During the Covid-19 pandemic, information and the (economic and social) situation has changed rapidly. Traditional (economic) indicators are not sufficiently frequent to monitor and forecast (economic and social) activity at high frequency. We use Google search trends to overcome this data gap and create meaningful indicators. We extract daily search data on keywords reflecting consumers’ perception of the economic situation.</p>
+<p>During the Covid-19 pandemic, information and the (economic and social) situation has changed rapidly. We use Google search trends to overcome this data gap and create meaningful indicators. We extract daily search data on keywords reflecting consumers’ perception of the economic situation.</p>
+<p>The website <a href="https://www.trendecon.org">www.trendecon.org</a> provides a set of economic indicators for Switzerland based on Google search trends. These indicators are updated daily and provide policymakers and business leaders with timely information about the Swiss economy. Here you find more information on how to use our indicators and you can download the data.</p>
+<p>This project was inititated during the #versusvirus<br><span class="math display"> &lt; <em>h</em><em>t</em><em>t</em><em>p</em><em>s</em> : //<em>w</em><em>w</em><em>w</em>.<em>v</em><em>e</em><em>r</em><em>s</em><em>u</em><em>s</em><em>v</em><em>i</em><em>r</em><em>u</em><em>s</em>.<em>c</em><em>h</em>&gt;</span><br> and got <a href="https://www.versusvirus.ch/funding">funding</a> from the hackathon.</p>
+<p>This package contains the R code to construct long daily time series from Google Trends. Robustness of the data is achieved by query Google mulitple times. In order to reflect the long term trends of the series, the queries are sent at various frequencies (daily, weekly and monthy). The actual download is done by the <a href="https://cran.r-project.org/package=gtrendsR">gtrendsR</a> package.</p>
+</div>
+<div id="install" class="section level2">
+<h2 class="hasAnchor">
+<a href="#install" class="anchor"></a>Install</h2>
+<p>You can install the trendecon package from GitHub.</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("remotes")</span>
+<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"trendecon/trendecon"</span>)</pre></div>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>To download a series from Google Trends:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trendecon</span>)
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ts_gtrends.html">ts_gtrends</a></span>(<span class="st">"cinema"</span>, <span class="kw">geo</span> <span class="kw">=</span> <span class="st">"CH"</span>)
+<span class="co">#&gt; Downloading data for today+5-y</span>
+<span class="kw pkg">tsbox</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="no">x</span>)</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<p>The <a href="https://trendecon.github.io/trendecon/articles/intro.html">introductory vignette</a> gives describes the basic use of the package.</p>
+<p>To create and update long daily series from Google Trends, see the <a href="https://trendecon.github.io/trendecon/articles/daily-series.html">vignette on daily series</a>.</p>
 </div>
 <div id="todo" class="section level2">
 <h2 class="hasAnchor">
 <a href="#todo" class="anchor"></a>TODO</h2>
 <p>Main source for inormation: <a href="http://r-pkgs.had.co.nz" class="uri">http://r-pkgs.had.co.nz</a></p>
-<div id="documentation" class="section level3">
+<div id="documentation-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h3>
+<a href="#documentation-1" class="anchor"></a>Documentation</h3>
 <ul>
-<li><p>[ ] Roxigen header to exported functions (<a href="http://r-pkgs.had.co.nz/man.html" class="uri">http://r-pkgs.had.co.nz/man.html</a>)</p></li>
-<li><p>[ ] DESCRIPTION: authors, pkg summary</p></li>
-<li><p>[ ] Introductiory vignette (<code>vignettes/intro.Rmd</code>) (<a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a>)</p></li>
-<li><p>[ ] Vignette: How to perform daily updates (see section below)</p></li>
-<li><p>[ ] Minimal section on getting started as <code>README.md</code></p></li>
-<li><p>[ ] pkgdown website (optional) <a href="https://pkgdown.r-lib.org" class="uri">https://pkgdown.r-lib.org</a></p></li>
+<li><p><br><span class="math display"></span><br> Roxigen header to exported functions (<a href="http://r-pkgs.had.co.nz/man.html" class="uri">http://r-pkgs.had.co.nz/man.html</a>)</p></li>
+<li><p><br><span class="math display"></span><br> DESCRIPTION: authors, pkg summary</p></li>
+<li><p><br><span class="math display"></span><br> Introductiory vignette (<code>vignettes/intro.Rmd</code>) (<a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a>)</p></li>
+<li><p><br><span class="math display"></span><br> Vignette: How to perform daily updates (see section below)</p></li>
+<li><p><br><span class="math display"></span><br> Minimal section on getting started as <code>README.md</code></p></li>
+<li><p><br><span class="math display"></span><br> pkgdown website (optional) <a href="https://pkgdown.r-lib.org" class="uri">https://pkgdown.r-lib.org</a></p></li>
 </ul>
 </div>
 <div id="clean-up" class="section level3">
 <h3 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean Up</h3>
 <ul>
-<li><p>[ ] Turn scripts in <code>inst/script</code> into functions. Instead of <code>inst/script/clothing.R</code>, we want to have something like <code>R/proc_index_clothing.R</code> (the later is currently just an example).</p></li>
-<li><p>[ ] Define (and document) the use of system paths. I think the only place where they appear is now in <code>path_trendecon</code>. Perhaps use system variables.</p></li>
+<li><p><br><span class="math display"></span><br> Turn scripts in <code>inst/script</code> into functions. Instead of <code>inst/script/clothing.R</code>, we want to have something like <code>R/proc_index_clothing.R</code> (the later is currently just an example).</p></li>
+<li><p><br><span class="math display"></span><br> Define (and document) the use of system paths. I think the only place where they appear is now in <code>path_trendecon</code>. Perhaps use system variables.</p></li>
 </ul>
 </div>
 <div id="tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tests" class="anchor"></a>Tests</h3>
 <ul>
-<li><p>[ ] R CMD check –as-cran (optional)</p></li>
-<li><p>[ ] a very few tests of the basic functions (optional)</p></li>
+<li><p><br><span class="math display"></span><br> R CMD check –as-cran (optional)</p></li>
+<li><p><br><span class="math display"></span><br> a very few tests of the basic functions (optional)</p></li>
 </ul>
 </div>
 </div>
