@@ -7,6 +7,7 @@
 #' @param to WHAT HAPPENED WITH THIS?
 #' @param stepsize how far to advance the window in days
 
+
 ts_gtrends_windows <- function(keyword = NA,
                                category = "0",
                                geo = "CH",
@@ -20,14 +21,10 @@ ts_gtrends_windows <- function(keyword = NA,
                                retry = 5) {
   library(tidyverse)
 
-  x <- tibble(
-    start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
-  ) %>%
-    rowwise() %>%
-    mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
-    ungroup() %>%
+  tbl <- start_end_tbl(from, n_windows, stepsize, windowsize)
+
     # truncate end date to Sys.Date() to avoid google errors
-    mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
+    tbl <- tbl %>% mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
     (function(x) {
       if (prevent_window_shrinkage) {
         distinct(x, end_date, .keep_all = TRUE)
@@ -52,3 +49,12 @@ ts_gtrends_windows <- function(keyword = NA,
   #       Every time 100 appears within stepsize of the start/end of a chunk
   #       a wild rescaling
 }
+
+start_end_tbl <- function(from, n_windows, stepsize, windowsize)
+  tbl <- tibble(
+  start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
+  ) %>%
+  rowwise() %>%
+  mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
+  ungroup()
+  return(tbl)
