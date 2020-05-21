@@ -33,7 +33,7 @@ proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
 
   files_raw <- grep(keyword, list.files(path_data_raw("indicator_raw")), value = TRUE, fixed = TRUE)
 
-  if (length(files_indicator) == 0 & (length(files_indicator) == 0)) {
+  if (length(files_indicator) == 0 & (length(files_raw) == 0)) {
     stop("No existing files found for keyword '", keyword, "' Have you run proc_keyword_init()?")
   }
 
