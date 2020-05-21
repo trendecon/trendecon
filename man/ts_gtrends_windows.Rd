@@ -2,7 +2,7 @@
 % Please edit documentation in R/ts_gtrends_windows.R
 \name{ts_gtrends_windows}
 \alias{ts_gtrends_windows}
-\title{Get approximate daily series over a large window}
+\title{Download approximate daily series over a sequence of time-windows}
 \usage{
 ts_gtrends_windows(
   keyword = NA,
@@ -19,22 +19,45 @@ ts_gtrends_windows(
 )
 }
 \arguments{
-\item{keyword}{keyword(s) to compare}
+\item{keyword}{A character vector with the actual Google Trends query
+keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if different keywords are used,
+mulitple queries are sent to Google, and each series is individually
+normalized.}
 
-\item{category}{category/ies to compare}
+\item{category}{A character vector, listing the categories, defaults to “0”.}
 
-\item{geo}{region to get trends for}
+\item{geo}{A character vector denoting geographic regions for the query, default is “CH”.}
 
 \item{from}{start of timeframe in YYYY-mm-dd form}
 
-\item{stepsize}{how far to advance the window in days}
+\item{prevent_window_shrinkage}{If \code{TRUE}, ensures that the last time-window is large enough to yield the desired
+frequency. Default is \code{FALSE}.}
 
-\item{quiet}{should progress output be su}
+\item{stepsize}{Number of days (integer) between the start days of the respective time-windows.}
 
-\item{wait}{waiting time until retry}
+\item{windowsize}{Number of days (integer) from start date to end date of each window.}
 
-\item{to}{end of timeframe in YYYY-mm-dd form}
+\item{n_windows}{Number (integer) of time-windows.}
+
+\item{quiet}{If TRUE won't display messages related to server interactions. Default is FALSE.}
+
+\item{wait}{Seconds to wait between attempts, where waiting time is \code{attempt * wait}.}
+
+\item{retry}{Number of attempts, in case the query request does not succeed.}
+}
+\value{
+A tibble of time series with columns \emph{window}, \emph{time}, \emph{value}, where \emph{window} is the time window
+indicated by start and end date of the window.
 }
 \description{
-This function downloads
+Downloads approximate daily series over a sequence of time-windows by first constructing the appropriate time
+windows and then downloading daily data for each time-window using \code{\link[trendecon:ts_getrends]{trendecon::ts_getrends()}}.
+}
+\section{Notes}{
+
+Time-windows may overlap - and will do so if \code{stepsize} < \code{windowsize}.
+}
+
+\seealso{
+\code{\link[trendecon:ts_gtrends]{trendecon::ts_gtrends()}}
 }
