@@ -25,12 +25,11 @@ proc_all <- function(path = ".") {
   )
 
   bname <- paste0(indices_in_production, ".R")
-  scripts <- list.files(system.file("script", package = "gtrendecon"), pattern = "\\.[rR]$")
+  scripts <- list.files(system.file("script", package = "trendecon"), pattern = "\\.[rR]$")
   stopifnot(all(bname %in% scripts))
 
-  library(gtrendecon)
   for (index in indices_in_production) {
-    index_script <- system.file("script", paste0(index, ".R"), package = "gtrendecon")
+    index_script <- system.file("script", paste0(index, ".R"), package = "trendecon")
     source(index_script, encoding = "UTF-8")
   }
 }
