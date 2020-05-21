@@ -19,9 +19,39 @@ library(trendecon)
 ```
 
 
+Google Trends is an online search tool from Google that allows you to analyse how often a search term was queried on the Google search engine relative to other search terms. See https://trends.google.com/ for the online interface. The tool allows to specify the time horizon and the location. Thereby, the popularity of a search term can be analysed over time, across countries or relative to other search terms. 
+
+The package trendecon allows to produce long daily time series of search queries. With the main function of the package, `ts_gtrends()` Google Trends data is downloaded for one or multiple keywords. It wraps around the package gtrendsR but modifies the function [gtrendsR::gtrends()] by a) vectorizing it, b) converting the result to a tsboxable tibble and c) retrying if no result is returned.
+
+
 ## Keyword search
 
-How to do this:
+Suppose we are interested in the demand for cultural events in Switzerland. First think of what people would google if they want to go to a cultural event. For instance, they might google "cinema" or "theater". The following command downloads the Google Trends data for the two terms "cinema" an "theater" in a separate query, i.e., they are not relative to each other. 
+
+
+```{r}
+gt_data <- ts_gtrends(keyword = c("cinema", "theater"),
+                      geo = "CH",
+                      time = "today+5-y")
+```
+
+Specify with the paramter `geo` the geographic location. Default is Switzerland ("CH"). With `geo=""` the global search volume is used. Not only countries but also regions within a country are possible. See `data("countries")` from the gtrendsR package for a list of available regions and their code. 
+
+With the parameter `time` the time span of the query can be specified. "today+5-y" downloads for the time span for the last five years (default). The frequency of the data depends on the entered time span. A time span of up to three months will yield daily data. Up to five years allows for a weekly frequency. And for a time span of more than five years, the data is monthly. `time = "all"` uses the maximum time span which starts in January 2004. 
+
+
+Alternatively to a search term also predefined Goolge product categories can be used. See for instance https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories for a hierarchically structered list of the Google product categories or get the categories with `data("categories")` from the gtrendsR package. Every search query in the Google search engine is assigned to one or multiple Google product categories. Therefore, the search volume of a category is an aggregate of multiple search terms. There is for instance the category "Events & Listings" with id 569. 
+
+
+
+
+## Tips when using Google trends
+
+* 0 means not enough data and not necessarily "no searches".
+* The data is sampled from the Google Trends data base and cached for one day. Therefore, the same query may yield different search volumens on different days. 
+* 
+
+
 
 ```{r}
 
@@ -30,6 +60,6 @@ keywords <- c("Fahrplan","taxi","sixt","google maps")
 #' target: seco categories 7 traffic
 keywords <- ts_gtrends(keyword = keywords, time = "2007-01-01 2020-04-05")
 x_prcomp <- filter(ts_prcomp(keywords), id == "PC1")
-keyword_plot(x = x_prcomp, freq = "quarter", target = traffic)
+keyword_plot(x = x_prcomp, freq = "quarter")
 
 ```
