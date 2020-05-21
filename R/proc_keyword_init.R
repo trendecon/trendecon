@@ -9,6 +9,7 @@
 # proc functions work on the file system
 #' @export
 proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
+  create_data_dirs()
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
   d <- ts_gtrends_windows(
