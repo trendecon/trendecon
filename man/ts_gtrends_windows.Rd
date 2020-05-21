@@ -30,16 +30,29 @@ normalized.}
 
 \item{from}{start of timeframe in YYYY-mm-dd form}
 
-\item{stepsize}{how far to advance the window in days}
+\item{prevent_window_shrinkage}{TODO}
+
+\item{stepsize}{Number of days (integer) between the start days of the respective time-windows.}
+
+\item{windowsize}{Number of days (integer) from start date to end date of each window.}
+
+\item{n_windows}{Number (integer) of time-windows.}
 
 \item{quiet}{If TRUE won't display messages related to server interactions. Default is FALSE.}
 
 \item{wait}{Seconds to wait between attempts, where waiting time is \code{attempt * wait}.}
 
 \item{retry}{Number of attempts, in case the query request does not succeed.}
-
-\item{to}{WHAT HAPPENED WITH THIS?}
+}
+\value{
+A tibble of time series with columns \emph{window}, \emph{time}, \emph{value},  where \emph{window} is the time window
+indicated by start and end date of the window.
 }
 \description{
 This function downloads
 }
+\section{Notes}{
+
+Time-windows may overlap - and will do so if \code{stepsize} < \code{windowsize}.
+}
+

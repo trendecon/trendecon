@@ -2,10 +2,19 @@
 #'
 #' This function downloads
 #' @inheritParams ts_gtrends
+#'
 #' @param from start of timeframe in YYYY-mm-dd form
-#' @param prevent_window_shrinkage
-#' @param to WHAT HAPPENED WITH THIS?
-#' @param stepsize how far to advance the window in days
+#' @param prevent_window_shrinkage TODO
+#' @param stepsize Number of days (integer) between the start days of the respective time-windows.
+#' @param windowsize Number of days (integer) from start date to end date of each window.
+#' @param n_windows Number (integer) of time-windows.
+#'
+#' @return A tibble of time series with columns *window*, *time*, *value*,  where *window* is the time window
+#' indicated by start and end date of the window.
+#'
+#' @section Notes:
+#' Time-windows may overlap - and will do so if `stepsize` < `windowsize`.
+
 
 
 ts_gtrends_windows <- function(keyword = NA,
