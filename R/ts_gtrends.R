@@ -67,7 +67,7 @@ ts_gtrends <- function(keyword = NA,
     # hourly data
     if (median(as.numeric(diff(x$interest_over_time$date))) == 1) {
       z <- transmute(x$interest_over_time, time = date, value = ensure_numeric(hits))
-    # otherwise, convert to date
+      # otherwise, convert to date
     } else {
       z <- transmute(x$interest_over_time, time = as.Date(date), value = ensure_numeric(hits))
     }
