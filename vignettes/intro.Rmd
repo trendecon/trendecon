@@ -1,8 +1,8 @@
 ---
-title: "intro"
+title: "Introduction to trendecon"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{intro}
+  %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -42,6 +42,7 @@ With the parameter `time` the time span of the query can be specified. "today+5-
 You can plot the time series with `ts_plot` from the `tsbox` package.
 
 ```{r}
+library(tsbox)
 ts_plot(gt_data)
 ```
 
@@ -49,7 +50,7 @@ ts_plot(gt_data)
 To retrieve the common signal of the four time series, you can for instance draw the principal component.
 
 ```{r}
-ts_plot(pc1 = filter(ts_prcomp(gt_data), id == "PC1"))
+ts_plot(ts_pick(ts_prcomp(gt_data), "PC1"))
 ```
 
 
