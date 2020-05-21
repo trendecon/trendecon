@@ -51,7 +51,8 @@ options(path_trendecon = my_data_dir)
 
 ## Initial Download
 
-To get started, a ke
+To include a new series, each keyword must be initiated. Careful, this causes a lot of queries to Google.
+
 
 ```r
 
@@ -59,7 +60,11 @@ proc_keyword_init("Rezession", "DE")  # FIXME make sure this works countries oth
 
 ```
 
+
+
 ## Daily Update
+
+Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.
 
 
 ```r
@@ -81,6 +86,19 @@ proc_keyword_latest()
 
 `read_keyword`
 `write_keyword`
+
+
+## Updating trendecon indicators (perhaps)
+
+To source all scripts from trendecon, use:
+
+```r
+# remotes::install_local()   # build the package, only do once
+gtrendecon::proc_all()
+```
+
+
+
 
 
 
