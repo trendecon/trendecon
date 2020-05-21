@@ -1,5 +1,9 @@
 ## Create Daily Series from Google Trends
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/trendecon/trendecon.svg?branch=master)](https://travis-ci.com/trendecon/trendecon)
+<!-- badges: end -->
+
 During the Covid-19 pandemic, information and the (economic and social) situation has changed rapidly. Traditional (economic) indicators are not sufficiently frequent to monitor and forecast (economic and social) activity at high frequency. We use Google search trends to overcome this data gap and create meaningful indicators. We extract daily search data on keywords reflecting consumers' perception of the economic situation.
 
 
