@@ -23,7 +23,7 @@ library(trendecon)
 
 How to do this:
 
-```{r}
+```r
 
 #' ## Mobility
 keywords <- c("Fahrplan","taxi","sixt","google maps")
