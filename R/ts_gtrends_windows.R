@@ -16,7 +16,6 @@
 #' Time-windows may overlap - and will do so if `stepsize` < `windowsize`.
 
 
-
 ts_gtrends_windows <- function(keyword = NA,
                                category = "0",
                                geo = "CH",
@@ -30,10 +29,30 @@ ts_gtrends_windows <- function(keyword = NA,
                                retry = 5) {
   library(tidyverse)
 
-  tbl <- start_end_tbl(from, n_windows, stepsize, windowsize)
+    tbl <- prepare_windows_tbl(from, n_windows, prevent_window_shrinkage, stepsize, windowsize)
+    tbl <- tbl %>% mutate(trend_data = list(ts_gtrends(keyword, category, geo, window, retry, wait, quiet))) %>%
+    unnest(cols = trend_data) %>%
+    ungroup()
 
-    # truncate end date to Sys.Date() to avoid google errors
-    tbl <- tbl[1:nrow(tbl),] %>% mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
+    return(tbl)
+  # TODO: The problem to solve:
+  #       Every time 100 appears within stepsize of the start/end of a chunk
+  #       a wild rescaling
+}
+
+
+prepare_windows_tbl <- function(from, n_windows, prevent_window_shrinkage, stepsize, windowsize) {
+  # prepare tibble with single column *windows* which for each time-window contains a string with start-date
+  # and end-date
+  tbl <- tibble(
+  start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
+  ) %>%
+  rowwise() %>%
+  mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
+  ungroup()
+
+  tbl <- tbl[1:nrow(tbl),] %>%
+    mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
     (function(x) {
       if (prevent_window_shrinkage) {
         distinct(x, end_date, .keep_all = TRUE)
@@ -43,27 +62,14 @@ ts_gtrends_windows <- function(keyword = NA,
     }) %>%
     # Make sure the last window is large enough to yield the desired frequency
     rowwise() %>%
-    mutate(start_date = ifelse(prevent_window_shrinkage & end_date == Sys.Date(), seq(start_date, length.out = 2, by = paste0("-", windowsize))[1], start_date)) %>%
+    mutate(start_date = ifelse(prevent_window_shrinkage & end_date == Sys.Date(),
+                               seq(start_date, length.out = 2, by = paste0("-", windowsize))[1], start_date)) %>%
     ungroup() %>%
     transmute(
-      # Using as.Date because the different variations of if(_)else each have their problems
-      window = sprintf("%s %s", as.Date(start_date, origin = "1970-01-01"), as.Date(end_date, origin = "1970-01-01"))
+    # Using as.Date because the different variations of if(_)else each have their problems
+    window = sprintf("%s %s", as.Date(start_date, origin = "1970-01-01"), as.Date(end_date, origin = "1970-01-01"))
     ) %>%
-    rowwise() %>%
-    mutate(trend_data = list(ts_gtrends(keyword, category, geo, window, retry, wait, quiet))) %>%
-    unnest(cols = trend_data) %>%
-    ungroup()
+    rowwise()
 
-  # TODO: The problem to solve:
-  #       Every time 100 appears within stepsize of the start/end of a chunk
-  #       a wild rescaling
-}
-
-start_end_tbl <- function(from, n_windows, stepsize, windowsize)
-  tbl <- tibble(
-  start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
-  ) %>%
-  rowwise() %>%
-  mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
-  ungroup()
   return(tbl)
+}
