@@ -1,26 +1,37 @@
 Package: trendecon
-Title: What the Package Does (One Line, Title Case)
+Title: Create Daily Series from Google Trends
 Version: 0.0.0.9000
-Authors@R:
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-Depends:
-  tidyverse,
-  tsbox
+Authors@R: c(
+    person("Angelica", "Becerra", role = "aut"),
+    person("Nina", "Mühlebach", role = "aut"),
+    person("Christoph", "Sax", email = "christoph.sax@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-7192-7044")),
+    person("Sverin", "Thoeni", role = "aut"),
+    person("Uwe", "Thuemmel", role = "aut"),
+    person("Vera", "Eichenauer", role = "ctb"),
+    person("Ronald", "Indergand", role = "ctb"),
+    person("Stefan", "Legge", role = "ctb"),
+    person("Isabel", "Martinez", role = "ctb"),
+    person("Furkan", "Oguz", role = "ctb"),
+    person("Kristina", "Schuepbach", role = "ctb")
+    )
+Description: To construct long daily time series from Google Trends. Robustness of the data is achieved by querying Google mulitple times. The queries are sampled at daily, weekly and monthy frequencies and then harmonized such that the long term trend is preserved.
 Imports:
+  gtrendsR,
   tempdisagg,
   seasonal,
-  here
-License: What license it uses
+  tsbox,
+  here,
+  dplyr,
+  tidyr,
+License: GPL-3
 Encoding: UTF-8
-LazyData: false
+LazyData: true
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
+URL: https://www.trendecon.org
+BugReports: https://github.com/trendecon/trendecon/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0

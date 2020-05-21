@@ -37,4 +37,4 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-inst/doc
+README.html

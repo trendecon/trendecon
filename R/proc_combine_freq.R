@@ -2,8 +2,6 @@
 proc_combine_freq <- function(keyword = "Insolvenz") {
   message("combining frequencies of keyword: ", keyword)
 
-  library(tempdisagg)
-
   d <- select(read_keyword(keyword, "d"), -n)
   w <- select(read_keyword(keyword, "w"), -n)
   m <- select(read_keyword(keyword, "m"), -n)

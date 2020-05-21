@@ -20,23 +20,14 @@ keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if di
 mulitple queries are sent to Google, and each series is individually
 normalized.}
 
-\item{category}{A character vector, listing the categories, defaults to “0”.}
+\item{category}{A character vector, listing the categories, defaults to
+\code{"0"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
-\item{geo}{A character vector denoting geographic regions for the query, default is “CH”.}
+\item{geo}{A character vector denoting geographic regions for the query,
+default is \code{"C"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
-\item{time}{A string specifying the time span of the query. Possible values are:
-\describe{
-\item{"now 1-H"}{Last hour}
-\item{"now 4-H"}{Last four hours}
-\item{"now 1-d"}{Last day}
-\item{"now 7-d"}{Last seven days}
-\item{"today 1-m"}{Past 30 days}
-\item{"today 3-m"}{Past 90 days}
-\item{"today 12-m"}{Past 12 months}
-\item{"today+5-y"}{Last five years (default)}
-\item{"all"}{Since the beginning of Google Trends (2004)}
-\item{"Y-m-d Y-m-d"}{Time span between two dates (ex.: "2010-01-01 2010-04-03")}
-}}
+\item{time}{A string specifying the time span of the query.
+Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}.}
 
 \item{retry}{Number of attempts, in case the query request does not succeed.}
 
@@ -58,15 +49,16 @@ retries if no result is returned.
 \section{Notes}{
 
 \itemize{
-\item {A list with all categories can be obtained using \code{data("categories")}. The function takes the id's as strings,
-not the names. For example, "Arts & Entertainment" has to be specified as "2".}
-\item {Multiple keywords or multiple categories can be specified, but not both.}
+\item The function takes the id's as strings, not the names. For example, "Arts & Entertainment" has to be specified as "2".
+\item Multiple keywords or multiple categories can be specified, but not both.
 }
 }
 
 \examples{
 
-ts_gtrends("Rezession")
+x <- ts_gtrends("Rezession")
+x
+tsbox::ts_plot(x)
 }
 \seealso{
 \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, \code{browseVignettes("intro")}
