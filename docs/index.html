@@ -118,38 +118,6 @@
 </ul>
 </div>
 </div>
-<div id="daily-update-of-indices" class="section level2">
-<h2 class="hasAnchor">
-<a href="#daily-update-of-indices" class="anchor"></a>Daily update of indices</h2>
-<p>For each index, we have a small script in <code>inst/script</code>.</p>
-<p>To include a new series, each keyword must be initiated, which causes a lot of queries to google, so this may be called on several computers.</p>
-<p>E.g.,</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trendecon</span>)
-<span class="fu">proc_keyword_init</span>(<span class="st">"Mango"</span>)</pre></div>
-<p>Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.</p>
-<p>To source all scripts, use:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># remotes::install_local()   # build the package, only do once</span>
-<span class="kw pkg">gtrendecon</span><span class="kw ns">::</span><span class="fu">proc_all</span>()</pre></div>
-<p>The first argument to <code>proc_all()</code> is the path to the <code>trendecon</code> folder, the folder that contains the repos <code>data</code> and <code>data-raw</code>. If you call it from your <code>gtrendecon</code> project, use:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># remotes::install_local()   # build the package, only do once</span>
-<span class="kw pkg">gtrendecon</span><span class="kw ns">::</span><span class="fu">proc_all</span>(<span class="st">".."</span>)</pre></div>
-<p>Updates can be performed from the command line, too:</p>
-<div class="sourceCode" id="cb4"><pre class="r">cd ~/git/trendecon/gtrendecon
-rscript -e 'gtrendecon::proc_all()'</pre></div>
-</div>
-<div id="open-questions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#open-questions" class="anchor"></a>Open Questions</h2>
-<p>How to auto commit stuff to the data repo? <code><a href="https://docs.ropensci.org/git2r/reference/push.html">git2r::push()</a></code> needs credentials.</p>
-<pre><code><a href="https://docs.ropensci.org/git2r/reference/add.html">git2r::add(path = list.files(".", recursive = TRUE))
-git2r::commit(message = paste("auto data upd: ", Sys.Date()))
-git2r::push()</a></code></pre>
-<p>How to run on a daily basis?</p>
-<ul>
-<li>Own machine?</li>
-<li>GitHub Actions?</li>
-</ul>
-</div>
 </div>
   </div>
 

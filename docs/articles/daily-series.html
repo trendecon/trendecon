@@ -130,13 +130,14 @@
 <div id="initial-download" class="section level2">
 <h2 class="hasAnchor">
 <a href="#initial-download" class="anchor"></a>Initial Download</h2>
-<p>To get started, a ke</p>
+<p>To include a new series, each keyword must be initiated. Careful, this causes a lot of queries to Google.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">
 <span class="fu">proc_keyword_init</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)  <span class="co"># FIXME make sure this works countries other than "CH", not sure if this is passed down correctly</span></pre></body></html></div>
 </div>
 <div id="daily-update" class="section level2">
 <h2 class="hasAnchor">
 <a href="#daily-update" class="anchor"></a>Daily Update</h2>
+<p>Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu">proc_keyword_latest</span>()</pre></body></html></div>
 </div>
 <div id="further-steps" class="section level2">
@@ -152,6 +153,13 @@
 <h2 class="hasAnchor">
 <a href="#reading-and-writing" class="anchor"></a>Reading and Writing</h2>
 <p><code>read_keyword</code> <code>write_keyword</code></p>
+</div>
+<div id="updating-trendecon-indicators-perhaps" class="section level2">
+<h2 class="hasAnchor">
+<a href="#updating-trendecon-indicators-perhaps" class="anchor"></a>Updating trendecon indicators (perhaps)</h2>
+<p>To source all scripts from trendecon, use:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># remotes::install_local()   # build the package, only do once</span>
+<span class="kw pkg">gtrendecon</span><span class="kw ns">::</span><span class="fu">proc_all</span>()</pre></body></html></div>
 </div>
   </div>
 
