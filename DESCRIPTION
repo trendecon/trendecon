@@ -28,7 +28,8 @@ Encoding: UTF-8
 LazyData: true
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 URL: https://www.trendecon.org
 BugReports: https://github.com/trendecon/trendecon/issues
 VignetteBuilder: knitr
