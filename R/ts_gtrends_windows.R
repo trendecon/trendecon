@@ -38,19 +38,23 @@ ts_gtrends_windows <- function(keyword = NA,
                                retry = 5) {
   library(tidyverse)
 
-  tbl <- prepare_windows_tbl(from,
-                             n_windows,
-                             prevent_window_shrinkage,
-                             stepsize,
-                             windowsize)
+  tbl <- prepare_windows_tbl(
+    from,
+    n_windows,
+    prevent_window_shrinkage,
+    stepsize,
+    windowsize
+  )
   tbl <- tbl %>%
-    mutate(trend_data = list(ts_gtrends(keyword,
-                                        category,
-                                        geo,
-                                        window,
-                                        retry,
-                                        wait,
-                                        quiet))) %>%
+    mutate(trend_data = list(ts_gtrends(
+      keyword,
+      category,
+      geo,
+      window,
+      retry,
+      wait,
+      quiet
+    ))) %>%
     unnest(cols = trend_data) %>%
     ungroup()
 
@@ -72,6 +76,7 @@ prepare_windows_tbl <- function(from,
     start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
   ) %>%
     rowwise() %>%
+    filter(start_date<=Sys.Date()) %>%
     mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
     ungroup() %>%
     mutate(end_date = as.Date(as.numeric(end_date), origin = "1970-01-01")) %>%
@@ -86,16 +91,21 @@ prepare_windows_tbl <- function(from,
     # Make sure the last window is large enough to yield the desired frequency
     rowwise() %>%
     mutate(start_date = ifelse(prevent_window_shrinkage & end_date == Sys.Date(),
-                               seq(start_date,
-                                   length.out = 2,
-                                   by = paste0("-", windowsize))[1],
-                               start_date)) %>%
+      seq(start_date,
+        length.out = 2,
+        by = paste0("-", windowsize)
+      )[1],
+      start_date
+    )) %>%
     ungroup() %>%
     transmute(
-    # Using as.Date because the different variations of if(_)else each have
-    # their problems
-    window = sprintf("%s %s", as.Date(start_date, origin = "1970-01-01"),
-                     as.Date(end_date, origin = "1970-01-01"))) %>%
+      # Using as.Date because the different variations of if(_)else each have
+      # their problems
+      window = sprintf(
+        "%s %s", as.Date(start_date, origin = "1970-01-01"),
+        as.Date(end_date, origin = "1970-01-01")
+      )
+    ) %>%
     rowwise()
 
 
