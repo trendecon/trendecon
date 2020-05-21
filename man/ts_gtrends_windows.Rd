@@ -19,21 +19,26 @@ ts_gtrends_windows(
 )
 }
 \arguments{
-\item{keyword}{keyword(s) to compare}
+\item{keyword}{A character vector with the actual Google Trends query
+keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if different keywords are used,
+mulitple queries are sent to Google, and each series is individually
+normalized.}
 
-\item{category}{category/ies to compare}
+\item{category}{A character vector, listing the categories, defaults to “0”.}
 
-\item{geo}{region to get trends for}
+\item{geo}{A character vector denoting geographic regions for the query, default is “CH”.}
 
 \item{from}{start of timeframe in YYYY-mm-dd form}
 
 \item{stepsize}{how far to advance the window in days}
 
-\item{quiet}{should progress output be su}
+\item{quiet}{If TRUE won't display messages related to server interactions. Default is FALSE.}
 
-\item{wait}{waiting time until retry}
+\item{wait}{Seconds to wait between attempts, where waiting time is \code{attempt * wait}.}
 
-\item{to}{end of timeframe in YYYY-mm-dd form}
+\item{retry}{Number of attempts, in case the query request does not succeed.}
+
+\item{to}{WHAT HAPPENED WITH THIS?}
 }
 \description{
 This function downloads

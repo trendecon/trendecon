@@ -1,15 +1,12 @@
 #' Get approximate daily series over a large window
 #'
 #' This function downloads
-#'
-#' @param keyword keyword(s) to compare
-#' @param category category/ies to compare
-#' @param geo region to get trends for
+#' @inheritParams ts_gtrends
 #' @param from start of timeframe in YYYY-mm-dd form
-#' @param to end of timeframe in YYYY-mm-dd form
+#' @param prevent_window_shrinkage
+#' @param to WHAT HAPPENED WITH THIS?
 #' @param stepsize how far to advance the window in days
-#' @param quiet should progress output be su
-#' @param wait waiting time until retry
+
 ts_gtrends_windows <- function(keyword = NA,
                                category = "0",
                                geo = "CH",
