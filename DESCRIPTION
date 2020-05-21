@@ -14,7 +14,7 @@ Authors@R: c(
     person("Furkan", "Oguz", role = "ctb"),
     person("Kristina", "Schuepbach", role = "ctb")
     )
-Description: Functions to create daily series from Google Trends.
+Description: To construct long daily time series from Google Trends. Robustness of the data is achieved by querying Google mulitple times. The queries are sampled at daily, weekly and monthy frequencies and then harmonized such that the long term trend is preserved.
 Imports:
   gtrendsR,
   tempdisagg,
