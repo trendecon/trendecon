@@ -158,27 +158,18 @@ normalized.</p></td>
     </tr>
     <tr>
       <th>category</th>
-      <td><p>A character vector, listing the categories, defaults to “0”.</p></td>
+      <td><p>A character vector, listing the categories, defaults to
+<code>"0"</code>. Passed to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code></p></td>
     </tr>
     <tr>
       <th>geo</th>
-      <td><p>A character vector denoting geographic regions for the query, default is “CH”.</p></td>
+      <td><p>A character vector denoting geographic regions for the query,
+default is <code>"C"</code>. Passed to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code></p></td>
     </tr>
     <tr>
       <th>time</th>
-      <td><p>A string specifying the time span of the query. Possible values are:</p><dl'>
-<dt>"now 1-H"</dt><dd><p>Last hour</p></dd>
-<dt>"now 4-H"</dt><dd><p>Last four hours</p></dd>
-<dt>"now 1-d"</dt><dd><p>Last day</p></dd>
-<dt>"now 7-d"</dt><dd><p>Last seven days</p></dd>
-<dt>"today 1-m"</dt><dd><p>Past 30 days</p></dd>
-<dt>"today 3-m"</dt><dd><p>Past 90 days</p></dd>
-<dt>"today 12-m"</dt><dd><p>Past 12 months</p></dd>
-<dt>"today+5-y"</dt><dd><p>Last five years (default)</p></dd>
-<dt>"all"</dt><dd><p>Since the beginning of Google Trends (2004)</p></dd>
-<dt>"Y-m-d Y-m-d"</dt><dd><p>Time span between two dates (ex.: "2010-01-01 2010-04-03")</p></dd>
-
-</dl></td>
+      <td><p>A string specifying the time span of the query.
+Passed to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code>.</p></td>
     </tr>
     <tr>
       <th>retry</th>
@@ -205,8 +196,7 @@ either the keyword, or the category.</p>
     
 
 <ul>
-<li><p>A list with all categories can be obtained using <code><a href='https://rdrr.io/r/utils/data.html'>data("categories")</a></code>. The function takes the id's as strings,
-not the names. For example, "Arts &amp; Entertainment" has to be specified as "2".</p></li>
+<li><p>The function takes the id's as strings, not the names. For example, "Arts &amp; Entertainment" has to be specified as "2".</p></li>
 <li><p>Multiple keywords or multiple categories can be specified, but not both.</p></li>
 </ul>
 
@@ -217,7 +207,7 @@ not the names. For example, "Arts &amp; Entertainment" has to be specified as "2
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>ts_gtrends</span>(<span class='st'>"Rezession"</span>)</div><div class='output co'>#&gt; <span class='message'>Downloading data for today+5-y</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 261 x 2</span><span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ts_gtrends</span>(<span class='st'>"Rezession"</span>)</div><div class='output co'>#&gt; <span class='message'>Downloading data for today+5-y</span></div><div class='input'><span class='no'>x</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 261 x 2</span><span>
 #&gt;    time       value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 2015-05-24     4
@@ -230,7 +220,7 @@ not the names. For example, "Arts &amp; Entertainment" has to be specified as "2
 #&gt; </span><span style='color: #555555;'> 8</span><span> 2015-07-12     3
 #&gt; </span><span style='color: #555555;'> 9</span><span> 2015-07-19     5
 #&gt; </span><span style='color: #555555;'>10</span><span> 2015-07-26     4
-#&gt; </span><span style='color: #555555;'># … with 251 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 251 more rows</span><span></div><div class='input'><span class='kw pkg'>tsbox</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tsbox/man/ts_plot.html'>ts_plot</a></span>(<span class='no'>x</span>)</div><div class='img'><img src='ts_gtrends-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
