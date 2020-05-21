@@ -9,28 +9,26 @@
 status](https://travis-ci.com/trendecon/trendecon.svg?branch=master)](https://travis-ci.com/trendecon/trendecon)
 <!-- badges: end -->
 
-During the Covid-19 pandemic, information and the (economic and social)
-situation has changed rapidly. We use Google search trends to overcome
-this data gap and create meaningful indicators. We extract daily search
-data on keywords reflecting consumers’ perception of the economic
-situation.
-
-The website [www.trendecon.org](https://www.trendecon.org) provides a
-set of economic indicators for Switzerland based on Google search
-trends. These indicators are updated daily and provide policymakers and
-business leaders with timely information about the Swiss economy. Here
-you find more information on how to use our indicators and you can
-download the data.
-
-This project was inititated during the
-\#versusvirus\[<https://www.versusvirus.ch>\] and got
-[funding](https://www.versusvirus.ch/funding) from the hackathon.
-
 This package contains R code to construct long daily time series from
 Google Trends. Robustness of the data is achieved by querying Google
 mulitple times. The queries are sampled at daily, weekly and monthy
 frequencies and then harmonized such that the long term trend is
 preserved.
+
+The website [www.trendecon.org](https://www.trendecon.org) applies the
+package and provides a set of indicators for Switzerland and is updated
+daily. During the Covid-19 pandemic, such high-frequency indicators have
+been in high demand. The economic and social situation has changed very
+rapidly and most economic statistics could not provide timely
+information since they are collected on a much lower frequency and
+published with a lag. We use Google search trends to create meaningful
+indicators that don’t suffer from this problem. In particular, we
+extract daily search data on keywords reflecting consumers’ perception
+of the economic situation.
+
+The project was inititated during the
+[\#versusvirus](https://www.versusvirus.ch) and got
+[funding](https://www.versusvirus.ch/funding) from the hackathon.
 
 ## Install
 
@@ -58,7 +56,7 @@ tsbox::ts_plot(x)
 
 The [introductory
 vignette](https://trendecon.github.io/trendecon/articles/intro.html)
-gives describes the basic use of the package.
+describes the basic use of the package.
 
 To create and update long daily series from Google Trends, see the
 [vignette on daily
@@ -70,32 +68,25 @@ Main source for inormation: <http://r-pkgs.had.co.nz>
 
 ### Documentation
 
+  - \[x\] DESCRIPTION: authors, pkg summary
+  - \[x\] Introductiory vignette (`vignettes/intro.Rmd`)
+    (<http://r-pkgs.had.co.nz/vignettes.html>)
+  - \[x\] Minimal section on getting started as `README.md`
+  - \[x\] pkgdown website (optional) <https://pkgdown.r-lib.org>
   - \[ \] Roxigen header to exported functions
     (<http://r-pkgs.had.co.nz/man.html>)
-
-  - \[ \] DESCRIPTION: authors, pkg summary
-
-  - \[ \] Introductiory vignette (`vignettes/intro.Rmd`)
-    (<http://r-pkgs.had.co.nz/vignettes.html>)
-
   - \[ \] Vignette: How to perform daily updates (see section below)
-
-  - \[ \] Minimal section on getting started as `README.md`
-
-  - \[ \] pkgdown website (optional) <https://pkgdown.r-lib.org>
 
 ### Clean Up
 
   - \[ \] Turn scripts in `inst/script` into functions. Instead of
     `inst/script/clothing.R`, we want to have something like
     `R/proc_index_clothing.R` (the later is currently just an example).
-
   - \[ \] Define (and document) the use of system paths. I think the
     only place where they appear is now in `path_trendecon`. Perhaps use
     system variables.
 
 ### Tests
 
+  - \[x\] a very few tests of the basic functions (optional)
   - \[ \] R CMD check –as-cran (optional)
-
-  - \[ \] a very few tests of the basic functions (optional)

@@ -61,31 +61,28 @@ Main source for inormation: http://r-pkgs.had.co.nz
 
 ### Documentation
 
+
+- [x] DESCRIPTION: authors, pkg summary
+- [x] Introductiory vignette (`vignettes/intro.Rmd`) (http://r-pkgs.had.co.nz/vignettes.html)
+- [x] Minimal section on getting started as `README.md`
+- [x] pkgdown website (optional) https://pkgdown.r-lib.org
 - [ ] Roxigen header to exported functions (http://r-pkgs.had.co.nz/man.html)
-
-- [ ] DESCRIPTION: authors, pkg summary
-
-- [ ] Introductiory vignette (`vignettes/intro.Rmd`) (http://r-pkgs.had.co.nz/vignettes.html)
-
 - [ ] Vignette: How to perform daily updates (see section below)
 
-- [ ] Minimal section on getting started as `README.md`
 
-- [ ] pkgdown website (optional) https://pkgdown.r-lib.org
 
 
 ### Clean Up
 
 - [ ] Turn scripts in `inst/script` into functions. Instead of `inst/script/clothing.R`, we want to have something like `R/proc_index_clothing.R` (the later is currently just an example).
-
 - [ ] Define (and document) the use of system paths. I think the only place where they appear is now in `path_trendecon`. Perhaps use system variables.
 
 
 ### Tests
 
+- [x] a very few tests of the basic functions (optional)
 - [ ] R CMD check --as-cran (optional)
 
-- [ ] a very few tests of the basic functions (optional)
 
 
 
