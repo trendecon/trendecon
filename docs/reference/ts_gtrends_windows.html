@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get approximate daily series over a large window — ts_gtrends_windows • trendecon</title>
+<title>Download approximate daily series over a sequence of time-windows — ts_gtrends_windows • trendecon</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Get approximate daily series over a large window — ts_gtrends_windows" />
-<meta property="og:description" content="This function downloads" />
+<meta property="og:title" content="Download approximate daily series over a sequence of time-windows — ts_gtrends_windows" />
+<meta property="og:description" content="Downloads approximate daily series over a sequence of time-windows by first constructing the appropriate time
+windows and then downloading daily data for each time-window using trendecon::ts_getrends()." />
 
 
 
@@ -123,13 +124,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get approximate daily series over a large window</h1>
+    <h1>Download approximate daily series over a sequence of time-windows</h1>
     <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/ts_gtrends_windows.R'><code>R/ts_gtrends_windows.R</code></a></small>
     <div class="hidden name"><code>ts_gtrends_windows.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function downloads</p>
+    <p>Downloads approximate daily series over a sequence of time-windows by first constructing the appropriate time
+windows and then downloading daily data for each time-window using <code>trendecon::ts_getrends()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ts_gtrends_windows</span>(
@@ -151,38 +153,66 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>keyword</th>
-      <td><p>keyword(s) to compare</p></td>
+      <td><p>A character vector with the actual Google Trends query
+keywords. Contrary to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code>, if different keywords are used,
+mulitple queries are sent to Google, and each series is individually
+normalized.</p></td>
     </tr>
     <tr>
       <th>category</th>
-      <td><p>category/ies to compare</p></td>
+      <td><p>A character vector, listing the categories, defaults to “0”.</p></td>
     </tr>
     <tr>
       <th>geo</th>
-      <td><p>region to get trends for</p></td>
+      <td><p>A character vector denoting geographic regions for the query, default is “CH”.</p></td>
     </tr>
     <tr>
       <th>from</th>
       <td><p>start of timeframe in YYYY-mm-dd form</p></td>
     </tr>
     <tr>
+      <th>prevent_window_shrinkage</th>
+      <td><p>If <code>TRUE</code>, ensures that the last time-window is large enough to yield the desired
+frequency. Default is <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
       <th>stepsize</th>
-      <td><p>how far to advance the window in days</p></td>
+      <td><p>Number of days (integer) between the start days of the respective time-windows.</p></td>
+    </tr>
+    <tr>
+      <th>windowsize</th>
+      <td><p>Number of days (integer) from start date to end date of each window.</p></td>
+    </tr>
+    <tr>
+      <th>n_windows</th>
+      <td><p>Number (integer) of time-windows.</p></td>
     </tr>
     <tr>
       <th>quiet</th>
-      <td><p>should progress output be su</p></td>
+      <td><p>If TRUE won't display messages related to server interactions. Default is FALSE.</p></td>
     </tr>
     <tr>
       <th>wait</th>
-      <td><p>waiting time until retry</p></td>
+      <td><p>Seconds to wait between attempts, where waiting time is <code>attempt * wait</code>.</p></td>
     </tr>
     <tr>
-      <th>to</th>
-      <td><p>end of timeframe in YYYY-mm-dd form</p></td>
+      <th>retry</th>
+      <td><p>Number of attempts, in case the query request does not succeed.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A tibble of time series with columns <em>window</em>, <em>time</em>, <em>value</em>, where <em>window</em> is the time window
+indicated by start and end date of the window.</p>
+    <h2 class="hasAnchor" id="notes"><a class="anchor" href="#notes"></a>Notes</h2>
+
+    
+
+<p>Time-windows may overlap - and will do so if <code>stepsize</code> &lt; <code>windowsize</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='ts_gtrends.html'>trendecon::ts_gtrends()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
