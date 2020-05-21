@@ -51,6 +51,7 @@
 #' @examples
 #'
 #' ts_gtrends("Rezession")
+#' @import dplyr tidyr tsbox gtrendsR
 ts_gtrends <- function(keyword = NA,
                        category = "0",
                        geo = "CH",
@@ -58,9 +59,6 @@ ts_gtrends <- function(keyword = NA,
                        retry = 5,
                        wait = 5,
                        quiet = FALSE) {
-  library(tidyverse)
-  library(tsbox)
-  library(gtrendsR)
 
   # replace return values like <1
   ensure_numeric <- function(x) {
