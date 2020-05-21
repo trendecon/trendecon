@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(trendecon)
-```
-
 
 Google Trends is an online search tool from Google that allows you to analyse the relative populatity of search queries. See https://trends.google.com/ for the official online interface. The tool allows to specify the time horizon and to define the location. Thereby, the popularity of a search term can be analysed over time, across countries and relative to other search terms.
 
@@ -30,9 +26,13 @@ Suppose we are interested in the demand for cultural events in Switzerland. Firs
 
 
 ```{r}
-gt_data <- ts_gtrends(keyword = c("cinema", "oper", "kino", "theater"),
-                      geo = "CH",
-                      time = "today+5-y")
+library(trendecon)
+
+gt_data <- ts_gtrends(
+  keyword = c("cinema", "oper", "kino", "theater"),
+  geo = "CH",
+  time = "today+5-y"
+)
 ```
 
 Specify with the paramter `geo` the geographic location. Default is Switzerland ("CH"). With `geo=""` the global search volume is used. Not only countries but also regions within a country are possible. See `data("countries")` from the gtrendsR package for a list of available regions and their code.
@@ -60,10 +60,11 @@ ts_plot(pc1 = filter(ts_prcomp(gt_data), id == "PC1"))
 Alternatively to a search term also predefined Goolge product categories can be used. See for instance https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories for a hierarchically structered list of the Google product categories or get the categories with `data("categories")` from the gtrendsR package. Every search query in the Google search engine is assigned to one or multiple Google product categories. Therefore, the search volume of a category is an aggregate of multiple search terms. There is for instance the category "Events & Listings" with id 569.
 
 ```{r}
-gt_data_cat <- ts_gtrends(category = "569",
-                          geo = "CH",
-                          time = "today+5-y")
-
+gt_data_cat <- ts_gtrends(
+  category = "569",
+  geo = "CH",
+  time = "today+5-y"
+)
 ts_plot(gt_data_cat)
 ```
 
