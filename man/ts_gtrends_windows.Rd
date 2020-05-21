@@ -24,9 +24,11 @@ keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if di
 mulitple queries are sent to Google, and each series is individually
 normalized.}
 
-\item{category}{A character vector, listing the categories, defaults to “0”.}
+\item{category}{A character vector, listing the categories, defaults to
+\code{"0"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
-\item{geo}{A character vector denoting geographic regions for the query, default is “CH”.}
+\item{geo}{A character vector denoting geographic regions for the query,
+default is \code{"C"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
 \item{from}{Start of timeframe in YYYY-mm-dd form.}
 
