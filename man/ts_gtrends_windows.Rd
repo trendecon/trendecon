@@ -24,18 +24,22 @@ keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if di
 mulitple queries are sent to Google, and each series is individually
 normalized.}
 
-\item{category}{A character vector, listing the categories, defaults to “0”.}
+\item{category}{A character vector, listing the categories, defaults to
+\code{"0"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
-\item{geo}{A character vector denoting geographic regions for the query, default is “CH”.}
+\item{geo}{A character vector denoting geographic regions for the query,
+default is \code{"C"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
-\item{from}{start of timeframe in YYYY-mm-dd form}
+\item{from}{Start of timeframe in YYYY-mm-dd form.}
 
-\item{prevent_window_shrinkage}{If \code{TRUE}, ensures that the last time-window is large enough to yield the desired
-frequency. Default is \code{FALSE}.}
+\item{prevent_window_shrinkage}{If \code{TRUE}, ensures that the last time-window
+is large enough to yield the desired frequency. Default is \code{FALSE}.}
 
-\item{stepsize}{Number of days (integer) between the start days of the respective time-windows.}
+\item{stepsize}{Number of days (integer) between the start days of the
+respective time-windows.}
 
-\item{windowsize}{Number of days (integer) from start date to end date of each window.}
+\item{windowsize}{Number of days (integer) from start date to end date of
+each window.}
 
 \item{n_windows}{Number (integer) of time-windows.}
 
@@ -46,12 +50,14 @@ frequency. Default is \code{FALSE}.}
 \item{retry}{Number of attempts, in case the query request does not succeed.}
 }
 \value{
-A tibble of time series with columns \emph{window}, \emph{time}, \emph{value}, where \emph{window} is the time window
+A tibble of time series with columns \emph{window}, \emph{time}, \emph{value},
+where \emph{window} is the time window
 indicated by start and end date of the window.
 }
 \description{
-Downloads approximate daily series over a sequence of time-windows by first constructing the appropriate time
-windows and then downloading daily data for each time-window using \code{\link[trendecon:ts_getrends]{trendecon::ts_getrends()}}.
+Downloads approximate daily series over a sequence of time-windows by first
+constructing the appropriate time windows and then downloading daily data
+for each time-window using \code{\link[trendecon:ts_gtrends]{trendecon::ts_gtrends()}}.
 }
 \section{Notes}{
 

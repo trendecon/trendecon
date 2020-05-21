@@ -15,14 +15,14 @@ knitr::opts_chunk$set(
 ```
 
 
-Google Trends is an online search tool from Google that allows you to analyse the relative populatity of search queries. See https://trends.google.com/ for the official online interface. The tool allows to specify the time horizon and to define the location. Thereby, the popularity of a search term can be analysed over time, across countries and relative to other search terms.
+Google Trends is an online search tool from Google that allows you to analyse the relative popularity of search queries: https://trends.google.com/. The popularity of a search term can be analysed over time, across regions and relative to other search terms.
 
-The R package trendecon allows to produce long daily time series of search queries. With the main function of the package, `ts_gtrends()` Google Trends data is downloaded for one or multiple keywords or Google product categories. It wraps around the package gtrendsR but modifies the function [gtrendsR::gtrends()] by a) vectorizing it, b) converting the result to a tsboxable tibble and c) retrying if no result is returned.
+The R package trendecon allows to produce long daily time series of search queries. The main function `ts_gtrends()` downloads Google Trends data for one or multiple keywords or Google product categories. It wraps around the package gtrendsR but modifies the function [gtrendsR::gtrends()] by a) vectorizing it, b) converting the result to a tsboxable tibble and c) retrying if no result is returned.
 
 
 ## Keyword search
 
-Suppose we are interested in the demand for cultural events in Switzerland. First think of what people would google if they want to go to a cultural event. For instance, they might google "cinema", "oper", "kino" and "theater". The following command downloads the Google Trends data for these search terms.
+Suppose we are interested in the demand for cultural events in Switzerland. Think of what people would google if they want to go to a cultural event. For instance, they might google "cinema", "oper", "kino" and "theater". The following command downloads the Google Trends data for these search terms.
 
 
 ```{r}
@@ -35,9 +35,9 @@ gt_data <- ts_gtrends(
 )
 ```
 
-Specify with the paramter `geo` the geographic location. Default is Switzerland ("CH"). With `geo=""` the global search volume is used. Not only countries but also regions within a country are possible. See `data("countries")` from the gtrendsR package for a list of available regions and their code.
+The paramter `geo` specifies the geographic location. Default is Switzerland ("CH"). With `geo=""` the global search volume is used. Not only countries but also regions within a country are possible. See `data("countries")` from the gtrendsR package for a list of available regions and their code.
 
-With the parameter `time` the time span of the query can be specified. "today+5-y" downloads for the time span for the last five years (default). The frequency of the data depends on the entered time span. A time span of up to three months will yield daily data. Up to five years allows for a weekly frequency. And for a time span of more than five years, the data is monthly. `time = "all"` uses the maximum time span which starts in January 2004.
+The parameter `time` specifies the time span of the query. "today+5-y" downloads for the last five years (default). For more details on the syntax, see the R Documentation of the function 'gtrends()' in the 'gtrendsR' package. The frequency of the data depends on the entered time span. A time span of up to nine months will yield daily data. Up to five years allows for a weekly frequency. And for a time span of more than five years, the data is monthly. `time = "all"` uses the maximum time span which starts in January 2004.
 
 You can plot the time series with `ts_plot` from the `tsbox` package.
 
@@ -46,8 +46,7 @@ library(tsbox)
 ts_plot(gt_data)
 ```
 
-
-To retrieve the common signal of the four time series, you can for instance draw the principal component.
+To retrieve the common signal of the four time series, you can for instance draw the first principal component.
 
 ```{r}
 ts_plot(ts_pick(ts_prcomp(gt_data), "PC1"))
@@ -55,10 +54,9 @@ ts_plot(ts_pick(ts_prcomp(gt_data), "PC1"))
 
 
 
-
 ## Google product categories search
 
-Alternatively to a search term also predefined Goolge product categories can be used. See for instance https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories for a hierarchically structered list of the Google product categories or get the categories with `data("categories")` from the gtrendsR package. Every search query in the Google search engine is assigned to one or multiple Google product categories. Therefore, the search volume of a category is an aggregate of multiple search terms. There is for instance the category "Events & Listings" with id 569.
+Alternatively to a specific search term, also predefined Goolge product categories can be retrieved. Every search query in the Google search engine is assigned to one or multiple Google product categories. The search volume of a category is thus an aggregate of multiple search terms. See https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories for a hierarchically structered list of these categories or get them with `data("categories")` from the gtrendsR package. For instance, the category "Events & Listings" with id 569 can be retrieved as follows.
 
 ```{r}
 gt_data_cat <- ts_gtrends(
@@ -68,7 +66,6 @@ gt_data_cat <- ts_gtrends(
 )
 ts_plot(gt_data_cat)
 ```
-
 
 
 
