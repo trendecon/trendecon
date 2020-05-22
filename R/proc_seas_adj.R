@@ -8,21 +8,15 @@ proc_seas_adj <- function(keyword = "Insolvenz") {
 
   data <- read_keyword(keyword, "mwd")
 
-  # to include user defined holidays
-  # holidays <- tibble(
-  #   holiday = "Christoph's Birthday",
-  #   ds = data$time[lubridate::month(data$time) == 3 & lubridate::day(data$time) == 28],
-  #   lower_window = 0,
-  #   upper_window = 1
-  # )
-
+  # data <- tsbox::ts_tbl(AirPassengers)
   df <- dplyr::rename(data, ds = time, y = value)
 
   # financial crisis as oultier
   # df[df$ds >= "2008-09-01" & df$ds <= "2009-12-31", 'y'] <- NA
 
-  # workaround, problem in prophet when imported
-  generated_holidays <- prophet::generated_holidays$country
+  # hack: prophet does not like to be imported
+  generated_holidays <- prophet::generated_holidays
+  assign("generated_holidays", prophet::generated_holidays, envir = globalenv())
 
   m <-
     # prophet(holidays = holidays, daily.seasonality = FALSE) %>%
