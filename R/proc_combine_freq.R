@@ -7,7 +7,7 @@ proc_combine_freq <- function(keyword = "Insolvenz") {
   m <- select(read_keyword(keyword, "m"), -n)
 
   message("align daily data to weekly")
-  m_wd <- td(w ~ d, method = "fast", conversion = "mean")
+  m_wd <- tempdisagg::td(w ~ d, method = "fast", conversion = "mean")
 
   # the slope coefficient should be around 1 and significant, otherwise the movement is not copied well
   # summary(m_wd)
@@ -16,7 +16,7 @@ proc_combine_freq <- function(keyword = "Insolvenz") {
   # 2. bend daily series (which fullfills weekly constraint) so that monthly
   # values are identical to monthly series
   message("align weekly data to monthly")
-  m_mwd <- td(m ~ wd, method = "fast", conversion = "mean")
+  m_mwd <- tempdisagg::td(m ~ wd, method = "fast", conversion = "mean")
   mwd <- predict(m_mwd)
 
   write_keyword(mwd, keyword, "mwd")

@@ -22,6 +22,7 @@ Imports:
   here,
   dplyr,
   tidyr,
+  readr,
   fs
 License: GPL-3 + file LICENSE
 Encoding: UTF-8

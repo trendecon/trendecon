@@ -73,7 +73,7 @@ path_keyword <- function(keyword, suffix) {
 
 # read_keyword("Insolvenz")
 read_keyword <- function(keyword, suffix = "sa") {
-  read_csv(path_keyword(keyword, suffix), col_types = cols())
+  readr::read_csv(path_keyword(keyword, suffix), col_types = cols())
 }
 
 #' Read keyword indicator data from disk

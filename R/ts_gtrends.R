@@ -41,7 +41,7 @@
 #' x <- ts_gtrends("Rezession")
 #' x
 #' tsbox::ts_plot(x)
-#' @import dplyr tidyr tsbox gtrendsR
+#' @import dplyr tidyr tsbox gtrendsR readr tempdisagg
 ts_gtrends <- function(keyword = NA,
                        category = "0",
                        geo = "CH",
