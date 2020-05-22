@@ -27,8 +27,7 @@ proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
 
     proc_keyword_latest(keyword = keyword, n_windows = n_windows)
 
-    # for now
-    proc_aggregate_raw(keyword = keyword)
+    proc_aggregate(keyword = keyword)
 
     proc_combine_freq(keyword = keyword)
 
