@@ -1,3 +1,6 @@
+#' Calculate Trendecon Main Indices
+#'
+#' @param path base directory
 #' @export
 proc_all <- function(path = ".") {
 

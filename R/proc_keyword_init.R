@@ -9,8 +9,7 @@
 #'
 #' - `data-raw/indicator_raw` contains time series in time-windows, as returned
 #'     by [trendecon::ts_gtrends_windows].
-#' -  `data-raw/indicator` contains time series aggregated within time-windows
-##'     by [trendecon::aggregate_windows].
+#' - `data-raw/indicator` contains aggregated time series.
 #'
 #' @inheritParams ts_gtrends_windows
 #' @param keyword A single keyword to query Google Trends.

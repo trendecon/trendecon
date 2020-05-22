@@ -22,8 +22,7 @@ are \verb{_d} for daily, \verb{_w} for weekly, and \verb{_m} for monthly data.
 \itemize{
 \item \code{data-raw/indicator_raw} contains time series in time-windows, as returned
 by \link[trendecon:ts_gtrends_windows]{trendecon::ts_gtrends_windows}.
-\item \code{data-raw/indicator} contains time series aggregated within time-windows
-by \link[trendecon:aggregate_windows]{trendecon::aggregate_windows}.
+\item \code{data-raw/indicator} contains aggregated time series.
 }
 }
 \examples{
