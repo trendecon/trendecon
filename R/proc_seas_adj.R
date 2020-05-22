@@ -16,10 +16,13 @@ proc_seas_adj <- function(keyword = "Insolvenz") {
   #   upper_window = 1
   # )
 
-  df <- rename(data, ds = time, y = value)
+  df <- dplyr::rename(data, ds = time, y = value)
 
   # financial crisis as oultier
   # df[df$ds >= "2008-09-01" & df$ds <= "2009-12-31", 'y'] <- NA
+
+  # workaround, problem in prophet when imported
+  generated_holidays <- prophet::generated_holidays$country
 
   m <-
     # prophet(holidays = holidays, daily.seasonality = FALSE) %>%
