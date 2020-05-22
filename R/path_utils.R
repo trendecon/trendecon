@@ -13,8 +13,10 @@
 #'
 #' @return The full path to the base directory, or (if provided as a
 #' parameter), the path to the subdirectory.
-#' @export
 #' @seealso [R.utils::setOption]
+#' @export
+#' @examples
+#' path_trendecon("data-raw")
 #'
 path_trendecon <- function(...) {
   base <- getOption("path_trendecon", default = normalizePath(".."))
