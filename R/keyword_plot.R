@@ -7,11 +7,8 @@ keyword_plot <- function(keyword = NULL, x = NULL, target = NULL, invert = FALSE
 
   if (invert) (x$value <- -x$value)
 
-  library(dataseries)
-
   x_seas <- ts_seas(x, x11 = "", outlier = NULL)
 
-  library(seasonal)
   m <- seasonal::seas(ts_ts(x), x11 = "", outlier = NULL)
   x_seas <- seasonal::final(m)
   x_trend <- seasonal::trend(m)

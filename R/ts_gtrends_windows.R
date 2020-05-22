@@ -36,7 +36,6 @@ ts_gtrends_windows <- function(keyword = NA,
                                quiet = FALSE,
                                wait = 60,
                                retry = 5) {
-  library(tidyverse)
 
   tbl <- prepare_windows_tbl(
     from,

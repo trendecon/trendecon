@@ -1,90 +1,63 @@
-# trendecon
-code to power trendecon
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## TODO
+## Create Daily Series from Google Trends
 
-Main source for inormation: http://r-pkgs.had.co.nz
+<!-- badges: start -->
+
+[![Travis build
+status](https://travis-ci.com/trendecon/trendecon.svg?branch=master)](https://travis-ci.com/trendecon/trendecon)
+<!-- badges: end -->
+
+This package contains R code to construct long daily time series from
+Google Trends. Robustness of the data is achieved by querying Google
+mulitple times. The queries are sampled at daily, weekly and monthy
+frequencies and then harmonized such that the long term trend is
+preserved.
+
+The website [www.trendecon.org](https://www.trendecon.org) applies the
+package and provides a set of indicators for Switzerland and is updated
+daily. During the Covid-19 pandemic, such high-frequency indicators have
+been in high demand. The economic and social situation has changed very
+rapidly and most economic statistics could not provide timely
+information since they are collected on a much lower frequency and
+published with a lag. We use Google search trends to create meaningful
+indicators that don’t suffer from this problem. In particular, we
+extract daily search data on keywords reflecting consumers’ perception
+of the economic situation.
+
+The project was inititated during the
+[\#versusvirus](https://www.versusvirus.ch) and got
+[funding](https://www.versusvirus.ch/funding) from the hackathon.
+
+### Installation
+
+You can install the trendecon package from GitHub.
+
+``` r
+# install.packages("remotes")
+remotes::install_github("trendecon/trendecon")
+```
+
+### Usage
+
+To download a series from Google Trends:
+
+``` r
+library(trendecon)
+x <- ts_gtrends("cinema", geo = "CH")
+#> Downloading data for today+5-y
+tsbox::ts_plot(x)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ### Documentation
 
-- [ ] Roxigen header to exported functions (http://r-pkgs.had.co.nz/man.html)
+The [introductory
+vignette](https://trendecon.github.io/trendecon/articles/intro.html)
+describes the basic use of the package.
 
-- [ ] DESCRIPTION: authors, pkg summary
-
-- [ ] Introductiory vignette (`vignettes/intro.Rmd`) (http://r-pkgs.had.co.nz/vignettes.html)
-
-- [ ] Vignette: How to perform daily updates (see section below)
-
-- [ ] Minimal section on getting started as `README.md`
-
-- [ ] pkgdown website (optional) https://pkgdown.r-lib.org
-
-
-### Clean Up
-
-- [ ] Turn scripts in `inst/script` into functions. Instead of `inst/script/clothing.R`, we want to have something like `R/proc_index_clothing.R` (the later is currently just an example).
-
-- [ ] Define (and document) the use of system paths. I think the only place where they appear is now in `path_trendecon`. Perhaps use system variables.
-
-
-### Tests
-
-- [ ] R CMD check --as-cran (optional)
-
-- [ ] a very few tests of the basic functions (optional)
-
-
-
-## Daily update of indices
-
-For each index, we have a small script in `inst/script`.
-
-To include a new series, each keyword must be initiated, which causes a lot of queries to google, so this may be called on several computers.
-
-E.g.,
-```r
-library(trendecon)
-proc_keyword_init("Mango")
-```
-
-Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.
-
-To source all scripts, use:
-
-```r
-# remotes::install_local()   # build the package, only do once
-gtrendecon::proc_all()
-```
-
-The first argument to `proc_all()` is the path to the `trendecon` folder, the folder that contains the repos `data` and `data-raw`. If you call it from your `gtrendecon` project, use:
-```r
-# remotes::install_local()   # build the package, only do once
-gtrendecon::proc_all("..")
-```
-
-Updates can be performed from the command line, too:
-
-```r
-cd ~/git/trendecon/gtrendecon
-rscript -e 'gtrendecon::proc_all()'
-```
-
-
-
-## Open Questions
-
-
-How to auto commit stuff to the data repo? `git2r::push()` needs credentials.
-
-```
-git2r::add(path = list.files(".", recursive = TRUE))
-git2r::commit(message = paste("auto data upd: ", Sys.Date()))
-git2r::push()
-```
-
-How to run on a daily basis?
-
-- Own machine?
-- GitHub Actions?
-
+To create and update long daily series from Google Trends, see the
+[vignette on daily
+series](https://trendecon.github.io/trendecon/articles/daily-series.html).
