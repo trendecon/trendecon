@@ -98,5 +98,5 @@ ts_gtrends <- function(keyword = NA,
   class(tslist) <- "tslist"
 
 
-  ts_tbl(tslist)
+  ts_tbl(tslist) %>% mutate(time = as.Date(time))
 }

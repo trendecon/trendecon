@@ -7,9 +7,6 @@ aggregate_windows <- function(data) {
 
 
 aggregate_averages <- function(data_1, data_2) {
-  data_1 <- data_1 %>% mutate(time = as.Date(time))
-  data_2 <- data_2 %>% mutate(time = as.Date(time))
-
   data_1 %>%
     full_join(
       rename(data_2, value_2 = value, n_2 = n),
