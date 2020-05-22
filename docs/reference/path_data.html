@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq • trendecon</title>
+<title>Build paths from <code>data</code> directory — path_data • trendecon</title>
 
 
 <!-- jquery -->
@@ -42,16 +39,8 @@ values are identical to monthly series</p></li>
 
 
 
-<meta property="og:title" content="<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq" />
-<meta property="og:description" content="
-
-bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series
-
-" />
+<meta property="og:title" content="Build paths from <code>data</code> directory — path_data" />
+<meta property="og:description" content="Build paths from data directory" />
 
 
 
@@ -134,26 +123,34 @@ values are identical to monthly series
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol></h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_combine_freq.R'><code>R/proc_combine_freq.R</code></a></small>
-    <div class="hidden name"><code>proc_combine_freq.Rd</code></div>
+    <h1>Build paths from <code>data</code> directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/path_utils.R'><code>R/path_utils.R</code></a></small>
+    <div class="hidden name"><code>path_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol>
-
+    <p>Build paths from <code>data</code> directory</p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_combine_freq</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>)</pre>
+    <pre class="usage"><span class='fu'>path_data</span>(<span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Character vector of subdirectories relative to the <code>data</code>
+directory.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The full path to the <code>data</code> directory, or (if provided as a
+parameter), the path to the subdirectory.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='path_trendecon.html'>path_trendecon</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

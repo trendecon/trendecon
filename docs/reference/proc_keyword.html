@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq • trendecon</title>
+<title>Processes the data for a single keyword. — proc_keyword • trendecon</title>
 
 
 <!-- jquery -->
@@ -42,14 +39,12 @@ values are identical to monthly series</p></li>
 
 
 
-<meta property="og:title" content="<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq" />
-<meta property="og:description" content="
-
-bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series
+<meta property="og:title" content="Processes the data for a single keyword. — proc_keyword" />
+<meta property="og:description" content="Processing includes
+donwloading the latest data
+aggregating
+combining
+seasonal adjustment
 
 " />
 
@@ -134,26 +129,40 @@ values are identical to monthly series
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol></h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_combine_freq.R'><code>R/proc_combine_freq.R</code></a></small>
-    <div class="hidden name"><code>proc_combine_freq.Rd</code></div>
+    <h1>Processes the data for a single keyword.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_keyword.R'><code>R/proc_keyword.R</code></a></small>
+    <div class="hidden name"><code>proc_keyword.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol>
+    <p>Processing includes</p><ul>
+<li><p>donwloading the latest data</p></li>
+<li><p>aggregating</p></li>
+<li><p>combining</p></li>
+<li><p>seasonal adjustment</p></li>
+</ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>proc_combine_freq</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>)</pre>
+    <pre class="usage"><span class='fu'>proc_keyword</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>, <span class='kw'>n_windows</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>keyword</th>
+      <td><p>A single keyword for which to process the data.</p></td>
+    </tr>
+    <tr>
+      <th>n_windows</th>
+      <td><p>Number of windows, passed to <a href='ts_gtrends_windows.html'>ts_gtrends_windows</a>, used
+when downloading the latest data.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='ts_gtrends_windows.html'>ts_gtrends_windows</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

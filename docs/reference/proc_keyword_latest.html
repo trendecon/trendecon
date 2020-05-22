@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq • trendecon</title>
+<title>Download latest data — proc_keyword_latest • trendecon</title>
 
 
 <!-- jquery -->
@@ -42,16 +39,8 @@ values are identical to monthly series</p></li>
 
 
 
-<meta property="og:title" content="<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq" />
-<meta property="og:description" content="
-
-bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series
-
-" />
+<meta property="og:title" content="Download latest data — proc_keyword_latest" />
+<meta property="og:description" content="Downloads latest daily, weekly, and monthly data." />
 
 
 
@@ -134,26 +123,55 @@ values are identical to monthly series
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol></h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_combine_freq.R'><code>R/proc_combine_freq.R</code></a></small>
-    <div class="hidden name"><code>proc_combine_freq.Rd</code></div>
+    <h1>Download latest data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_keyword_latest.R'><code>R/proc_keyword_latest.R</code></a></small>
+    <div class="hidden name"><code>proc_keyword_latest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol>
-
+    <p>Downloads latest daily, weekly, and monthly data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_combine_freq</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>)</pre>
+    <pre class="usage"><span class='fu'>proc_keyword_latest</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>, <span class='kw'>n_windows</span> <span class='kw'>=</span> <span class='fl'>12</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>keyword</th>
+      <td><p>A single keyword for which to process the data.</p></td>
+    </tr>
+    <tr>
+      <th>n_windows</th>
+      <td><p>Number (integer) of time-windows.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="daily-data"><a class="anchor" href="#daily-data"></a>Daily data</h2>
+
+    
+
+<p>Downloads data for the last 90 days in two windows, with the same end
+date (today) but start date shifted by one day. File saved as
+<code>{keyword}_d_{today}.csv</code> in folder <code>data-raw/indicator_raw</code>.</p>
+    <h2 class="hasAnchor" id="weekly-data"><a class="anchor" href="#weekly-data"></a>Weekly data</h2>
+
+    
+
+<p>Downloads weekly data for two windows, first window starts 1 year ago,
+second window offset by one week, both windows end today. File saved
+as <code>{keyword}_w_{today}.csv</code> in folder <code>data-raw/indicator_raw</code>.</p>
+    <h2 class="hasAnchor" id="monthly-data"><a class="anchor" href="#monthly-data"></a>Monthly data</h2>
+
+    
+
+<p>Downloads monthly data for two windows, first window starts at
+2006-01-01, second window offset by  1 month, both windows end today.
+File saved as <code>{keyword}_m_{today}.csv</code> in folder
+<code>data-raw/indicator_raw</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='ts_gtrends_windows.html'>ts_gtrends_windows</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

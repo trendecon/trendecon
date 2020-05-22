@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq • trendecon</title>
+<title>Build paths from base directory — path_trendecon • trendecon</title>
 
 
 <!-- jquery -->
@@ -42,16 +39,12 @@ values are identical to monthly series</p></li>
 
 
 
-<meta property="og:title" content="<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq" />
-<meta property="og:description" content="
-
-bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series
-
-" />
+<meta property="og:title" content="Build paths from base directory — path_trendecon" />
+<meta property="og:description" content="The base directory is obtained by getOption(&quot;path_trendecon&quot;). If the
+option is not present, the base directory defaults to the parent directory
+of the current working directory. To set the option, run
+library(R.utils)
+setOption(&quot;path_trendecon&quot;, &quot;~/path/to/base/dir&quot;)" />
 
 
 
@@ -134,27 +127,42 @@ values are identical to monthly series
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol></h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_combine_freq.R'><code>R/proc_combine_freq.R</code></a></small>
-    <div class="hidden name"><code>proc_combine_freq.Rd</code></div>
+    <h1>Build paths from base directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/path_utils.R'><code>R/path_utils.R</code></a></small>
+    <div class="hidden name"><code>path_trendecon.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol>
-
+    <p>The base directory is obtained by <code><a href='https://rdrr.io/r/base/options.html'>getOption("path_trendecon")</a></code>. If the
+option is not present, the base directory defaults to the parent directory
+of the current working directory. To set the option, run
+<code><a href='https://rdrr.io/pkg/R.utils/man'>library(R.utils)</a></code>
+<code>setOption("path_trendecon", "~/path/to/base/dir")</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_combine_freq</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>)</pre>
+    <pre class="usage"><span class='fu'>path_trendecon</span>(<span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Character vector of subdirectories relative to the base
+directory.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>The full path to the base directory, or (if provided as a
+parameter), the path to the subdirectory.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://rdrr.io/pkg/R.utils/man/setOption.html'>R.utils::setOption</a></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>path_trendecon</span>(<span class='st'>"data-raw"</span>)</div><div class='output co'>#&gt; /Users/christoph/git/trendecon/trendecon/docs/data-raw</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

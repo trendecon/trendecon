@@ -9,7 +9,8 @@ proc_keyword(keyword = "Insolvenz", n_windows = 2)
 \arguments{
 \item{keyword}{A single keyword for which to process the data.}
 
-\item{n_windows}{TODO}
+\item{n_windows}{Number of windows, passed to \link{ts_gtrends_windows}, used
+when downloading the latest data.}
 }
 \description{
 Processing includes
@@ -19,4 +20,7 @@ Processing includes
 \item combining
 \item seasonal adjustment
 }
+}
+\seealso{
+\link{ts_gtrends_windows}
 }

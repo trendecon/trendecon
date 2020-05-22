@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq • trendecon</title>
+<title>Write csv file for keyword indicator — write_keyword • trendecon</title>
 
 
 <!-- jquery -->
@@ -42,16 +39,9 @@ values are identical to monthly series</p></li>
 
 
 
-<meta property="og:title" content="<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol> — proc_combine_freq" />
-<meta property="og:description" content="
-
-bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series
-
-" />
+<meta property="og:title" content="Write csv file for keyword indicator — write_keyword" />
+<meta property="og:description" content="Writes csv file for keyword indicator to
+/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv." />
 
 
 
@@ -134,26 +124,39 @@ values are identical to monthly series
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol></h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_combine_freq.R'><code>R/proc_combine_freq.R</code></a></small>
-    <div class="hidden name"><code>proc_combine_freq.Rd</code></div>
+    <h1>Write csv file for keyword indicator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/path_utils.R'><code>R/path_utils.R</code></a></small>
+    <div class="hidden name"><code>write_keyword.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<ol>
-<li><p>bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthly series</p></li>
-</ol>
-
+    <p>Writes csv file for keyword indicator to
+<code>/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_combine_freq</span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"Insolvenz"</span>)</pre>
+    <pre class="usage"><span class='fu'>write_keyword</span>(<span class='no'>x</span>, <span class='no'>keyword</span>, <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='st'>"sa"</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Tibble of data to write to file.</p></td>
+    </tr>
+    <tr>
+      <th>keyword</th>
+      <td><p>Keyword (character vector) for which to construct the path
+to the indicator.</p></td>
+    </tr>
+    <tr>
+      <th>suffix</th>
+      <td><p>Character vector for file suffix, defaults to <code>"sa"</code>.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='path_keyword.html'>path_keyword</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
