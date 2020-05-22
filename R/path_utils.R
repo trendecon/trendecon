@@ -51,8 +51,8 @@ path_data <- function(...) {
 
 create_data_dirs <- function(){
   message("Creating data directories if not there.")
-  dir.create(file.path(path_trendecon("data-raw")), showWarnings = FALSE)
-  dir.create(file.path(path_trendecon("data")), showWarnings = FALSE)
+  dir.create(file.path(path_data_raw()), showWarnings = FALSE)
+  dir.create(file.path(path_data()), showWarnings = FALSE)
   dir.create(file.path(path_data_raw("indicator_raw")), showWarnings = FALSE)
   dir.create(file.path(path_data_raw("indicator")), showWarnings = FALSE)
 }
@@ -76,6 +76,18 @@ read_keyword <- function(keyword, suffix = "sa") {
   read_csv(path_keyword(keyword, suffix), col_types = cols())
 }
 
+#' Read keyword indicator data from disk
+#'
+#' Reads keyword indicators from csv files from
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv` where `{keyword}`
+#' is one of the keywords in parameter `keywords`.
+#'
+#' @param keywords A vector of keywords.
+#' @param suffix Suffix in file names, defaults to `"sa"`. Common for all
+#'     keywords.
+#' @param id Category id, defaults to `NULL`.
+#'
+#' @return A tibble with columns `keyword`, `time`, `value`.
 #' @export
 read_keywords <- function(keywords, suffix = "sa", id = NULL) {
   read_keywords_one <- function(keyword) {
