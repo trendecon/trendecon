@@ -7,8 +7,10 @@
 #' - seasonal adjustment
 
 #' @param keyword A single keyword for which to process the data.
-#' @param n_windows TODO
+#' @param n_windows Number of windows, passed to [ts_gtrends_windows], used
+#'     when downloading the latest data.
 #'
+#' @seealso[ts_gtrends_windows]
 #' @export
 
 
