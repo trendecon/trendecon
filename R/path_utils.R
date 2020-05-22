@@ -93,6 +93,15 @@ read_keywords <- function(keywords, suffix = "sa", id = NULL) {
   bind_rows(lapply(keywords, read_keywords_one))
 }
 
+#' Write csv file for keyword indicator
+#'
+#' Writes csv file for keyword indicator to
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv`.
+#'
+#' @param x Tibble of data to write to file.
+#' @param suffix Character vector for file suffix, defaults to `"sa"`.
+#' @inheritParams path_keyword
+#'
 #' @export
 write_keyword <- function(x, keyword, suffix = "sa") {
   write_csv(x, path_keyword(keyword, suffix))
