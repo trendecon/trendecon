@@ -36,6 +36,14 @@ path_data_raw <- function(...) {
   path_trendecon("data-raw", ...)
 }
 
+#' Build paths from `data` directory
+#'
+#' @param ... Character vector of subdirectories relative to the `data`
+#'     directory.
+#'
+#' @return The full path to the `data` directory, or (if provided as a
+#' parameter), the path to the subdirectory.
+#' @seealso [path_trendecon]
 #' @export
 path_data <- function(...) {
   path_trendecon("data", ...)
@@ -49,6 +57,15 @@ create_data_dirs <- function(){
   dir.create(file.path(path_data_raw("indicator")), showWarnings = FALSE)
 }
 
+#' Build path to indicator data file
+#'
+#' Builds path to indicator files of the form
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv`.
+#'
+#' @param keyword Keyword (character vector) for which to construct the path
+#'     to the indicator.
+#' @param suffix Character vector for file suffix.
+#' @seealso [path_data_raw]
 #' @export
 path_keyword <- function(keyword, suffix) {
   normalizePath(path_data_raw("indicator", paste0(keyword, "_", suffix, ".csv")), mustWork = FALSE)
