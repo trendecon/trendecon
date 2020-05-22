@@ -23,6 +23,14 @@ path_trendecon <- function(...) {
   fs::path(base, ...)
 }
 
+#' Build paths from `data-raw` directory
+#'
+#' @param ... Character vector of subdirectories relative to the `data-raw`
+#'     directory.
+#'
+#' @return The full path to the `data-raw` directory, or (if provided as a
+#' parameter), the path to the subdirectory.
+#' @seealso [path_trendecon]
 #' @export
 path_data_raw <- function(...) {
   path_trendecon("data-raw", ...)
