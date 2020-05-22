@@ -1,16 +1,49 @@
 # proc functions work on the file system
 
+#' Build paths from base directory
+#'
+#' The base directory is obtained by `getOption("path_trendecon")`. If the
+#' option is not present, the base directory defaults to the parent directory
+#' of the current working directory. To set the option, run
+#' `library(R.utils)`
+#'  `setOption("path_trendecon", "~/path/to/base/dir")`
+#'
+#' @param ... Character vector of subdirectories relative to the base
+#'     directory.
+#'
+#' @return The full path to the base directory, or (if provided as a
+#' parameter), the path to the subdirectory.
+#' @seealso [R.utils::setOption]
 #' @export
+#' @examples
+#' path_trendecon("data-raw")
+#'
 path_trendecon <- function(...) {
   base <- getOption("path_trendecon", default = normalizePath(".."))
   fs::path(base, ...)
 }
 
+#' Build paths from `data-raw` directory
+#'
+#' @param ... Character vector of subdirectories relative to the `data-raw`
+#'     directory.
+#'
+#' @return The full path to the `data-raw` directory, or (if provided as a
+#' parameter), the path to the subdirectory.
+#' @seealso [path_trendecon]
 #' @export
 path_data_raw <- function(...) {
   path_trendecon("data-raw", ...)
 }
 
+#' Build paths from `data` directory
+#'
+#' @param ... Character vector of subdirectories relative to the `data`
+#'     directory.
+#'
+#' @return The full path to the `data` directory, or (if provided as a
+#' parameter), the path to the subdirectory.
+#' @seealso [path_trendecon]
 #' @export
 path_data <- function(...) {
   path_trendecon("data", ...)
@@ -18,12 +51,21 @@ path_data <- function(...) {
 
 create_data_dirs <- function(){
   message("Creating data directories if not there.")
-  dir.create(file.path(path_trendecon("data-raw")), showWarnings = FALSE)
-  dir.create(file.path(path_trendecon("data")), showWarnings = FALSE)
+  dir.create(file.path(path_data_raw()), showWarnings = FALSE)
+  dir.create(file.path(path_data()), showWarnings = FALSE)
   dir.create(file.path(path_data_raw("indicator_raw")), showWarnings = FALSE)
   dir.create(file.path(path_data_raw("indicator")), showWarnings = FALSE)
 }
 
+#' Build path to indicator data file
+#'
+#' Builds path to indicator files of the form
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv`.
+#'
+#' @param keyword Keyword (character vector) for which to construct the path
+#'     to the indicator.
+#' @param suffix Character vector for file suffix.
+#' @seealso [path_data_raw]
 #' @export
 path_keyword <- function(keyword, suffix) {
   normalizePath(path_data_raw("indicator", paste0(keyword, "_", suffix, ".csv")), mustWork = FALSE)
@@ -34,6 +76,18 @@ read_keyword <- function(keyword, suffix = "sa") {
   read_csv(path_keyword(keyword, suffix), col_types = cols())
 }
 
+#' Read keyword indicator data from disk
+#'
+#' Reads keyword indicators from csv files from
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv` where `{keyword}`
+#' is one of the keywords in parameter `keywords`.
+#'
+#' @param keywords A vector of keywords.
+#' @param suffix Suffix in file names, defaults to `"sa"`. Common for all
+#'     keywords.
+#' @param id Category id, defaults to `NULL`.
+#'
+#' @return A tibble with columns `keyword`, `time`, `value`.
 #' @export
 read_keywords <- function(keywords, suffix = "sa", id = NULL) {
   read_keywords_one <- function(keyword) {
@@ -51,6 +105,15 @@ read_keywords <- function(keywords, suffix = "sa", id = NULL) {
   bind_rows(lapply(keywords, read_keywords_one))
 }
 
+#' Write csv file for keyword indicator
+#'
+#' Writes csv file for keyword indicator to
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv`.
+#'
+#' @param x Tibble of data to write to file.
+#' @param suffix Character vector for file suffix, defaults to `"sa"`.
+#' @inheritParams path_keyword
+#' @seealso [path_keyword]
 #' @export
 write_keyword <- function(x, keyword, suffix = "sa") {
   write_csv(x, path_keyword(keyword, suffix))

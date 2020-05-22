@@ -15,6 +15,6 @@ aggregate_averages <- function(data_1, data_2) {
     mutate_at(vars(n, n_2), coalesce, 0L) %>%
     mutate_at(vars(value, value_2), coalesce, 0) %>%
     # weigthed average
-    transmute(time, value = (value * n + value_2 * n_2) / (n + n_2), n = n + n_2) %>%
+    transmute(time, value = (value * n + value_2 * n_2) / (n +n_2), n = n + n_2) %>%
     arrange(time)
 }

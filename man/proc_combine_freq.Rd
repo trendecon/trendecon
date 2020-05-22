@@ -4,7 +4,7 @@
 \alias{proc_combine_freq}
 \title{\enumerate{
 \item bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthy series
+values are identical to monthly series
 }}
 \usage{
 proc_combine_freq(keyword = "Insolvenz")
@@ -12,6 +12,6 @@ proc_combine_freq(keyword = "Insolvenz")
 \description{
 \enumerate{
 \item bend daily series (which fullfills weekly constraint) so that monthly
-values are identical to monthy series
+values are identical to monthly series
 }
 }
