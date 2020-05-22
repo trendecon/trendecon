@@ -5,8 +5,8 @@
 #' The base directory is obtained by `getOption("path_trendecon")`. If the
 #' option is not present, the base directory defaults to the parent directory
 #' of the current working directory. To set the option, run
-#' `library(R.utils)`
-#'  `setOption("path_trendecon", "~/path/to/base/dir")`
+#'
+#'     options(path_trendecon = "~/path/to/base/dir")
 #'
 #' @param ... Character vector of subdirectories relative to the base
 #'     directory.
