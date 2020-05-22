@@ -14,8 +14,8 @@ proc_combine_freq <- function(keyword = "Insolvenz") {
   wd <- predict(m_wd)
 
   #' 2. bend daily series (which fullfills weekly constraint) so that monthly
-  #' values are identical to monthy series
-  message("align weekly data to monthy")
+  #' values are identical to monthly series
+  message("align weekly data to monthly")
   m_mwd <- td(m ~ wd, method = "fast", conversion = "mean")
   mwd <- predict(m_mwd)
 

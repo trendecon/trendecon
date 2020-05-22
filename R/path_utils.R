@@ -1,6 +1,21 @@
 # proc functions work on the file system
 
+#' Build paths from base directory
+#'
+#' The base directory is obtained by `getOption("path_trendecon")`. If the
+#' option is not present, the base directory defaults to the parent directory
+#' of the current working directory. To set the option, run
+#' `library(R.utils)`
+#'  `setOption("path_trendecon", "~/path/to/base/dir")`
+#'
+#' @param ... Character vector of subdirectories relative to the base
+#'     directory.
+#'
+#' @return The full path to the base directory, or (if provided as a
+#' parameter), the path to the subdirectory.
 #' @export
+#' @seealso [R.utils::setOption]
+#'
 path_trendecon <- function(...) {
   base <- getOption("path_trendecon", default = normalizePath(".."))
   fs::path(base, ...)
