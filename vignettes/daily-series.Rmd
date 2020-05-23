@@ -94,7 +94,7 @@ To source all scripts from trendecon, use:
 
 ```r
 # remotes::install_local()   # build the package, only do once
-gtrendecon::proc_all()
+trendecon::proc_all()
 ```
 
 
