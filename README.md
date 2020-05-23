@@ -14,15 +14,14 @@ This package contains R code to construct long daily time series from
 Google Trends. Robustness of the data is achieved by querying Google
 mulitple times. The queries are sampled at daily, weekly and monthy
 frequencies and then harmonized such that the long term trend is
-preserved.
+preserved. The download itself relies on the
+[gtrendsR](https://CRAN.R-project.org/package=gtrendsR) package by
+Philippe Massicotte and Dirk Eddelbuettel.
 
 The website [www.trendecon.org](https://www.trendecon.org) applies the
 package and provides a set of indicators for Switzerland and is updated
 daily. During the Covid-19 pandemic, such high-frequency indicators have
-been in high demand. The economic and social situation has changed very
-rapidly and most economic statistics could not provide timely
-information since they are collected on a much lower frequency and
-published with a lag. We use Google search trends to create meaningful
+been in high demand. We use Google search trends to create meaningful
 indicators that don’t suffer from this problem. In particular, we
 extract daily search data on keywords reflecting consumers’ perception
 of the economic situation.
