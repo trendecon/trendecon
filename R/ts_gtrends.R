@@ -90,8 +90,11 @@ ts_gtrends <- function(keyword = NA,
   # results to tsboxable tibble
   is_null <- sapply(gtrendslist, function(e) is.null(e$interest_over_time))
   if (any(is_null)) {
+    # download a dummy result that always exist (search for 'google')
+    tbl_dummy <- gtrends_with_backoff(keyword = "google", category = category, gprop = "web", geo = geo, time = time, onlyInterest = TRUE, retry = retry, wait = wait, quiet = quiet)
+    tbl_dummy$interest_over_time$hits <- 0
     message("no results for some ids: ", names(is_null)[is_null])
-    gtrendslist <- gtrendslist[!is_null]
+    gtrendslist[is_null] <- lapply(gtrendslist[is_null], function(e) tbl_dummy)
   }
 
   tslist <- lapply(gtrendslist, get_ts_from_gtrends)
