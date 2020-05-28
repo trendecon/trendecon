@@ -1,7 +1,4 @@
----
-title: "Readme about proc functions"
-output: html_document
----
+# Readme about proc functions
 
 All functions which start with prefix `proc_` operate on the file system. They run in the following order (sub-list
  items are functions which are
