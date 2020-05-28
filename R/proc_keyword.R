@@ -7,6 +7,8 @@
 #' - seasonal adjustment
 
 #' @param keyword A single keyword for which to process the data.
+#' @param geo A character vector denoting the geographic region.
+#'     Default is "CH".
 #' @param n_windows Number of windows, passed to [ts_gtrends_windows], used
 #'     when downloading the latest data.
 #'
@@ -15,7 +17,9 @@
 
 
 
-proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
+proc_keyword <- function(keyword = "Insolvenz",
+                         geo = "CH",
+                         n_windows = 2) {
   stop_if_no_data(keyword)
 
   previous_google_date <- check_when_last_processed(keyword)
@@ -25,7 +29,7 @@ proc_keyword <- function(keyword = "Insolvenz", n_windows = 2) {
     return(TRUE)
   } else {
 
-    proc_keyword_latest(keyword = keyword, n_windows = n_windows)
+    proc_keyword_latest(keyword = keyword, geo = geo, n_windows = n_windows)
 
     proc_aggregate(keyword = keyword)
 
