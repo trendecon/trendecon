@@ -38,3 +38,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 README.html
+
+# Other files
+/R/readme_proc.html
