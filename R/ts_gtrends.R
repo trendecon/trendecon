@@ -13,7 +13,7 @@
 #'   `"0"`. Passed to [gtrendsR::gtrends()]
 #'
 #' @param geo A character vector denoting geographic regions for the query,
-#'   default is `"C"`. Passed to [gtrendsR::gtrends()]
+#'   default is `"CH"`. Passed to [gtrendsR::gtrends()]
 #'
 #' @param time A string specifying the time span of the query.
 #'   Passed to [gtrendsR::gtrends()].
