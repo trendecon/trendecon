@@ -4,12 +4,17 @@
 \alias{proc_keyword_init}
 \title{Download daily, weekly and monthly Google Trends data for a keyword.}
 \usage{
-proc_keyword_init(keyword = "Insolvenz", from = "2006-01-01")
+proc_keyword_init(keyword = "Insolvenz", geo = "CH", from = "2006-01-01")
 }
 \arguments{
 \item{keyword}{A single keyword to query Google Trends.}
 
-\item{from}{Start of timeframe in YYYY-mm-dd form.}
+\item{geo}{A character vector denoting the geographic region.
+Default is "CH".}
+
+\item{from}{Start of timeframe in YYYY-mm-dd form. Should be before
+"2014-01-01", since otherwise creates an issue with aligning different
+frequencies in later steps.}
 }
 \description{
 Downloads daily, weekly and monthly Google Trends data for a keyword

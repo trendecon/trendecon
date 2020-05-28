@@ -24,7 +24,7 @@ normalized.}
 \code{"0"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
 \item{geo}{A character vector denoting geographic regions for the query,
-default is \code{"C"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
+default is \code{"CH"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
 \item{time}{A string specifying the time span of the query.
 Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}.}
