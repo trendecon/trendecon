@@ -11,8 +11,10 @@
 #'     by [trendecon::ts_gtrends_windows].
 #' - `data-raw/indicator` contains aggregated time series.
 #'
-#' @inheritParams ts_gtrends_windows
 #' @param keyword A single keyword to query Google Trends.
+#' @param from Start of timeframe in YYYY-mm-dd form. Should be before
+#'     "2014-01-01", since otherwise creates an issue with aligning different
+#'      frequencies in later steps.
 #'
 #' @seealso [ts_gtrends_windows]
 #' @export
@@ -24,6 +26,12 @@
 #'
 proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")
+
+  if (as.Date(from) > as.Date("2014-01-01")){
+    stop("If `from` is more recent than '2014-01-01', will run into this
+    issue: https://github.com/trendecon/trendecon/issues/16" )
+  }
+
   create_data_dirs()
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
@@ -33,6 +41,7 @@ proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
     n_windows = 348, wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
+
   # for now, we store all windows
   # (if we are confident that storing the averages is sufficient, we can stop that)
   write_csv(d, path_data_raw("indicator_raw", paste0(keyword, "_d.csv")))
