@@ -4,7 +4,7 @@
 \alias{proc_trendecon_ch}
 \title{Calculate Trendecon Main Indices for Switzeland}
 \usage{
-proc_trendecon_ch(path = ".", copy_to_data = FALSE)
+proc_trendecon_ch(path = ".", test = FALSE)
 }
 \arguments{
 \item{path}{base directory}

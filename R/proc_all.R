@@ -21,7 +21,7 @@ proc_all <- function(path = ".") {
   on.exit(options(op))
 
   indices_in_production <- c(
-    "clothing"
+    "clothing",
     "garden",
     "luxury",
     "mobility",
