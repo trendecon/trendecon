@@ -8,6 +8,8 @@ proc_trendecon_ch(path = ".", test = FALSE)
 }
 \arguments{
 \item{path}{base directory}
+
+\item{test}{test mode, produces one index only}
 }
 \description{
 Calculate Trendecon Main Indices for Switzeland

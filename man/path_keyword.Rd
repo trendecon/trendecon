@@ -17,5 +17,5 @@ Builds path to indicator files of the form
 \verb{/\{base_dir\}/data-raw/indicator/\{keyword\}_\{suffix\}.csv}.
 }
 \seealso{
-\link{path_data_raw}
+\link{path_trendecon}
 }

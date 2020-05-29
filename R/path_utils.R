@@ -91,7 +91,7 @@ create_data_dirs <- function(){
 #' @param keyword Keyword (character vector) for which to construct the path
 #'     to the indicator.
 #' @param suffix Character vector for file suffix.
-#' @seealso [path_data_raw]
+#' @seealso [path_trendecon]
 #' @export
 path_keyword <- function(keyword, suffix) {
   normalizePath(path_raw(paste0(keyword, "_", suffix, ".csv")), mustWork = FALSE)

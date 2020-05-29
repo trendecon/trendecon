@@ -1,6 +1,7 @@
 #' Calculate Trendecon Main Indices for Switzeland
 #'
 #' @param path base directory
+#' @param test test mode, produces one index only
 #' @export
 proc_trendecon_ch <- function(path = ".", test = FALSE) {
 
