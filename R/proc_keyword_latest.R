@@ -34,7 +34,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
     n_windows = n_windows, wait = 20, retry = 20,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(d, path_data_raw("indicator_raw", sprintf("%s_d_%s.csv", keyword, today)))
+  write_csv(d, path_draws(sprintf("%s_d_%s.csv", keyword, today)))
 
 
   message("Downloading weekly data")
@@ -45,7 +45,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
     n_windows = n_windows, wait = 20, retry = 20,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(w, path_data_raw("indicator_raw", sprintf("%s_w_%s.csv", keyword, today)))
+  write_csv(w, path_draws(sprintf("%s_w_%s.csv", keyword, today)))
 
   message("Downloading monthly data")
   m <- ts_gtrends_windows(
@@ -55,5 +55,5 @@ proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
     n_windows = n_windows, wait = 20, retry = 20,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(m, path_data_raw("indicator_raw", sprintf("%s_m_%s.csv", keyword, today)))
+  write_csv(m, path_draws(sprintf("%s_m_%s.csv", keyword, today)))
 }

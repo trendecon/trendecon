@@ -82,7 +82,7 @@ prepare_windows_tbl <- function(from,
     mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
     (function(x) {
       if (prevent_window_shrinkage) {
-        distinct(x, end_date, .keep_all = TRUE)
+        dplyr::distinct(x, end_date, .keep_all = TRUE)
       } else {
         x
       }

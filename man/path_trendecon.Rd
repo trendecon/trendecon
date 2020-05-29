@@ -18,8 +18,10 @@ parameter), the path to the subdirectory.
 The base directory is obtained by \code{getOption("path_trendecon")}. If the
 option is not present, the base directory defaults to the parent directory
 of the current working directory. To set the option, run
-\code{library(R.utils)}
-\code{setOption("path_trendecon", "~/path/to/base/dir")}
+}
+\details{
+\preformatted{options(path_trendecon = "~/path/to/base/dir")
+}
 }
 \examples{
 path_trendecon("data-raw")

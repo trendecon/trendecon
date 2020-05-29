@@ -10,7 +10,7 @@ data <- read_keywords(keywords, id = "seas_adj")
 # check if they have the same span
 smry <- ts_summary(data)
 smry
-stopifnot(nrow(distinct(smry, start, end)) == 1)
+stopifnot(nrow(dplyr::distinct(smry, start, end)) == 1)
 
 seas_adj <- filter(ts_prcomp(data), id == "PC1") %>%
   mutate(value = -value) %>%
@@ -65,8 +65,8 @@ write_keyword(seas_adj, "trendecon", "sa")
 write_keyword(ans, "trendecon", "all")
 
 # copy to data repo
-fs::file_copy(path_keyword("trendecon", "sa"), path_data("daily"), overwrite = TRUE)
-fs::file_copy(path_keyword("trendecon", "all"), path_data("daily"), overwrite = TRUE)
+# fs::file_copy(path_keyword("trendecon", "sa"), path_data("daily"), overwrite = TRUE)
+# fs::file_copy(path_keyword("trendecon", "all"), path_data("daily"), overwrite = TRUE)
 
 # store all keywords (disscuss w Angelica)
 # write_csv(read_keywords(keywords), "../data/daily/trendecon_keywords.csv")
