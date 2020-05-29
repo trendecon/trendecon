@@ -22,13 +22,13 @@ proc_all <- function(path = ".") {
 
   indices_in_production <- c(
     "clothing"
-    # "garden",
-    # "luxury",
-    # "mobility",
-    # "social",
-    # "travel",
-    # "trendecon",
-    # "fooddelivery"
+    "garden",
+    "luxury",
+    "mobility",
+    "social",
+    "travel",
+    "trendecon",
+    "fooddelivery"
   )
 
   bname <- paste0(indices_in_production, ".R")
