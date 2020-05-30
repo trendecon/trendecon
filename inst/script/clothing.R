@@ -2,6 +2,7 @@ keywords <- c( "Mango", "Zara", "H&M", "PKZ", "Blue Tomato","Dosenbach", "Schuhe
 
 library(tsbox)
 library(dplyr)
+library(tibble)
 
 # update indicators
 lapply(keywords, proc_keyword)
