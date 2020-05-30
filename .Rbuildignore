@@ -5,3 +5,6 @@
 ^pkgdown$
 ^\.travis\.yml$
 ^README\.Rmd$
+^\.ccache$
+^\.github$
+^tic\.R$
