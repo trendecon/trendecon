@@ -80,6 +80,9 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          
+      - name: curl
+        uses: wei/curl@master
 
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
