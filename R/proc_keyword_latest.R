@@ -4,6 +4,8 @@
 #'
 #' @inheritParams ts_gtrends_windows
 #' @param keyword A single keyword for which to process the data.
+#' @param geo A character vector denoting the geographic region.
+#'     Default is "CH".
 #' @seealso [ts_gtrends_windows]
 #'
 #' @section Daily data:
@@ -22,13 +24,16 @@
 #'     File saved as `{keyword}_m_{today}.csv` in folder
 #'     `data-raw/indicator_raw`.
 #'
-proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
+proc_keyword_latest <- function(keyword = "Insolvenz",
+                                geo = "CH",
+                                n_windows = 12) {
   today <- Sys.Date()
 
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
   d <- ts_gtrends_windows(
     keyword = keyword,
+    geo = geo,
     from = seq(today, length.out = 2, by = "-90 days")[2],
     stepsize = "1 day", windowsize = "3 months",
     n_windows = n_windows, wait = 20, retry = 20,
@@ -40,6 +45,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
   message("Downloading weekly data")
   w <- ts_gtrends_windows(
     keyword = keyword,
+    geo = geo,
     from = seq(today, length.out = 2, by = "-1 year")[2],
     stepsize = "1 week", windowsize = "1 year",
     n_windows = n_windows, wait = 20, retry = 20,
@@ -50,6 +56,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz", n_windows = 12) {
   message("Downloading monthly data")
   m <- ts_gtrends_windows(
     keyword = keyword,
+    geo = geo,
     from = "2006-01-01",
     stepsize = "1 month", windowsize = "20 years",
     n_windows = n_windows, wait = 20, retry = 20,

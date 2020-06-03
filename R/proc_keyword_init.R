@@ -11,8 +11,12 @@
 #'     by [trendecon::ts_gtrends_windows].
 #' - `data-raw/indicator` contains aggregated time series.
 #'
-#' @inheritParams ts_gtrends_windows
 #' @param keyword A single keyword to query Google Trends.
+#' @param geo A character vector denoting the geographic region.
+#'     Default is "CH".
+#' @param from Start of timeframe in YYYY-mm-dd form. Should be before
+#'     "2014-01-01", since otherwise creates an issue with aligning different
+#'      frequencies in later steps.
 #'
 #' @seealso [ts_gtrends_windows]
 #' @export
@@ -22,17 +26,27 @@
 #' proc_keyword_init(keyword = "Insolvenz", from = "2006-01-01")
 #' }
 #'
-proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
+proc_keyword_init <- function(keyword = "Insolvenz",
+                              geo = "CH",
+                              from = "2006-01-01") {
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")
+
+  if (as.Date(from) > as.Date("2014-01-01")){
+    stop("If `from` is more recent than '2014-01-01', will run into this
+    issue: https://github.com/trendecon/trendecon/issues/16" )
+  }
+
   create_data_dirs()
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
   d <- ts_gtrends_windows(
     keyword = keyword,
+    geo = geo,
     from = from, stepsize = "15 days", windowsize = "6 months",
     n_windows = 348, wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
+
   # for now, we store all windows
   # (if we are confident that storing the averages is sufficient, we can stop that)
   write_csv(d, path_draws(paste0(keyword, "_d.csv")))
@@ -41,6 +55,7 @@ proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
   message("Downloading weekly data")
   w <- ts_gtrends_windows(
     keyword = keyword,
+    geo = geo,
     from = from, stepsize = "11 weeks", windowsize = "5 years",
     n_windows = 68, wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
@@ -51,6 +66,7 @@ proc_keyword_init <- function(keyword = "Insolvenz", from = "2006-01-01") {
   message("Downloading monthly data")
   m <- ts_gtrends_windows(
     keyword = keyword,
+    geo = geo,
     from = from, stepsize = "1 month", windowsize = "15 years",
     n_windows = 12, wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE

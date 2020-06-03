@@ -4,10 +4,13 @@
 \alias{proc_keyword}
 \title{Processes the data for a single keyword.}
 \usage{
-proc_keyword(keyword = "Insolvenz", n_windows = 2)
+proc_keyword(keyword = "Insolvenz", geo = "CH", n_windows = 2)
 }
 \arguments{
 \item{keyword}{A single keyword for which to process the data.}
+
+\item{geo}{A character vector denoting the geographic region.
+Default is "CH".}
 
 \item{n_windows}{Number of windows, passed to \link{ts_gtrends_windows}, used
 when downloading the latest data.}
