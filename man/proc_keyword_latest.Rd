@@ -4,10 +4,13 @@
 \alias{proc_keyword_latest}
 \title{Download latest data}
 \usage{
-proc_keyword_latest(keyword = "Insolvenz", n_windows = 12)
+proc_keyword_latest(keyword = "Insolvenz", geo = "CH", n_windows = 12)
 }
 \arguments{
 \item{keyword}{A single keyword for which to process the data.}
+
+\item{geo}{A character vector denoting the geographic region.
+Default is "CH".}
 
 \item{n_windows}{Number (integer) of time-windows.}
 }
