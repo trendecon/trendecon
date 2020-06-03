@@ -10,7 +10,7 @@ proc_index_clothing <- function() {
   # check if they have the same span
   smry <- ts_summary(data)
   smry
-  stopifnot(nrow(distinct(smry, start, end)) == 1)
+  stopifnot(nrow(dplyr::distinct(smry, start, end)) == 1)
 
   x_prcomp <- filter(ts_prcomp(data), id == "PC1") %>%
     # mutate(value = -value) %>%

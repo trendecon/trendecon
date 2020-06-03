@@ -33,4 +33,4 @@ x_prcomp <- filter(ts_prcomp(data), id == "PC1") %>%
 write_keyword(x_prcomp, "fooddelivery", "sa")
 
 # copy to data repo
-fs::file_copy(path_keyword("fooddelivery", "sa"), path_data("daily"), overwrite = TRUE)
+# fs::file_copy(path_keyword("fooddelivery", "sa"), path_data("daily"), overwrite = TRUE)

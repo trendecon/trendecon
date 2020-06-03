@@ -39,5 +39,4 @@ vignettes/*.pdf
 .Renviron
 README.html
 
-# Other files
-/R/readme_proc.html
+docs/

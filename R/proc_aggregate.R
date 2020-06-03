@@ -1,6 +1,6 @@
 proc_aggregate <- function(keyword = "Insolvenz") {
   aggregate_one <- function(suffix_start) {
-    files <- normalizePath(list.files(path_data_raw("indicator_raw"), pattern = "csv$", full.names = TRUE))
+    files <- normalizePath(list.files(path_draws(), pattern = "csv$", full.names = TRUE))
     files <- grep(paste0(keyword, "_", suffix_start), files, fixed = TRUE, value = TRUE)
 
     datas <- lapply(files, function(e) aggregate_windows(read_csv(e, col_types = cols())))

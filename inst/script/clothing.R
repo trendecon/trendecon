@@ -1,5 +1,9 @@
 keywords <- c( "Mango", "Zara", "H&M", "PKZ", "Blue Tomato","Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
 
+library(tsbox)
+library(dplyr)
+library(tibble)
+
 # update indicators
 lapply(keywords, proc_keyword)
 
@@ -15,10 +19,10 @@ x_prcomp <- filter(ts_prcomp(data), id == "PC1") %>%
   select(-id) %>%
   ts_scale()
 
-ts_dygraphs(x_prcomp)
+# ts_dygraphs(x_prcomp)
 
 # this is our main product
 write_keyword(x_prcomp, "clothing", "sa")
 
 # copy to data repo
-fs::file_copy(path_keyword("clothing", "sa"), path_data("daily"), overwrite = TRUE)
+# fs::file_copy(path_keyword("clothing", "sa"), path_data("daily"), overwrite = TRUE)

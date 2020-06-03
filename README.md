@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![tic](https://github.com/trendecon/trendecon/workflows/tic/badge.svg?branch=master)](https://github.com/trendecon/trendecon/actions)
 [![Travis build
 status](https://travis-ci.com/trendecon/trendecon.svg?branch=master)](https://travis-ci.com/trendecon/trendecon)
 [![eRum2020::CovidR](https://badgen.net/https/runkit.io/erum2020-covidr/badge/branches/master/trendecon?cache=300)](https://milano-r.github.io/erum2020-covidr-contest/trendecon.html)
