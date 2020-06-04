@@ -4,7 +4,7 @@
 #' @export
 proc_all <- function(path = ".") {
 
-  .Deprecated("proc_trendecon_ch")
+  .Defunct("proc_trendecon_ch")
 
   # path <- normalizePath("../data-raw")
 
