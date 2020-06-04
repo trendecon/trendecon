@@ -32,10 +32,12 @@ This vingette describes the production processes of trendecon. The production fu
 
 The `proc_` functions write to the working directory. If you are unsure about your current working directory, use `getwd()`.
 
-Within the working directory, the `proc_` functions assume two folders:
+Within the working directory, the `proc_` functions assume the existence of two folders,
 
 - `data`
 - `raw`
+
+which, if not present, are created when calling `proc_keyword_init` for the first time.
 
 Within these folders, there is a subfolder for every `geo` location.
 Thus, you may see the following subfolders
@@ -55,78 +57,97 @@ In the `data` folder, we collect our final indicators - the data you see on the 
 To include a new series, each keyword must be initiated. Be careful, as this causes a lot of queries to Google.
 
 ```r
-proc_keyword_init("Rezession", "DE")
+proc_keyword_init("Rezession", "CH")
 ```
+After running we have the aggregated series at daily, weekly and monthly frequency, stored in the `raw` folder. In
+ the example above, the files `raw/ch/Rezession_d.csv`, `raw/ch/Rezession_w.csv`, and `raw/ch/Rezession_m.csv` are
+  created.
 
-In this example, the files `raw/de/Rezession_d.csv`, `raw/de/Rezession_m.csv`, and `raw/de/Rezession_w.csv` are created.
+## Updating trendecon indicators
 
-## Daily Download
+Trendecon includes a few functions that process a collection of keywords.
+These functions produce the indicators that we show on trendecon.org. These are called by our automated process on
+ GitHub, so they usually do not need to be called manually.
 
-Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.
-
-Q: which script?
+To process all Swiss indicators of trendecon, run:
 
 ```r
-proc_keyword_latest("Rezession", "DE")
+proc_trendecon_ch()
 ```
 
-After running we have the aggregated series at all three frequencies, stored in the `raw` folder.
+Once all the keywords are initiated, `proc_trendecon_ch()` updates the series for each keyword, and produces the
+ indicators. In the final step, the data is copied to the data repository.
 
-Q: Previously, proc_keyword_latest would save files with suffixes. Now it seems to update the raw files instead? (At
- least the daily file). How is that done?
+- [ ] TODO: what data exactly is copied?
+- [ ] TODO: describe where the list of keywords which need to be initiated can be found.
 
-## Bending
+While `proc_trendecon_ch()` automatically updates our indicators, it is insightful to walk through the different
+ steps it performs, as these are the steps which are required to build indicators from other sets of keywords or for
+  other countries.
+
+
+### Scripts for each indicator
+
+To construct each indicator, an indicator-specific script in the folder `inst/script` is called. For example
+
+```r
+source("inst/script/trendecon.R")
+```
+
+produces the indicator for economic sentiment. To do so, it first performs a number of steps for each keyword on
+ which the indicator is based. For example, our main indicator is based on the keywords `"Wirtschaftskrise"`, `"Kurzarbeit
+ "`, `"arbeitslos"`, and `"Insolvenz"`. Once the data for each keyword has been processed, the actual indicator is
+  constructed from the individual keyword-series using a principal-component approach.
+
+Below, we describe the steps which are performed for each of the keywords. All these steps are bundled together in
+ the function `proc_keyword`.
+
+#### Bundled steps for each keyword
+
+For each keyword, `proc_keyword` is called, for example
+
+```r
+proc_keyword("Rezession", "CH")
+```
+
+which in turn performs the following steps.
+
+##### Update data series with latest data
+In the first step, the raw data series for each keyword are updated with the latest daily, weekly, and monthly data.
+For example, to update the raw series for keyword `"Rezession"` for Switzerland, call
+
+```r
+proc_keyword_latest("Rezession", "CH")
+```
+
+- [ ] TODO: This will fail without proper error if `proc_keyword_init` has not been run.
+
+##### Bending
 
 To combine the three frequencies, we apply the following methodology: In a first step, we "bend" the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monhtly values.
 
-To combine the three frquencies for a given keyword, use:
+To combine the three frequencies for a given keyword, use:
 
 ```r
-proc_combine_freq("Rezession", "DE")
+proc_combine_freq("Rezession", "CH")
 ```
 
-## Seasonal Adjustment
+##### Seasonal Adjustment
 
-FXIME some text from the website
+- [ ] FXIME some text from the website
 
 To seasonally adjust a combined keyword, use:
 
 ```r
-proc_seas_adj("Rezession", "DE")
+proc_seas_adj("Rezession", "CH")
 ```
 
-
-## Combining Downloading, Bending, seasonal adjustments.
-
-In the daily update process, it is sufficient to run:
-
-```r
-proc_keyword("Rezession", "DE")
-```
-
-Which combines all the three steps above.
-
-
-
-## Reading and Writing
+##### Reading and Writing
 
 There are two special helper functions that are useful when working with production data:
 
 - `read_keyword`
 - `write_keyword`
-
-
-## Updating trendecon indicators
-
-Trendecon includes a few functions that process a collection of keywords.
-These are the ones that we show on trendecon.org. These are called by our automtated processed on GitHub, so they usually don't need to be called manually.
-
-To process all swiss indicators of trendecon, run:
-
-```r
-proc_trendecon_ch
-```
-
 
 
 
