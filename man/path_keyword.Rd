@@ -4,11 +4,13 @@
 \alias{path_keyword}
 \title{Build path to indicator data file}
 \usage{
-path_keyword(keyword, suffix)
+path_keyword(keyword, geo = "CH", suffix = "sa")
 }
 \arguments{
 \item{keyword}{Keyword (character vector) for which to construct the path
 to the indicator.}
+
+\item{geo}{geographical area}
 
 \item{suffix}{Character vector for file suffix.}
 }

@@ -96,6 +96,7 @@ create_data_dirs <- function(){
 #'
 #' @param keyword Keyword (character vector) for which to construct the path
 #'     to the indicator.
+#' @param geo geographical area
 #' @param suffix Character vector for file suffix.
 #' @seealso [path_trendecon]
 #' @export

@@ -4,13 +4,15 @@
 \alias{write_keyword}
 \title{Write csv file for keyword indicator}
 \usage{
-write_keyword(x, keyword, suffix = "sa")
+write_keyword(x, keyword, geo, suffix = "sa")
 }
 \arguments{
 \item{x}{Tibble of data to write to file.}
 
 \item{keyword}{Keyword (character vector) for which to construct the path
 to the indicator.}
+
+\item{geo}{geographical area}
 
 \item{suffix}{Character vector for file suffix, defaults to \code{"sa"}.}
 }

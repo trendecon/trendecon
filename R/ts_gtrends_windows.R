@@ -23,8 +23,6 @@
 #' Time-windows may overlap - and will do so if `stepsize` < `windowsize`.
 #'
 #' @seealso [trendecon::ts_gtrends()]
-
-
 ts_gtrends_windows <- function(keyword = NA,
                                category = "0",
                                geo = "CH",

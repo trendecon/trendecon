@@ -56,8 +56,7 @@ To include a new series, each keyword must be initiated. Careful, this causes a 
 
 ```r
 
-proc_keyword_init("Rezession", "DE")  # FIXME make sure this works countries other than "CH", not sure if this is passed down correctly
-
+proc_keyword_init("Rezession", "DE")
 ```
 
 

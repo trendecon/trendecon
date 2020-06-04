@@ -4,7 +4,12 @@
 \alias{proc_keyword_init}
 \title{Download daily, weekly and monthly Google Trends data for a keyword.}
 \usage{
-proc_keyword_init(keyword = "Insolvenz", geo = "CH", from = "2006-01-01")
+proc_keyword_init(
+  keyword = "Insolvenz",
+  geo = "CH",
+  from = "2006-01-01",
+  indicator_raw = FALSE
+)
 }
 \arguments{
 \item{keyword}{A single keyword to query Google Trends.}
@@ -12,27 +17,26 @@ proc_keyword_init(keyword = "Insolvenz", geo = "CH", from = "2006-01-01")
 \item{geo}{A character vector denoting the geographic region.
 Default is "CH".}
 
-\item{from}{Start of timeframe in YYYY-mm-dd form. Should be before
-"2014-01-01", since otherwise creates an issue with aligning different
-frequencies in later steps.}
+\item{from}{Start of timeframe in YYYY-mm-dd form. Should not be changed from
+the the default.}
+
+\item{indicator_raw}{store individual downloads. If \code{FALSE}, only the
+averages are stored.}
 }
 \description{
 Downloads daily, weekly and monthly Google Trends data for a keyword
 and writes the data to csv files.
 }
 \details{
-By default, the data is stored in
-folders \code{data-raw/indicator_raw} and \code{data-raw/indicator}. File suffixes
-are \verb{_d} for daily, \verb{_w} for weekly, and \verb{_m} for monthly data.
-\itemize{
-\item \code{data-raw/indicator_raw} contains time series in time-windows, as returned
-by \link[trendecon:ts_gtrends_windows]{trendecon::ts_gtrends_windows}.
-\item \code{data-raw/indicator} contains aggregated time series.
-}
+By default, the data is stored in folders \code{data} and \code{raw}. Each folder
+contains a subdirectory of each country.
 }
 \examples{
 \dontrun{
-proc_keyword_init(keyword = "Insolvenz", from = "2006-01-01")
+# run once
+proc_keyword_init(keyword = "Insolvenz", "AT")
+# run every day
+proc_keyword_latest(keyword = "Insolvenz", "AT")
 }
 
 }
