@@ -97,59 +97,77 @@
 <h2 class="hasAnchor">
 <a href="#intro" class="anchor"></a>Intro</h2>
 <p>Google search results are available on a daily, weekly or monthly frequency. As with individual samples, querying Google at a different frequency will lead to substantially different results.</p>
-<p>Our goal is to produce long daily time series, ideally from 2006. This is mostly because we want to use the financial crisis of 2008 and 2009 as a benchmark for the Covid-19 crisis. However, Google does not provide daily or weekly data for such a long time period. We circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.</p>
-<p>Since the daily, weekly and monthly series are still very different, we want to combine them into a single daily series.</p>
-<p>Our next steps are based on the following assumptions:</p>
-<ul>
-<li><p>Monthly data catches the long term trend in search activity in the most accurate way.</p></li>
-<li><p>Weekly data is best to analyze the searches over the medium term, i.e., over a few months.</p></li>
-<li><p>Daily data is best to analyze short term behavior over a few days and weeks.</p></li>
-</ul>
-<p>With this in mind, we apply the following methodology. In a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series.</p>
+<p>Our goal is to produce long daily time series, ideally from 2006. However, Google does not provide daily or weekly data for such a long time period. We circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.</p>
+<p>This vingette describes the production processes of trendecon. The production function start with <code>proc_</code> and usually operate on the file system. That means that calling this functions will write to your disk.</p>
 </div>
-<div id="setting-the-data-path" class="section level2">
+<div id="directory-structure" class="section level2">
 <h2 class="hasAnchor">
-<a href="#setting-the-data-path" class="anchor"></a>Setting the Data Path</h2>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">my_data_dir</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>()
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">path_trendecon</span> <span class="kw">=</span> <span class="no">my_data_dir</span>)</pre></body></html></div>
+<a href="#directory-structure" class="anchor"></a>Directory structure</h2>
+<p>The <code>proc_</code> functions write to the working directory. If you are unsure about your current working directory, use <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>.</p>
+<p>Within the working directory, the <code>proc_</code> functions assume two folders:</p>
 <ul>
-<li>
-<code>proc_</code> functions will write and read to this directory.</li>
+<li><code>data</code></li>
+<li><code>raw</code></li>
 </ul>
+<p>Within these folders, there is a subfolder for every <code>geo</code> location. Thus, you may see the following subfolders</p>
+<ul>
+<li><code>data/ch</code></li>
+<li><code>data/at</code></li>
+<li><code>raw/ch</code></li>
+<li><code>raw/at</code></li>
+</ul>
+<p>What is the difference between <code>data</code> and <code>raw</code>? In the <code>raw</code> folder, we collect all the data downloaded from Google, plus some transfromations, such as the seasonally adjusted or the combined series.</p>
+<p>In the <code>data</code> folder, we collect our final indicators - the data you see on the website.</p>
 </div>
 <div id="initial-download" class="section level2">
 <h2 class="hasAnchor">
 <a href="#initial-download" class="anchor"></a>Initial Download</h2>
-<p>To include a new series, each keyword must be initiated. Careful, this causes a lot of queries to Google.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">
-<span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)  <span class="co"># FIXME make sure this works countries other than "CH", not sure if this is passed down correctly</span></pre></body></html></div>
+<p>To include a new series, each keyword must be initiated. Be careful, as this causes a lot of queries to Google.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
 </div>
-<div id="daily-update" class="section level2">
+<div id="daily-download" class="section level2">
 <h2 class="hasAnchor">
-<a href="#daily-update" class="anchor"></a>Daily Update</h2>
+<a href="#daily-download" class="anchor"></a>Daily Download</h2>
 <p>Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+<p>After running we have the aggregated series at all three frequencies, stored in the <code>raw</code> folder.</p>
 </div>
-<div id="further-steps" class="section level2">
+<div id="bending" class="section level2">
 <h2 class="hasAnchor">
-<a href="#further-steps" class="anchor"></a>Further Steps</h2>
-<ul>
-<li><p>Bending</p></li>
-<li><p>Seasonal Adjustment</p></li>
-<li><p>Index creation</p></li>
-</ul>
+<a href="#bending" class="anchor"></a>Bending</h2>
+<p>To combine the three frequencies, we apply the following methodology: In a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monhtly values.</p>
+<p>To combine the three frquencies for a given keyword, use:</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+</div>
+<div id="seasonal-adjustment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#seasonal-adjustment" class="anchor"></a>Seasonal Adjustment</h2>
+<p>FXIME some text from the website</p>
+<p>To seasonally adjust a combined keyword, use:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+</div>
+<div id="combining-downloading-bending-seasonal-adjustments-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#combining-downloading-bending-seasonal-adjustments-" class="anchor"></a>Combining Downloading, Bending, seasonal adjustments.</h2>
+<p>In the daily update process, it is sufficient to run:</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">proc_keywordt</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+<p>Which combines all the three steps above.</p>
 </div>
 <div id="reading-and-writing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reading-and-writing" class="anchor"></a>Reading and Writing</h2>
-<p><code>read_keyword</code> <code>write_keyword</code></p>
+<p>There are two special helper functions that are useful when working with production data:</p>
+<ul>
+<li><code>read_keyword</code></li>
+<li><code>write_keyword</code></li>
+</ul>
 </div>
-<div id="updating-trendecon-indicators-perhaps" class="section level2">
+<div id="updating-trendecon-indicators" class="section level2">
 <h2 class="hasAnchor">
-<a href="#updating-trendecon-indicators-perhaps" class="anchor"></a>Updating trendecon indicators (perhaps)</h2>
-<p>To source all scripts from trendecon, use:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># remotes::install_local()   # build the package, only do once</span>
-<span class="kw pkg">trendecon</span><span class="kw ns">::</span><span class="fu"><a href="../reference/proc_all.html">proc_all</a></span>()</pre></body></html></div>
+<a href="#updating-trendecon-indicators" class="anchor"></a>Updating trendecon indicators</h2>
+<p>Trendecon includes a few functions that process a collection of keywords. These are the ones that we show on trendecon.org. These are called by our automtated processed on GitHub, so they usually don’t need to be called manually.</p>
+<p>To process all swiss indicators of trendecon, run:</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">proc_trendecon_ch</span></pre></body></html></div>
 </div>
   </div>
 

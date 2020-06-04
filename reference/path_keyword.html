@@ -134,7 +134,7 @@
 <code>/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>path_keyword</span>(<span class='no'>keyword</span>, <span class='no'>suffix</span>)</pre>
+    <pre class="usage"><span class='fu'>path_keyword</span>(<span class='no'>keyword</span>, <span class='kw'>geo</span> <span class='kw'>=</span> <span class='st'>"CH"</span>, <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='st'>"sa"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +143,10 @@
       <th>keyword</th>
       <td><p>Keyword (character vector) for which to construct the path
 to the indicator.</p></td>
+    </tr>
+    <tr>
+      <th>geo</th>
+      <td><p>geographical area</p></td>
     </tr>
     <tr>
       <th>suffix</th>
