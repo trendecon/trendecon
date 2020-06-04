@@ -58,17 +58,22 @@ To include a new series, each keyword must be initiated. Be careful, as this cau
 proc_keyword_init("Rezession", "DE")
 ```
 
+In this example, the files `raw/de/Rezession_d.csv`, `raw/de/Rezession_m.csv`, and `raw/de/Rezession_w.csv` are created.
 
 ## Daily Download
 
 Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.
 
+Q: which script?
 
 ```r
 proc_keyword_latest("Rezession", "DE")
 ```
 
 After running we have the aggregated series at all three frequencies, stored in the `raw` folder.
+
+Q: Previously, proc_keyword_latest would save files with suffixes. Now it seems to update the raw files instead? (At
+ least the daily file). How is that done?
 
 ## Bending
 
@@ -96,7 +101,7 @@ proc_seas_adj("Rezession", "DE")
 In the daily update process, it is sufficient to run:
 
 ```r
-proc_keywordt("Rezession", "DE")
+proc_keyword("Rezession", "DE")
 ```
 
 Which combines all the three steps above.
