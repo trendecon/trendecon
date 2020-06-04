@@ -19,7 +19,7 @@ x_prcomp <-
   ts_scale()
 
 # this is our main product
-write_keyword(x_prcomp, "social", "sa")
+write_keyword(x_prcomp, "social", "ch", "sa")
 
 ts_dygraphs(x_prcomp)
 

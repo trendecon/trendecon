@@ -61,8 +61,8 @@ ans <- ts_c(seas_adj, orig, seas_comp = orig  %ts-% seas_adj)
 
 
 # this is our main product
-write_keyword(seas_adj, "trendecon", "sa")
-write_keyword(ans, "trendecon", "all")
+write_keyword(seas_adj, "trendecon", "ch", "sa")
+# write_keyword(ans, "trendecon", "all")
 
 # copy to data repo
 # fs::file_copy(path_keyword("trendecon", "sa"), path_data("daily"), overwrite = TRUE)

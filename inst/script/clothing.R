@@ -22,7 +22,7 @@ x_prcomp <- filter(ts_prcomp(data), id == "PC1") %>%
 # ts_dygraphs(x_prcomp)
 
 # this is our main product
-write_keyword(x_prcomp, "clothing", "sa")
+write_keyword(x_prcomp, "clothing", "ch", "sa")
 
 # copy to data repo
 # fs::file_copy(path_keyword("clothing", "sa"), path_data("daily"), overwrite = TRUE)
