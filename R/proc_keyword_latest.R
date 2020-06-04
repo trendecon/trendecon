@@ -29,6 +29,13 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
                                 n_windows = 12) {
   today <- Sys.Date()
 
+  enhance_keyword <- function(data, keyword, geo, suffix){
+    old <- read_keyword(keyword, geo, "d") %>%
+      mutate(n = as.integer(n))
+    new <- aggregate_windows(data)
+    write_keyword(aggregate_averages(old, new), keyword, geo, "d")
+  }
+
   message("Downloading keyword: ", keyword)
   message("Downloading daily data")
   d <- ts_gtrends_windows(
@@ -39,8 +46,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     n_windows = n_windows, wait = 20, retry = 20,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(d, path_draws(sprintf("%s_d_%s.csv", keyword, today)))
-
+  enhance_keyword(d, keyword, geo, "d")
 
   message("Downloading weekly data")
   w <- ts_gtrends_windows(
@@ -51,7 +57,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     n_windows = n_windows, wait = 20, retry = 20,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(w, path_draws(sprintf("%s_w_%s.csv", keyword, today)))
+  enhance_keyword(w, keyword, geo, "w")
 
   message("Downloading monthly data")
   m <- ts_gtrends_windows(
@@ -62,5 +68,5 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     n_windows = n_windows, wait = 20, retry = 20,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(m, path_draws(sprintf("%s_m_%s.csv", keyword, today)))
+  enhance_keyword(m, keyword, geo, "m")
 }

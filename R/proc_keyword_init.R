@@ -17,7 +17,8 @@
 #' @param from Start of timeframe in YYYY-mm-dd form. Should be before
 #'     "2014-01-01", since otherwise creates an issue with aligning different
 #'      frequencies in later steps.
-#'
+#' @param indicator_raw store individual downloads. If `FALSE`, only the
+#'     averages are stored.
 #' @seealso [ts_gtrends_windows]
 #' @export
 #'
@@ -28,7 +29,8 @@
 #'
 proc_keyword_init <- function(keyword = "Insolvenz",
                               geo = "CH",
-                              from = "2006-01-01") {
+                              from = "2006-01-01",
+                              indicator_raw = FALSE) {
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")
 
   if (as.Date(from) > as.Date("2014-01-01")){
@@ -49,8 +51,8 @@ proc_keyword_init <- function(keyword = "Insolvenz",
 
   # for now, we store all windows
   # (if we are confident that storing the averages is sufficient, we can stop that)
-  write_csv(d, path_draws(paste0(keyword, "_d.csv")))
-  write_keyword(aggregate_windows(d), keyword, "d")
+  if (indicator_raw) write_csv(d, path_draws(tolower(geo), paste0(keyword, "_d.csv")))
+  write_keyword(aggregate_windows(d), keyword, geo, "d")
 
   message("Downloading weekly data")
   w <- ts_gtrends_windows(
@@ -60,8 +62,8 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     n_windows = 68, wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
-  write_csv(w, path_draws(paste0(keyword, "_w.csv")))
-  write_keyword(aggregate_windows(w), keyword, "w")
+  if (indicator_raw) write_csv(w, path_draws(tolower(geo), paste0(keyword, "_w.csv")))
+  write_keyword(aggregate_windows(w), keyword, geo, "w")
 
   message("Downloading monthly data")
   m <- ts_gtrends_windows(
@@ -71,6 +73,6 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     n_windows = 12, wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
   )
-  write_csv(m, path_draws(paste0(keyword, "_m.csv")))
-  write_keyword(aggregate_windows(m), keyword, "m")
+  if (indicator_raw) write_csv(m, path_draws(tolower(geo), paste0(keyword, "_m.csv")))
+  write_keyword(aggregate_windows(m), keyword, geo, "m")
 }
