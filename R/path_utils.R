@@ -34,7 +34,7 @@ path_draws <- function(...) {
 
 # dir to store the raw data
 path_raw <- function(...) {
-  path_trendecon("indicator", ...)
+  path_trendecon("raw", ...)
 }
 
 # dir to store the daily data for download. Uses this name, because we link
@@ -44,7 +44,9 @@ path_daily <- function(...) {
   path_trendecon("daily", ...)
 }
 
-
+path_data <- function(...) {
+  path_trendecon("data", ...)
+}
 
 # #' Build paths from `data-raw` directory
 # #'
@@ -74,13 +76,17 @@ path_daily <- function(...) {
 # }
 
 
+create_dir_if_needed <- function(x) {
+  if (!dir.exists(x)) {
+    message("create", x)
+    dir.create(x, recursive = TRUE)
+  }
+  x
+}
+
 create_data_dirs <- function(){
-  message("Creating data directories if not there.")
-  dir.create(path_trendecon(), showWarnings = FALSE)
-  # dir.create(file.path(path_data()), showWarnings = FALSE)
-  dir.create(path_daily(), showWarnings = FALSE)
-  dir.create(path_draws(), showWarnings = FALSE)
-  dir.create(path_raw(), showWarnings = FALSE)
+  create_dir_if_needed(path_data())
+  create_dir_if_needed(path_raw())
 }
 
 #' Build path to indicator data file
@@ -93,13 +99,13 @@ create_data_dirs <- function(){
 #' @param suffix Character vector for file suffix.
 #' @seealso [path_trendecon]
 #' @export
-path_keyword <- function(keyword, suffix) {
-  normalizePath(path_raw(paste0(keyword, "_", suffix, ".csv")), mustWork = FALSE)
+path_keyword <- function(keyword, geo = "CH", suffix = "sa") {
+  normalizePath(path_raw(tolower(geo), paste0(keyword, "_", suffix, ".csv")), mustWork = FALSE)
 }
 
 # read_keyword("Insolvenz")
-read_keyword <- function(keyword, suffix = "sa") {
-  readr::read_csv(path_keyword(keyword, suffix), col_types = cols())
+read_keyword <- function(keyword, geo = "CH", suffix = "sa") {
+  readr::read_csv(path_keyword(keyword, geo, suffix), col_types = cols())
 }
 
 #' Read keyword indicator data from disk
@@ -141,6 +147,14 @@ read_keywords <- function(keywords, suffix = "sa", id = NULL) {
 #' @inheritParams path_keyword
 #' @seealso [path_keyword]
 #' @export
-write_keyword <- function(x, keyword, suffix = "sa") {
-  write_csv(x, path_keyword(keyword, suffix))
+write_keyword <- function(x, keyword, geo, suffix = "sa") {
+  path <- path_keyword(keyword, geo, suffix)
+  create_dir_if_needed(dirname(path))
+  write_csv(x, path)
 }
+
+
+
+
+
+
