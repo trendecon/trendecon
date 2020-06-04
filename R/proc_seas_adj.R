@@ -1,12 +1,12 @@
 # daily seasonal adjustment, using prophet
 #
 # seas_adj_file("Insolvenz")
-proc_seas_adj <- function(keyword = "Insolvenz") {
+proc_seas_adj <- function(keyword = "Insolvenz", geo = "ch") {
   message("seasonal adjustment keyword: ", keyword)
 
   tsbox::load_suggested("prophet")
 
-  data <- read_keyword(keyword, "mwd")
+  data <- read_keyword(keyword, geo, "mwd")
 
   # data <- tsbox::ts_tbl(AirPassengers)
   df <- dplyr::rename(data, ds = time, y = value)
@@ -37,5 +37,5 @@ proc_seas_adj <- function(keyword = "Insolvenz") {
     mutate(seas_adj = orig - seas_comp) %>%
     ts_long()
 
-  write_keyword(sa, keyword, "sa")
+  write_keyword(sa, keyword, geo, "sa")
 }

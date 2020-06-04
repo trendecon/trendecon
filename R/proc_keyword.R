@@ -31,11 +31,9 @@ proc_keyword <- function(keyword = "Insolvenz",
 
     proc_keyword_latest(keyword = keyword, geo = geo, n_windows = n_windows)
 
-    proc_aggregate(keyword = keyword)
+    proc_combine_freq(keyword = keyword, geo = geo)
 
-    proc_combine_freq(keyword = keyword)
-
-    proc_seas_adj(keyword = keyword)
+    proc_seas_adj(keyword = keyword, geo = geo)
 
     # store globally: next proc_keyword() run will only update if newer
     .latest_google_date <<- latest_google_date(keyword)

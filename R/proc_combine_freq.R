@@ -1,10 +1,10 @@
 # proc_combine_freq("Insolvenz")
-proc_combine_freq <- function(keyword = "Insolvenz") {
+proc_combine_freq <- function(keyword = "Insolvenz", geo = "ch") {
   message("combining frequencies of keyword: ", keyword)
 
-  d <- select(read_keyword(keyword, "d"), -n)
-  w <- select(read_keyword(keyword, "w"), -n)
-  m <- select(read_keyword(keyword, "m"), -n)
+  d <- select(read_keyword(keyword, geo, "d"), -n)
+  w <- select(read_keyword(keyword, geo, "w"), -n)
+  m <- select(read_keyword(keyword, geo, "m"), -n)
 
   message("align daily data to weekly")
   m_wd <- tempdisagg::td(w ~ d, method = "fast", conversion = "mean")
@@ -19,7 +19,7 @@ proc_combine_freq <- function(keyword = "Insolvenz") {
   m_mwd <- tempdisagg::td(m ~ wd, method = "fast", conversion = "mean")
   mwd <- predict(m_mwd)
 
-  write_keyword(mwd, keyword, "mwd")
+  write_keyword(mwd, keyword, geo, "mwd")
 
   # mwd_old <- read_keyword(keyword, "mwd")
   # write_csv(ts_c(mwd_old, mwd), "data/indicator_doc/mwd_old.csv")

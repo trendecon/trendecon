@@ -3,20 +3,14 @@
 #' Downloads daily, weekly and monthly Google Trends data for a keyword
 #' and writes the data to csv files.
 #'
-#' By default, the data is stored in
-#' folders `data-raw/indicator_raw` and `data-raw/indicator`. File suffixes
-#' are `_d` for daily, `_w` for weekly, and `_m` for monthly data.
-#'
-#' - `data-raw/indicator_raw` contains time series in time-windows, as returned
-#'     by [trendecon::ts_gtrends_windows].
-#' - `data-raw/indicator` contains aggregated time series.
+#' By default, the data is stored in folders `data` and `raw`. Each folder
+#'   contains a subdirectory of each country.
 #'
 #' @param keyword A single keyword to query Google Trends.
 #' @param geo A character vector denoting the geographic region.
 #'     Default is "CH".
-#' @param from Start of timeframe in YYYY-mm-dd form. Should be before
-#'     "2014-01-01", since otherwise creates an issue with aligning different
-#'      frequencies in later steps.
+#' @param from Start of timeframe in YYYY-mm-dd form. Should not be changed from
+#'       the the default.
 #' @param indicator_raw store individual downloads. If `FALSE`, only the
 #'     averages are stored.
 #' @seealso [ts_gtrends_windows]
@@ -24,7 +18,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' proc_keyword_init(keyword = "Insolvenz", from = "2006-01-01")
+#' # run once
+#' proc_keyword_init(keyword = "Insolvenz", "AT")
+#' # run every day
+#' proc_keyword_latest(keyword = "Insolvenz", "AT")
 #' }
 #'
 proc_keyword_init <- function(keyword = "Insolvenz",
