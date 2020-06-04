@@ -23,77 +23,103 @@ library(trendecon)
 
 Google search results are available on a daily, weekly or monthly frequency. As with individual samples, querying Google at a different frequency will lead to substantially different results.
 
-Our goal is to produce long daily time series, ideally from 2006. This is mostly because we want to use the financial crisis of 2008 and 2009 as a benchmark for the Covid-19 crisis. However, Google does not provide daily or weekly data for such a long time period. We circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
+Our goal is to produce long daily time series, ideally from 2006. However, Google does not provide daily or weekly data for such a long time period. We circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
 
-Since the daily, weekly and monthly series are still very different, we want to combine them into a single daily series.
-
-Our next steps are based on the following assumptions:
-
-- Monthly data catches the long term trend in search activity in the most accurate way.
-
-- Weekly data is best to analyze the searches over the medium term, i.e., over a few months.
-
-- Daily data is best to analyze short term behavior over a few days and weeks.
-
-With this in mind, we apply the following methodology. In a first step, we "bend" the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series.
+This vingette describes the production processes of trendecon. The production function start with `proc_` and usually operate on the file system. That means that calling this functions will write to your disk.
 
 
+## Directory structure
 
-## Setting the Data Path
+The `proc_` functions write to the working directory. If you are unsure about your current working directory, use `getwd()`.
 
-```r
-my_data_dir <- tempdir()
-options(path_trendecon = my_data_dir)
-```
+Within the working directory, the `proc_` functions assume two folders:
 
-- `proc_` functions will write and read to this directory.
+- `data`
+- `raw`
+
+Within these folders, there is a subfolder for every `geo` location.
+Thus, you may see the following subfolders
+
+- `data/ch`
+- `data/at`
+- `raw/ch`
+- `raw/at`
+
+What is the difference between `data` and `raw`? In the `raw` folder, we collect all the data downloaded from Google, plus some transfromations, such as the seasonally adjusted or the combined series.
+
+In the `data` folder, we collect our final indicators - the data you see on the website.
 
 
 ## Initial Download
 
-To include a new series, each keyword must be initiated. Careful, this causes a lot of queries to Google.
-
+To include a new series, each keyword must be initiated. Be careful, as this causes a lot of queries to Google.
 
 ```r
-
 proc_keyword_init("Rezession", "DE")
 ```
 
 
-
-## Daily Update
+## Daily Download
 
 Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.
 
 
 ```r
-proc_keyword_latest()
+proc_keyword_latest("Rezession", "DE")
+```
 
+After running we have the aggregated series at all three frequencies, stored in the `raw` folder.
+
+## Bending
+
+To combine the three frequencies, we apply the following methodology: In a first step, we "bend" the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monhtly values.
+
+To combine the three frquencies for a given keyword, use:
+
+```r
+proc_combine_freq("Rezession", "DE")
+```
+
+## Seasonal Adjustment
+
+FXIME some text from the website
+
+To seasonally adjust a combined keyword, use:
+
+```r
+proc_seas_adj("Rezession", "DE")
 ```
 
 
-## Further Steps
+## Combining Downloading, Bending, seasonal adjustments.
 
-- Bending
+In the daily update process, it is sufficient to run:
 
-- Seasonal Adjustment
+```r
+proc_keywordt("Rezession", "DE")
+```
 
-- Index creation
+Which combines all the three steps above.
+
 
 
 ## Reading and Writing
 
-`read_keyword`
-`write_keyword`
+There are two special helper functions that are useful when working with production data:
+
+- `read_keyword`
+- `write_keyword`
 
 
-## Updating trendecon indicators (perhaps)
+## Updating trendecon indicators
 
-To source all scripts from trendecon, use:
+Trendecon includes a few functions that process a collection of keywords.
+These are the ones that we show on trendecon.org. These are called by our automtated processed on GitHub, so they usually don't need to be called manually.
+
+To process all swiss indicators of trendecon, run:
 
 ```r
-# remotes::install_local()   # build the package, only do once
-trendecon::proc_all()
+proc_trendecon_ch
 ```
 
 
