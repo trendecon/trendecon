@@ -20,7 +20,7 @@
 proc_keyword <- function(keyword = "Insolvenz",
                          geo = "CH",
                          n_windows = 2) {
-  stop_if_no_data(keyword)
+  stop_if_no_data(keyword, geo)
 
   previous_google_date <- check_when_last_processed(keyword, geo)
 
@@ -41,9 +41,15 @@ proc_keyword <- function(keyword = "Insolvenz",
   }
 }
 
-stop_if_no_data <- function(keyword) {
-  files_indicator <- grep(keyword, list.files(path_raw()), value = TRUE, fixed = TRUE)
-  files_indicator_raw <- grep(keyword, list.files(path_draws()), value = TRUE, fixed = TRUE)
+stop_if_no_data <- function(keyword, geo) {
+  files_indicator <- grep(keyword,
+                          list.files(path_raw(tolower(geo))),
+                          value = TRUE,
+                          fixed = TRUE)
+  files_indicator_raw <- grep(keyword,
+                              list.files(path_draws(tolower(geo))),
+                              value = TRUE,
+                              fixed = TRUE)
   if (length(files_indicator) == 0 & (length(files_indicator_raw) == 0)) {
     stop("No existing files found for keyword '", keyword, "' Have you run proc_keyword_init()?")
   }
