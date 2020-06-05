@@ -104,11 +104,12 @@
 <h2 class="hasAnchor">
 <a href="#directory-structure" class="anchor"></a>Directory structure</h2>
 <p>The <code>proc_</code> functions write to the working directory. If you are unsure about your current working directory, use <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>.</p>
-<p>Within the working directory, the <code>proc_</code> functions assume two folders:</p>
+<p>Within the working directory, the <code>proc_</code> functions assume the existence of two folders,</p>
 <ul>
 <li><code>data</code></li>
 <li><code>raw</code></li>
 </ul>
+<p>which, if not present, are created when calling <code>proc_keyword_init</code> for the first time.</p>
 <p>Within these folders, there is a subfolder for every <code>geo</code> location. Thus, you may see the following subfolders</p>
 <ul>
 <li><code>data/ch</code></li>
@@ -123,51 +124,78 @@
 <h2 class="hasAnchor">
 <a href="#initial-download" class="anchor"></a>Initial Download</h2>
 <p>To include a new series, each keyword must be initiated. Be careful, as this causes a lot of queries to Google.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<p>After running we have the aggregated series at daily, weekly and monthly frequency, stored in the <code>raw</code> folder. In the example above, the files <code>raw/ch/Rezession_d.csv</code>, <code>raw/ch/Rezession_w.csv</code>, and <code>raw/ch/Rezession_m.csv</code> are created.</p>
 </div>
-<div id="daily-download" class="section level2">
+<div id="updating-trendecon-indicators" class="section level2">
 <h2 class="hasAnchor">
-<a href="#daily-download" class="anchor"></a>Daily Download</h2>
-<p>Once all the keywords are initiated, the script updates the series and produces the indicator. The last line copies the data to the data repository.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
-<p>After running we have the aggregated series at all three frequencies, stored in the <code>raw</code> folder.</p>
+<a href="#updating-trendecon-indicators" class="anchor"></a>Updating trendecon indicators</h2>
+<p>Trendecon includes a few functions that process a collection of keywords. These functions produce the indicators that we show on trendecon.org. These are called by our automated process on GitHub, so they usually do not need to be called manually.</p>
+<p>To process all Swiss indicators of trendecon, run:</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch</a></span>()</pre></body></html></div>
+<p>Once all the keywords are initiated, <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> updates the series for each keyword, and produces the indicators. In the final step, the data is copied to the data repository.</p>
+<ul>
+<li>
+<input type="checkbox" disabled>
+TODO: what data exactly is copied?</li>
+<li>
+<input type="checkbox" disabled>
+TODO: describe where the list of keywords which need to be initiated can be found.</li>
+</ul>
+<p>While <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> automatically updates our indicators, it is insightful to walk through the different steps it performs, as these are the steps which are required to build indicators from other sets of keywords or for other countries.</p>
+<div id="scripts-for-each-indicator" class="section level3">
+<h3 class="hasAnchor">
+<a href="#scripts-for-each-indicator" class="anchor"></a>Scripts for each indicator</h3>
+<p>To construct each indicator, an indicator-specific script in the folder <code>inst/script</code> is called. For example</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"inst/script/trendecon.R"</span>)</pre></body></html></div>
+<p>produces the indicator for economic sentiment. To do so, it first performs a number of steps for each keyword on which the indicator is based. For example, our main indicator is based on the keywords <code>"Wirtschaftskrise"</code>, <code>"Kurzarbeit  "</code>, <code>"arbeitslos"</code>, and <code>"Insolvenz"</code>. Once the data for each keyword has been processed, the actual indicator is constructed from the individual keyword-series using a principal-component approach.</p>
+<p>Below, we describe the steps which are performed for each of the keywords. All these steps are bundled together in the function <code>proc_keyword</code>.</p>
+<div id="bundled-steps-for-each-keyword" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bundled-steps-for-each-keyword" class="anchor"></a>Bundled steps for each keyword</h4>
+<p>For each keyword, <code>proc_keyword</code> is called, for example</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword.html">proc_keyword</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<p>which in turn performs the following steps.</p>
+<div id="update-data-series-with-latest-data" class="section level5">
+<h5 class="hasAnchor">
+<a href="#update-data-series-with-latest-data" class="anchor"></a>Update data series with latest data</h5>
+<p>In the first step, the raw data series for each keyword are updated with the latest daily, weekly, and monthly data. For example, to update the raw series for keyword <code>"Rezession"</code> for Switzerland, call</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<ul>
+<li>
+<input type="checkbox" disabled>
+TODO: This will fail without proper error if <code>proc_keyword_init</code> has not been run.</li>
+</ul>
 </div>
-<div id="bending" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bending" class="anchor"></a>Bending</h2>
+<div id="bending" class="section level5">
+<h5 class="hasAnchor">
+<a href="#bending" class="anchor"></a>Bending</h5>
 <p>To combine the three frequencies, we apply the following methodology: In a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monhtly values.</p>
-<p>To combine the three frquencies for a given keyword, use:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+<p>To combine the three frequencies for a given keyword, use:</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
 </div>
-<div id="seasonal-adjustment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#seasonal-adjustment" class="anchor"></a>Seasonal Adjustment</h2>
-<p>FXIME some text from the website</p>
+<div id="seasonal-adjustment" class="section level5">
+<h5 class="hasAnchor">
+<a href="#seasonal-adjustment" class="anchor"></a>Seasonal Adjustment</h5>
+<ul>
+<li>
+<input type="checkbox" disabled>
+FXIME some text from the website</li>
+</ul>
 <p>To seasonally adjust a combined keyword, use:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
 </div>
-<div id="combining-downloading-bending-seasonal-adjustments-" class="section level2">
-<h2 class="hasAnchor">
-<a href="#combining-downloading-bending-seasonal-adjustments-" class="anchor"></a>Combining Downloading, Bending, seasonal adjustments.</h2>
-<p>In the daily update process, it is sufficient to run:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">proc_keywordt</span>(<span class="st">"Rezession"</span>, <span class="st">"DE"</span>)</pre></body></html></div>
-<p>Which combines all the three steps above.</p>
-</div>
-<div id="reading-and-writing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reading-and-writing" class="anchor"></a>Reading and Writing</h2>
+<div id="reading-and-writing" class="section level5">
+<h5 class="hasAnchor">
+<a href="#reading-and-writing" class="anchor"></a>Reading and Writing</h5>
 <p>There are two special helper functions that are useful when working with production data:</p>
 <ul>
 <li><code>read_keyword</code></li>
 <li><code>write_keyword</code></li>
 </ul>
 </div>
-<div id="updating-trendecon-indicators" class="section level2">
-<h2 class="hasAnchor">
-<a href="#updating-trendecon-indicators" class="anchor"></a>Updating trendecon indicators</h2>
-<p>Trendecon includes a few functions that process a collection of keywords. These are the ones that we show on trendecon.org. These are called by our automtated processed on GitHub, so they usually don’t need to be called manually.</p>
-<p>To process all swiss indicators of trendecon, run:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">proc_trendecon_ch</span></pre></body></html></div>
+</div>
+</div>
 </div>
   </div>
 
