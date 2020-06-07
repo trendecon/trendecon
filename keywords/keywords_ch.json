@@ -20,6 +20,84 @@
       "pizza bestellen",
       "dieci pizza"
     ]
+  },
+  {
+    "index": "garden",
+    "keywords": [
+      "Heim+Hobby",
+      "Bau+Hobby",
+      "Do it + Garden",
+      "Do it Migros",
+      "Jumbo",
+      "Landi",
+      "Gartencenter",
+      "Bauhaus",
+      "Hornbach"
+    ]
+  },
+  {
+    "index": "luxury",
+    "keywords": [
+      "christ",
+      "bucherer",
+      "uhren",
+      "uhr",
+      "swarovski",
+      "rhomberg",
+      "juwelier"
+    ]
+  },
+  {
+    "index": "mobility",
+    "keywords": [
+      "Fahrplan",
+      "taxi",
+      "sixt",
+      "google maps"
+    ]
+  },
+  {
+    "index": "onlinegroceries",
+    "keywords": [
+      "coopathome",
+      "coop at home",
+      "leshop",
+      "le shop",
+      "farmy",
+      "coop online bestellen",
+      "migros online bestellen",
+      "lebensmittel online bestellen",
+      "volg online"
+    ]
+  },
+  {
+    "index": "social",
+    "keywords": [
+      "Kino",
+      "Theater",
+      "Cinema",
+      "ticketcorner",
+      "starticket",
+      "oper",
+      "konzert"
+    ]
+  },
+  {
+    "index": "travel",
+    "keywords": [
+      "städtetrip",
+      "flug buchen",
+      "günstige flüge"
+    ]
+  },
+  {
+    "index": "trendecon",
+    "keywords": [
+      "Wirtschaftskrise",
+      "Kurzarbeit",
+      "arbeitslos",
+      "Insolvenz"
+    ]
   }
 ]
 
