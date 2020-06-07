@@ -1,5 +1,5 @@
-{
-  "ch": {
+[
+  {
     "index": "clothing",
     "keywords": [
       "Mango",
@@ -12,6 +12,7 @@
       "Ochsner Schuhe"
     ]
   },
+  {
     "index": "fooddelivery",
     "keywords": [
       "take away",
@@ -19,4 +20,6 @@
       "pizza bestellen",
       "dieci pizza"
     ]
-}
+  }
+]
+
