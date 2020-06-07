@@ -5,7 +5,7 @@
 #'
 #' @param json_file A character vector with the path to the json file with
 #'     index-specific keywords
-#' @param idx A character vector with the name of the index (as in the json
+#' @param index_name A character vector with the name of the index (as in the json
 #' file)
 #'
 #' @example
@@ -13,8 +13,8 @@
 
 library(jsonlite)
 
-read_index_json <- function(json_file, idx){
+read_index_json <- function(json_file, index_name){
   json <- fromJSON(txt = json_file)
-  keywords <- json %>% filter(index==idx) %>% pull(keywords) %>% unlist()
+  keywords <- json %>% filter(index==index_name) %>% pull(keywords) %>% unlist()
   return(keywords)
 }
