@@ -1,16 +1,102 @@
 #' Calculate Trendecon Main Indices for Switzeland
 #'
-#' @param path base directory
-#' @param test test mode, produces one index only
 #' @export
-proc_trendecon_ch <- function(path = ".", test = FALSE) {
+#'
+proc_trendecon_ch <- function() {
 
-  # path <- normalizePath("../data-raw")
+  kw_clothing <- c(
+    "Mango",
+    "Zara",
+    "H&M",
+    "PKZ",
+    "Blue Tomato",
+    "Dosenbach",
+    "Schuhe kaufen",
+    "Ochsner Schuhe"
+  )
 
-  path <- normalizePath(path)
+  kw_fooddelivery <- c(
+    "take away",
+    "takeaway",
+    "pizza bestellen",
+    "dieci pizza"
+  )
 
-  op <- options(path_trendecon = path)
-  on.exit(options(op))
+  kw_garden <- c(
+    "Heim+Hobby",
+    "Bau+Hobby",
+    "Do it + Garden",
+    "Do it Migros",
+    "Jumbo",
+    "Landi",
+    "Gartencenter",
+    "Bauhaus",
+    "Hornbach"
+  )
+
+  kw_luxury <- c(
+    "christ",
+    "bucherer",
+    "uhren",
+    "uhr",
+    "swarovski",
+    "rhomberg",
+    "juwelier"
+  )
+
+  kw_mobility <- c(
+    "Fahrplan",
+    "taxi",
+    "sixt",
+    "google maps"
+  )
+
+  kw_onlinegroceries <- c(
+    "coopathome",
+    "coop at home",
+    "leshop",
+    "le shop",
+    "farmy",
+    "coop online bestellen",
+    "migros online bestellen",
+    "lebensmittel online bestellen",
+    "volg online"
+  )
+
+  kw_social <- c(
+    "Kino",
+    "Theater",
+    "Cinema",
+    "ticketcorner",
+    "starticket",
+    "oper",
+    "konzert"
+  )
+
+  kw_travel <- c(
+    "städtetrip",
+    "flug buchen",
+    "günstige flüge"
+  )
+
+
+  kw_trendecon <- c(
+    "Wirtschaftskrise",
+    "Kurzarbeit",
+    "arbeitslos",
+    "Insolvenz"
+  )
+
+
+  proc_index(kw_clothing, "CH", 'clothing')
+  proc_index(kw_garden, "CH", 'garden')
+  proc_index(kw_luxury, "CH", 'luxury')
+  proc_index(kw_mobility, "CH", 'mobility')
+  proc_index(kw_social, "CH", 'social')
+  proc_index(kw_travel, "CH", 'travel')
+  proc_index(kw_trendecon, "CH", 'trendecon')
+  proc_index(kw_fooddelivery, "CH", 'fooddelivery')
+
 
   indices_in_production <- c(
     "clothing",
@@ -22,29 +108,6 @@ proc_trendecon_ch <- function(path = ".", test = FALSE) {
     "trendecon",
     "fooddelivery"
   )
-
-  # so it takes less time to test
-  if (test) {
-    indices_in_production <- c(
-      "clothing"
-    )
-  }
-
-  bname <- paste0(indices_in_production, ".R")
-  scripts <- list.files(system.file("script", package = "trendecon"), pattern = "\\.[rR]$")
-  stopifnot(all(bname %in% scripts))
-
-  # TODO Still uses sourced script for trendecon indicator. Change.
-  for (index in indices_in_production) {
-    if (index != "trendecon"){
-      keywords <- read_index_json("../keywords/keywords_ch.json", index)
-      proc_index(keywords, "CH", index)
-    }
-    else{
-    index_script <- system.file("script", paste0(index, ".R"), package = "trendecon")
-    source(index_script, encoding = "UTF-8")
-    }
-  }
 
   # vintage mode, copy to 'daily'
   lapply(indices_in_production, function(e) fs::file_copy(path_keyword(e, "ch", "sa"), path_daily(), overwrite = TRUE))
