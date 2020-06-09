@@ -51,17 +51,6 @@ proc_trendecon_ch <- function() {
     "google maps"
   )
 
-  kw_onlinegroceries <- c(
-    "coopathome",
-    "coop at home",
-    "leshop",
-    "le shop",
-    "farmy",
-    "coop online bestellen",
-    "migros online bestellen",
-    "lebensmittel online bestellen",
-    "volg online"
-  )
 
   kw_social <- c(
     "Kino",
