@@ -62,12 +62,13 @@ proc_trendecon_ch <- function() {
     "konzert"
   )
 
+  # unicode codes
+  # https://resources.german.lsa.umich.edu/schreiben/unicode/
   kw_travel <- c(
-    "städtetrip",
+    "st\u00E4dtetrip",
     "flug buchen",
-    "günstige flüge"
+    "g\u00FCnstige fl\u00FCge"
   )
-
 
   kw_trendecon <- c(
     "Wirtschaftskrise",

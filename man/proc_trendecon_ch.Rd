@@ -4,12 +4,7 @@
 \alias{proc_trendecon_ch}
 \title{Calculate Trendecon Main Indices for Switzeland}
 \usage{
-proc_trendecon_ch(path = ".", test = FALSE)
-}
-\arguments{
-\item{path}{base directory}
-
-\item{test}{test mode, produces one index only}
+proc_trendecon_ch()
 }
 \description{
 Calculate Trendecon Main Indices for Switzeland
