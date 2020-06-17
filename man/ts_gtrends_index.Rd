@@ -17,8 +17,15 @@ keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if di
 mulitple queries are sent to Google, and each series is individually
 normalized.}
 
-\item{time}{A string specifying the time span of the query.
-Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}.}
+\item{time}{A string specifying the time span of the query. Possible values
+  are:
+
+  \describe{ \item{"now 1-H"}{Last hour} \item{"now 4-H"}{Last four hours}
+  \item{"now 1-d"}{Last day} \item{"now 7-d"}{Last seven days} \item{"today
+  1-m"}{Past 30 days} \item{"today 3-m"}{Past 90 days} \item{"today
+  12-m"}{Past 12 months} \item{"today+5-y"}{Last five years (default)}
+  \item{"all"}{Since the beginning of Google Trends (2004)} \item{"Y-m-d
+  Y-m-d"}{Time span between two dates (ex.: "2010-01-01 2010-04-03")} }}
 
 \item{...}{further arguments, passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}.}
 

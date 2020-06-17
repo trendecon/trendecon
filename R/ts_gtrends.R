@@ -4,6 +4,8 @@
 #' a) vectorizing it, b) converting the result to tsboxable tibble and c)
 #' retries if no result is returned.
 #'
+#' @inheritParams gtrendsR::gtrends
+#'
 #' @param keyword A character vector with the actual Google Trends query
 #'  keywords. Contrary to [gtrendsR::gtrends()], if different keywords are used,
 #'  mulitple queries are sent to Google, and each series is individually
@@ -14,9 +16,7 @@
 #'
 #' @param geo A character vector denoting geographic regions for the query,
 #'   default is `"CH"`. Passed to [gtrendsR::gtrends()]
-#'
-#' @param time A string specifying the time span of the query.
-#'   Passed to [gtrendsR::gtrends()].
+#
 #'
 #' @param retry Number of attempts, in case the query request does not succeed.
 #'
