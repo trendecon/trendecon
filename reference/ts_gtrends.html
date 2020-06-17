@@ -168,8 +168,16 @@ default is <code>"CH"</code>. Passed to <code><a href='https://rdrr.io/pkg/gtren
     </tr>
     <tr>
       <th>time</th>
-      <td><p>A string specifying the time span of the query.
-Passed to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code>.</p></td>
+      <td><p>A string specifying the time span of the query. Possible values
+  are:</p>
+<p></p><dl'>
+<dt>"now 1-H"</dt><dd><p>Last hour</p></dd> <dt>"now 4-H"</dt><dd><p>Last four hours</p></dd>
+  <dt>"now 1-d"</dt><dd><p>Last day</p></dd> <dt>"now 7-d"</dt><dd><p>Last seven days</p></dd> <dt>"today
+  1-m"</dt><dd><p>Past 30 days</p></dd> <dt>"today 3-m"</dt><dd><p>Past 90 days</p></dd> <dt>"today
+  12-m"</dt><dd><p>Past 12 months</p></dd> <dt>"today+5-y"</dt><dd><p>Last five years (default)</p></dd>
+  <dt>"all"</dt><dd><p>Since the beginning of Google Trends (2004)</p></dd> <dt>"Y-m-d
+  Y-m-d"</dt><dd><p>Time span between two dates (ex.: "2010-01-01 2010-04-03")</p></dd> 
+</dl></td>
     </tr>
     <tr>
       <th>retry</th>
@@ -210,16 +218,16 @@ either the keyword, or the category.</p>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ts_gtrends</span>(<span class='st'>"Rezession"</span>)</div><div class='output co'>#&gt; <span class='message'>Downloading data for today+5-y</span></div><div class='input'><span class='no'>x</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 261 x 2</span><span>
 #&gt;    time       value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2015-06-21     4
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2015-06-28     2
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2015-07-05     7
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2015-07-12     3
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2015-06-21     3
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2015-06-28     3
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2015-07-05     5
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2015-07-12     4
 #&gt; </span><span style='color: #555555;'> 5</span><span> 2015-07-19     3
 #&gt; </span><span style='color: #555555;'> 6</span><span> 2015-07-26     3
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2015-08-02     3
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2015-08-09     6
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2015-08-16     3
-#&gt; </span><span style='color: #555555;'>10</span><span> 2015-08-23     5
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2015-08-02     4
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2015-08-09     3
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2015-08-16     2
+#&gt; </span><span style='color: #555555;'>10</span><span> 2015-08-23     6
 #&gt; </span><span style='color: #555555;'># … with 251 more rows</span><span></div><div class='input'><span class='kw pkg'>tsbox</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tsbox/man/ts_plot.html'>ts_plot</a></span>(<span class='no'>x</span>)</div><div class='img'><img src='ts_gtrends-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

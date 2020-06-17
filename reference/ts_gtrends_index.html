@@ -151,8 +151,16 @@ normalized.</p></td>
     </tr>
     <tr>
       <th>time</th>
-      <td><p>A string specifying the time span of the query.
-Passed to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code>.</p></td>
+      <td><p>A string specifying the time span of the query. Possible values
+  are:</p>
+<p></p><dl'>
+<dt>"now 1-H"</dt><dd><p>Last hour</p></dd> <dt>"now 4-H"</dt><dd><p>Last four hours</p></dd>
+  <dt>"now 1-d"</dt><dd><p>Last day</p></dd> <dt>"now 7-d"</dt><dd><p>Last seven days</p></dd> <dt>"today
+  1-m"</dt><dd><p>Past 30 days</p></dd> <dt>"today 3-m"</dt><dd><p>Past 90 days</p></dd> <dt>"today
+  12-m"</dt><dd><p>Past 12 months</p></dd> <dt>"today+5-y"</dt><dd><p>Last five years (default)</p></dd>
+  <dt>"all"</dt><dd><p>Since the beginning of Google Trends (2004)</p></dd> <dt>"Y-m-d
+  Y-m-d"</dt><dd><p>Time span between two dates (ex.: "2010-01-01 2010-04-03")</p></dd> 
+</dl></td>
     </tr>
     <tr>
       <th>...</th>
