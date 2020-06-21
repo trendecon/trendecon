@@ -10,9 +10,13 @@ proc_index <- function(keywords, geo, index_name) {
   stopifnot(nrow(distinct(ts_summary(data), start, end)) == 1)
 
   x_prcomp <- filter(ts_prcomp(data), id == "PC1") %>%
-    mutate(value = ifelse(index_name=="trendecon", -value, value)) %>%
     select(-id) %>%
     ts_scale()
+
+  # invert main index
+  if (index_name == "trendecon") {
+    x_prcomp$value <- -x_prcomp$value
+  }
 
   write_keyword(x_prcomp, index_name, geo, "sa")
 }
