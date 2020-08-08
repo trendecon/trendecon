@@ -69,8 +69,8 @@ To retrieve the common signal of all four time series we can, for instance, use 
 ts_plot(ts_pick(ts_prcomp(gt_data), "PC1"))
 ```
 
-Alternatively `ts_gtrends()` function can accept Google product categories instead of search term keywords.
-This category number can be specified instead of a keyword in which case the trend data for the predefined Google product group will be retrieved.
+Alternatively, `ts_gtrends()` function can accept Google Trends categories instead of search term keywords.
+Unlike with search terms, Google Trends categories are expressed with category numbers. Such a category number can be specified instead of a keyword in which case the trend data for the predefined Google search category will be retrieved.
 
 Under the hood it wraps around the `gtrends()` function from the [*gtrendsR*](https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf) package and modifies it by
 a) vectorizing it so that multiple keywords can be requested in one go,
