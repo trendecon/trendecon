@@ -16,16 +16,16 @@ knitr::opts_chunk$set(
 
 *trendecon* - a package for obtaining and analyzing Google Trends timeseries data directly from R.
 
-People's searches on Google can tell a lot about their perception of the state of the economy and their demand for various goods and services.
-Hence carefully chosen sets of Google Trends keywords can serve as timely economic indicators.
+People's searches on Google can tell a lot about their demand for various goods and services as well as their perception of the state of the economy.
+Hence, carefully chosen sets of Google Trends keywords can serve as timely economic indicators.
 Functions within this package assist with obtaining, storing, comparing, and visualizing Google Trends results.
-This in turn provides an easy way to explore different keyword combinations and evaluate their econometric value and performance.
+This in turn provides a convenient way to explore different keyword combinations and evaluate their econometric value and performance.
 
 
 ## Google Trends ##
 
-Google Trends (https://trends.queries.google.com/) is an online search tool from Google that can be used to analyse the popularity of various Google search terms across a specified time interval.
-The popularity measure of a particular search term is relative - it is a number ranging from 0 to 100 where the value of 100 marks the date when the specified search term was most popular.
+Google Trends (https://trends.google.com/) is an online search tool from Google that can be used to analyse the popularity of various Google search terms across a specified time interval.
+The popularity measure of a particular search term, given a specified time interval, is relative - it is a number ranging from 0 to 100 where the value of 100 marks the date when the specified search term was most popular.
 By analyzing such relative popularity scores we can track the search term usage across time, compare its popularity between different geographical regions, or contrast it with other search terms.
 
 For more information please see [Google Trends FAQ](Check https://support.google.com/trends/answer/4365533?hl=en).
@@ -49,7 +49,7 @@ gt_data <- ts_gtrends(
 )
 ```
 
-By default a weekly timeseries for the last 5 years is obtained but this interval can be changed by adjusting the `time` argument (See "Further Help" for more).
+By default, a weekly timeseries for the last 5 years is obtained but this interval can be changed by adjusting the `time` argument (See "Further Help" for more).
 The output will be a "tibble" table with 3 columns: id (keyword), time (date), and value (relative popularity score):
 
 ```{r}
@@ -80,8 +80,7 @@ c) automatically retrying in case of failures.
 
 ## Further Help ##
 
-- For a list of abailable product categories see `data("categories")`.
-- For a list of available geographical regions see `data("countires)`.
+- For a list of available product categories see `data("categories")`.
+- For a list of available geographical regions see `data("countries)`.
 - For more details about the time interval specification see `help(gtrends)`.
-- For explanation of additional parameters accepted by the `ts_gtrends()` function see `help(ts_gtrends)`.
-
+- For an explanation of additional parameters accepted by the `ts_gtrends()` function see `help(ts_gtrends)`.
