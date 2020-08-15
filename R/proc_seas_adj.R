@@ -21,7 +21,7 @@ proc_seas_adj <- function(keyword = "Insolvenz", geo = "ch") {
   m <-
     # prophet(holidays = holidays, daily.seasonality = FALSE) %>%
     prophet::prophet(daily.seasonality = FALSE) %>%
-    prophet::add_country_holidays(country_name = "CH") %>%
+    prophet::add_country_holidays(country_name = toupper(geo)) %>%
     prophet::fit.prophet(df)
 
   # forecast <- predict(m, df)
