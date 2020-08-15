@@ -4,7 +4,7 @@ proc_index <- function(keywords, geo, index_name) {
 
   lapply(keywords, proc_keyword)
 
-  data <- read_keywords(keywords, id = "seas_adj")
+  data <- read_keywords(keywords, geo = geo, id = "seas_adj")
 
   # check if they have the same span
   stopifnot(nrow(distinct(ts_summary(data), start, end)) == 1)

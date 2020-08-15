@@ -116,16 +116,17 @@ read_keyword <- function(keyword, geo = "CH", suffix = "sa") {
 #' is one of the keywords in parameter `keywords`.
 #'
 #' @param keywords A vector of keywords.
+#' @param geo geographical area.
 #' @param suffix Suffix in file names, defaults to `"sa"`. Common for all
 #'     keywords.
 #' @param id Category id, defaults to `NULL`.
 #'
 #' @return A tibble with columns `keyword`, `time`, `value`.
 #' @export
-read_keywords <- function(keywords, suffix = "sa", id = NULL) {
+read_keywords <- function(keywords, geo = "CH", suffix = "sa", id = NULL) {
   read_keywords_one <- function(keyword) {
     ans <-
-      read_keyword(keyword, suffix = suffix) %>%
+      read_keyword(keyword, geo = geo, suffix = suffix) %>%
       mutate(keyword = keyword) %>%
       select(keyword, id, time, value)
 
