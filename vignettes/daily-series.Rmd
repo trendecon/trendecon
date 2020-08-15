@@ -79,16 +79,6 @@ The list of active Swiss indicators can be found within the code of `proc_trende
 While `proc_trendecon_ch()` automatically updates the indicators it cannot add new indicators to production.
 In order to be able to introduce new indicators it is insightful to walk through the different steps performed by `proc_trendecon_ch()`.
 The same steps will be required to build indicators from other sets of keywords or for other countries.
-
-To construct an indicator, an indicator-specific script, located in the folder `inst/script`, is called.
-For example, the instructions for producing the indicator for economic sentiment are stored in `inst/script/trendecon.R`.
-Executing the line below will produce the data needed for this indicator:
-
-```r
-source("inst/script/trendecon.R")
-```
-
-Each such script takes a number of steps needed to prepare the indicator for final use.
 The steps of such preparation are outlined below.
 
 ### Step 1: update with latest data ###
@@ -101,6 +91,7 @@ proc_keyword_latest("Rezession", "CH")
 ```
 
 This function downloads raw daily, weekly, and monthly data for the specified pair of keyword and geo location.
+If the data for a particular keyword is not yet available, `proc_keyword_init()` should be called instead.
 
 ### Step 2: bending ###
 
@@ -142,12 +133,4 @@ Finally the prepared index is saved to a file:
 ```
 write_keyword(prepared_data, "indicator", "CH")
 ```
-
-
-## Summary ##
-
-In summary:
-
-- To add new indicator "indicator": create a new script at `inst/script/indicator.R`.
-- To add a new geographic location "geo": create a new `proc_trendecon_geo()` function.
 
