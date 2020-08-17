@@ -2,7 +2,6 @@
 
 export(path_keyword)
 export(path_trendecon)
-export(proc_all)
 export(proc_keyword)
 export(proc_keyword_init)
 export(proc_trendecon_ch)
