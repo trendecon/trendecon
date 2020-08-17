@@ -57,7 +57,7 @@ indicated by start and end date of the window.
 \description{
 Downloads approximate daily series over a sequence of time-windows by first
 constructing the appropriate time windows and then downloading daily data
-for each time-window using \code{\link[trendecon:ts_gtrends]{trendecon::ts_gtrends()}}.
+for each time-window using \code{\link[=ts_gtrends]{ts_gtrends()}}.
 }
 \section{Notes}{
 
@@ -65,5 +65,5 @@ Time-windows may overlap - and will do so if \code{stepsize} < \code{windowsize}
 }
 
 \seealso{
-\code{\link[trendecon:ts_gtrends]{trendecon::ts_gtrends()}}
+\code{\link[=ts_gtrends]{ts_gtrends()}}
 }

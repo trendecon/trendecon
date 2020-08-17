@@ -4,10 +4,12 @@
 \alias{read_keywords}
 \title{Read keyword indicator data from disk}
 \usage{
-read_keywords(keywords, suffix = "sa", id = NULL)
+read_keywords(keywords, geo = "CH", suffix = "sa", id = NULL)
 }
 \arguments{
 \item{keywords}{A vector of keywords.}
+
+\item{geo}{geographical area.}
 
 \item{suffix}{Suffix in file names, defaults to \code{"sa"}. Common for all
 keywords.}
