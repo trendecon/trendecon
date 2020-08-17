@@ -99,10 +99,7 @@ proc_trendecon_ch <- function() {
     "fooddelivery"
   )
 
-  # vintage mode, copy to 'daily'
-  lapply(indices_in_production, function(e) fs::file_copy(path_keyword(e, "ch", "sa"), path_daily(), overwrite = TRUE))
-
-  # from now, copy to data/ch
+  # copy to data/ch
   lapply(indices_in_production, function(e) fs::file_copy(path_keyword(e, "ch", "sa"), path_data("ch"), overwrite = TRUE))
 
   # FIXME: also store d, w, m, f in data/ch
