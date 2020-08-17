@@ -2,7 +2,7 @@
 #'
 #' @export
 #'
-proc_trendecon_de <- function() {
+proc_trendecon_at <- function() {
 
   kw_trendecon <- c(
     "Wirtschaftskrise",
