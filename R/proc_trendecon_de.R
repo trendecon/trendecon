@@ -18,7 +18,7 @@ proc_trendecon_de <- function() {
   )
 
   # copy to data/ch
-  lapply(indices_in_production, function(e) fs::file_copy(path_keyword(e, "de", "sa"), path_data("ch"), overwrite = TRUE))
+  lapply(indices_in_production, function(e) fs::file_copy(path_keyword(e, "de", "sa"), path_data("de"), overwrite = TRUE))
 
   # FIXME: also store d, w, m, f in data/de
 }
