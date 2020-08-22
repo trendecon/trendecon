@@ -19,7 +19,7 @@ Once the combination of useful keywords is selected we might want to use them as
 ## Directory structure ##
 
 The names of production functions within the `trendecon` package start with `proc_`.
-They usually operate on the file system which means that calling these functions will write files to disk.
+They usually operate on the file system which means that calling these functions will write files to the local disk.
 The `proc_` functions will save files within two folders: `data` and `raw`, which are located under the working directory (`getwd()`).
 `raw` folder holds all the data downloaded from Google, plus some transformations, such as seasonally adjusted or combined series.
 `data` folder, on the other hand, collects the final indicators - the data displayed on the website.
@@ -43,9 +43,9 @@ Thus, in the end, if we used Swiss and Austrian indicators, we would end up with
 ## Initial download ##
 
 To include a new series, each keyword must first be initiated.
-Our goal is to produce long daily time series, ideally from 2006.
+Our goal is to produce long daily time series, ideally ranging from 2006.
 However, Google does not provide daily or weekly data for such a long time period.
-Hence we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
+Hence, we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
 So be careful, as this causes a lot of queries to Google.
 
 ```r
@@ -107,7 +107,7 @@ proc_combine_freq("Rezession", "CH")
 
 ### Step 3: seasonal adjustment ###
 
-Some keywords might display seasonal patterns.
+Some keywords' time series might display seasonal patterns.
 For example it is not surprising that searches for gardening are higher in spring.
 In order to make meaningful comparisons over time such seasonal patterns, present within the data, need to be removed.
 To achieve this `trendecon` uses the "Prophet" procedure for estimating an additive model where non-linear trends are fit with yearly and weekly seasonality and the holiday effects.
@@ -120,7 +120,7 @@ proc_seas_adj("Rezession", "CH")
 
 ### Step 4: combining ###
 
-Once the data for each keyword has been processed we end up with multiple time series - one for each keyword within the indicator.
+Once the raw data for each keyword has been processed we end up with multiple time series - one for each keyword within the indicator.
 As an example the main indicator uses the following keywords: `"Wirtschaftskrise"`, `"Kurzarbeit "`, `"arbeitslos"`, and `"Insolvenz"`.
 To turn several provided keywords into a single time series the first principal component is used.
 
@@ -128,9 +128,8 @@ In order to achieve this the script calls `ts_prcomp()` function from the `tsbox
 
 ### Step 5: writing the data ###
 
-Finally the prepared index is saved to a file:
+Finally the prepared index is saved to a file in the data folder:
 
 ```
 write_keyword(prepared_data, "indicator", "CH")
 ```
-
