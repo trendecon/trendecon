@@ -46,7 +46,7 @@ To include a new series, each keyword must first be initiated.
 Our goal is to produce long daily time series, ideally ranging from 2006.
 However, Google does not provide daily or weekly data for such a long time period.
 Hence, we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
-So be careful, as this causes a lot of queries to Google.
+So be careful, as this causes a lot of queries to Google and might result in a temporary IP address ban.
 
 ```r
 proc_keyword_init("Rezession", "CH")
