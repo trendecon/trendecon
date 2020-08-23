@@ -30,10 +30,10 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
   today <- Sys.Date()
 
   enhance_keyword <- function(data, keyword, geo, suffix){
-    old <- read_keyword(keyword, geo, "d") %>%
+    old <- read_keyword(keyword, geo, suffix) %>%
       mutate(n = as.integer(n))
     new <- aggregate_windows(data)
-    write_keyword(aggregate_averages(old, new), keyword, geo, "d")
+    write_keyword(aggregate_averages(old, new), keyword, geo, suffix)
   }
 
   message("Downloading keyword: ", keyword)
