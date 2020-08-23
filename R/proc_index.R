@@ -2,7 +2,7 @@
 # proc_index(keywords, "ch", "clothing")
 proc_index <- function(keywords, geo, index_name) {
 
-  lapply(keywords, proc_keyword)
+  lapply(keywords, proc_keyword, geo = geo)
 
   data <- read_keywords(keywords, geo = geo, id = "seas_adj")
 
