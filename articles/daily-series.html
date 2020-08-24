@@ -92,109 +92,72 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trendecon</span>)</pre></body></html></div>
-<div id="intro" class="section level2">
-<h2 class="hasAnchor">
-<a href="#intro" class="anchor"></a>Intro</h2>
-<p>Google search results are available on a daily, weekly or monthly frequency. As with individual samples, querying Google at a different frequency will lead to substantially different results.</p>
-<p>Our goal is to produce long daily time series, ideally from 2006. However, Google does not provide daily or weekly data for such a long time period. We circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.</p>
-<p>This vingette describes the production processes of trendecon. The production function start with <code>proc_</code> and usually operate on the file system. That means that calling this functions will write to your disk.</p>
-</div>
+<p>Once the combination of useful keywords is selected we might want to use them as economic indicators in production and display them on <a href="https://www.trendecon.org/">trendecon.org</a>. This vignette describes the steps for adding new indicators to the production processes of “Trendecon”.</p>
 <div id="directory-structure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#directory-structure" class="anchor"></a>Directory structure</h2>
-<p>The <code>proc_</code> functions write to the working directory. If you are unsure about your current working directory, use <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>.</p>
-<p>Within the working directory, the <code>proc_</code> functions assume the existence of two folders,</p>
-<ul>
-<li><code>data</code></li>
-<li><code>raw</code></li>
-</ul>
-<p>which, if not present, are created when calling <code>proc_keyword_init</code> for the first time.</p>
-<p>Within these folders, there is a subfolder for every <code>geo</code> location. Thus, you may see the following subfolders</p>
-<ul>
-<li><code>data/ch</code></li>
-<li><code>data/at</code></li>
-<li><code>raw/ch</code></li>
-<li><code>raw/at</code></li>
-</ul>
-<p>What is the difference between <code>data</code> and <code>raw</code>? In the <code>raw</code> folder, we collect all the data downloaded from Google, plus some transfromations, such as the seasonally adjusted or the combined series.</p>
-<p>In the <code>data</code> folder, we collect our final indicators - the data you see on the website.</p>
+<p>The names of production functions within the <code>trendecon</code> package start with <code>proc_</code>. They usually operate on the file system which means that calling these functions will write files to the local disk. The <code>proc_</code> functions will save files within two folders: <code>data</code> and <code>raw</code>, which are located under the working directory (<code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>). <code>raw</code> folder holds all the data downloaded from Google, plus some transformations, such as seasonally adjusted or combined series. <code>data</code> folder, on the other hand, collects the final indicators - the data displayed on the website. If not present these folders will be created when calling <code>proc_keyword_init</code> for the first time.</p>
+<p>Within these folders, every used <code>geo</code> location will have its own subfolder. Thus, in the end, if we used Swiss and Austrian indicators, we would end up with the following directory structure:</p>
+<pre><code>│
+├── data
+│   ├── at
+│   └── ch
+│
+└── raw
+    ├── at
+    └── ch</code></pre>
 </div>
 <div id="initial-download" class="section level2">
 <h2 class="hasAnchor">
-<a href="#initial-download" class="anchor"></a>Initial Download</h2>
-<p>To include a new series, each keyword must be initiated. Be careful, as this causes a lot of queries to Google.</p>
+<a href="#initial-download" class="anchor"></a>Initial download</h2>
+<p>To include a new series, each keyword must first be initiated. Our goal is to produce long daily time series, ideally ranging from 2006. However, Google does not provide daily or weekly data for such a long time period. Hence, we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period. So be careful, as this causes a lot of queries to Google and might result in a temporary IP address ban.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
-<p>After running we have the aggregated series at daily, weekly and monthly frequency, stored in the <code>raw</code> folder. In the example above, the files <code>raw/ch/Rezession_d.csv</code>, <code>raw/ch/Rezession_w.csv</code>, and <code>raw/ch/Rezession_m.csv</code> are created.</p>
+<p>After running the code above we will have the aggregated series at daily, weekly and monthly frequency, stored in the <code>raw</code> folder. In this example the following files: <code>raw/ch/Rezession_d.csv</code>, <code>raw/ch/Rezession_w.csv</code>, and <code>raw/ch/Rezession_m.csv</code> will be created.</p>
 </div>
 <div id="updating-trendecon-indicators" class="section level2">
 <h2 class="hasAnchor">
 <a href="#updating-trendecon-indicators" class="anchor"></a>Updating trendecon indicators</h2>
-<p>Trendecon includes a few functions that process a collection of keywords. These functions produce the indicators that we show on trendecon.org. These are called by our automated process on GitHub, so they usually do not need to be called manually.</p>
-<p>To process all Swiss indicators of trendecon, run:</p>
+<p>Once all the keywords are initiated and the raw data is obtained we need to process it. <code>trendecon</code> includes a few functions that process a collection of keywords. These functions produce the final indicators that we show on <a href="https://www.trendecon.org/">trendecon.org</a>. These are called by an automated process which is set up on GitHub, so we do not need to call them manually when updating the data.</p>
+<p>For example, in order to process all Swiss indicators of trendecon, run:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch</a></span>()</pre></body></html></div>
-<p>Once all the keywords are initiated, <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> updates the series for each keyword, and produces the indicators. In the final step, the data is copied to the data repository.</p>
-<ul>
-<li>
-<input type="checkbox" disabled>
-TODO: what data exactly is copied?</li>
-<li>
-<input type="checkbox" disabled>
-TODO: describe where the list of keywords which need to be initiated can be found.</li>
-</ul>
-<p>While <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> automatically updates our indicators, it is insightful to walk through the different steps it performs, as these are the steps which are required to build indicators from other sets of keywords or for other countries.</p>
-<div id="scripts-for-each-indicator" class="section level3">
+<p>This function updates the series for each keyword, and produces the indicators. In the final step all the specified Swiss indicators will be processed and the final data is stored in the <code>data/ch</code> folder. The list of active Swiss indicators can be found within the code of <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> function.</p>
+</div>
+<div id="preprocessing-indicators-step-by-step" class="section level2">
+<h2 class="hasAnchor">
+<a href="#preprocessing-indicators-step-by-step" class="anchor"></a>Preprocessing indicators step by step</h2>
+<p>While <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> automatically updates the indicators it cannot add new indicators to production. In order to be able to introduce new indicators it is insightful to walk through the different steps performed by <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code>. The same steps will be required to build indicators from other sets of keywords or for other countries. The steps of such preparation are outlined below.</p>
+<div id="step-1-update-with-latest-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#scripts-for-each-indicator" class="anchor"></a>Scripts for each indicator</h3>
-<p>To construct each indicator, an indicator-specific script in the folder <code>inst/script</code> is called. For example</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"inst/script/trendecon.R"</span>)</pre></body></html></div>
-<p>produces the indicator for economic sentiment. To do so, it first performs a number of steps for each keyword on which the indicator is based. For example, our main indicator is based on the keywords <code>"Wirtschaftskrise"</code>, <code>"Kurzarbeit  "</code>, <code>"arbeitslos"</code>, and <code>"Insolvenz"</code>. Once the data for each keyword has been processed, the actual indicator is constructed from the individual keyword-series using a principal-component approach.</p>
-<p>Below, we describe the steps which are performed for each of the keywords. All these steps are bundled together in the function <code>proc_keyword</code>.</p>
-<div id="bundled-steps-for-each-keyword" class="section level4">
-<h4 class="hasAnchor">
-<a href="#bundled-steps-for-each-keyword" class="anchor"></a>Bundled steps for each keyword</h4>
-<p>For each keyword, <code>proc_keyword</code> is called, for example</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword.html">proc_keyword</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
-<p>which in turn performs the following steps.</p>
-<div id="update-data-series-with-latest-data" class="section level5">
-<h5 class="hasAnchor">
-<a href="#update-data-series-with-latest-data" class="anchor"></a>Update data series with latest data</h5>
-<p>In the first step, the raw data series for each keyword are updated with the latest daily, weekly, and monthly data. For example, to update the raw series for keyword <code>"Rezession"</code> for Switzerland, call</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
-<ul>
-<li>
-<input type="checkbox" disabled>
-TODO: This will fail without proper error if <code>proc_keyword_init</code> has not been run.</li>
-</ul>
+<a href="#step-1-update-with-latest-data" class="anchor"></a>Step 1: update with latest data</h3>
+<p>In the first step, the raw data series for each keyword are updated with the latest daily, weekly, and monthly data. For example, to update the raw series for keyword <code>"Rezession"</code> for Switzerland, the script calls the following internal function:</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<p>This function downloads raw daily, weekly, and monthly data for the specified pair of keyword and geo location. If the data for a particular keyword is not yet available, <code><a href="../reference/proc_keyword_init.html">proc_keyword_init()</a></code> should be called instead.</p>
 </div>
-<div id="bending" class="section level5">
-<h5 class="hasAnchor">
-<a href="#bending" class="anchor"></a>Bending</h5>
-<p>To combine the three frequencies, we apply the following methodology: In a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monhtly values.</p>
-<p>To combine the three frequencies for a given keyword, use:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<div id="step-2-bending" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-2-bending" class="anchor"></a>Step 2: bending</h3>
+<p>To combine the three frequencies (monthly, weekly, and daily), we apply the following methodology: in a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monthly values.</p>
+<p>To combine the three frequencies for a given keyword, the script calls another internal function:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
 </div>
-<div id="seasonal-adjustment" class="section level5">
-<h5 class="hasAnchor">
-<a href="#seasonal-adjustment" class="anchor"></a>Seasonal Adjustment</h5>
-<ul>
-<li>
-<input type="checkbox" disabled>
-FXIME some text from the website</li>
-</ul>
-<p>To seasonally adjust a combined keyword, use:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<div id="step-3-seasonal-adjustment" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-3-seasonal-adjustment" class="anchor"></a>Step 3: seasonal adjustment</h3>
+<p>Some keywords’ time series might display seasonal patterns. For example it is not surprising that searches for gardening are higher in spring. In order to make meaningful comparisons over time such seasonal patterns, present within the data, need to be removed. To achieve this <code>trendecon</code> uses the “Prophet” procedure for estimating an additive model where non-linear trends are fit with yearly and weekly seasonality and the holiday effects.</p>
+<p>To seasonally adjust a combined keyword, the script calls the following internal function:</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
 </div>
-<div id="reading-and-writing" class="section level5">
-<h5 class="hasAnchor">
-<a href="#reading-and-writing" class="anchor"></a>Reading and Writing</h5>
-<p>There are two special helper functions that are useful when working with production data:</p>
-<ul>
-<li><code>read_keyword</code></li>
-<li><code>write_keyword</code></li>
-</ul>
+<div id="step-4-combining" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-4-combining" class="anchor"></a>Step 4: combining</h3>
+<p>Once the raw data for each keyword has been processed we end up with multiple time series - one for each keyword within the indicator. As an example the main indicator uses the following keywords: <code>"Wirtschaftskrise"</code>, <code>"Kurzarbeit "</code>, <code>"arbeitslos"</code>, and <code>"Insolvenz"</code>. To turn several provided keywords into a single time series the first principal component is used.</p>
+<p>In order to achieve this the script calls <code>ts_prcomp()</code> function from the <code>tsbox</code> package.</p>
 </div>
-</div>
+<div id="step-5-writing-the-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-5-writing-the-data" class="anchor"></a>Step 5: writing the data</h3>
+<p>Finally the prepared index is saved to a file in the data folder:</p>
+<pre><code><a href="../reference/write_keyword.html">write_keyword(prepared_data, "indicator", "CH")</a></code></pre>
 </div>
 </div>
   </div>
