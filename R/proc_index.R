@@ -13,6 +13,13 @@ proc_index <- function(keywords, geo, index_name) {
     select(-id) %>%
     ts_scale()
 
+  # determine PC sign based on average correlation with actual time series
+  values  <- mapply(getElement, split(data, data$keyword), "value")
+  corsign <- mean(cor(values, x_prcomp$value))
+  if(corsign < 0) {
+    x_prcomp$value <- -x_prcomp$value
+  }
+
   # invert main index
   if (index_name == "trendecon") {
     x_prcomp$value <- -x_prcomp$value
