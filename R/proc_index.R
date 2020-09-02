@@ -17,7 +17,7 @@ proc_index <- function(keywords, geo, index_name) {
   values  <- mapply(getElement, split(data, data$keyword), "value")
   corsign <- mean(cor(values, x_prcomp$value))
   if(corsign < 0) {
-    x_prcom$value <- -x_prcomp$value
+    x_prcomp$value <- -x_prcomp$value
   }
 
   # invert main index
