@@ -14,9 +14,6 @@
 #'
 #' @seealso[ts_gtrends_windows]
 #' @export
-
-
-
 proc_keyword <- function(keyword = "Insolvenz",
                          geo = "CH",
                          n_windows = 2) {
