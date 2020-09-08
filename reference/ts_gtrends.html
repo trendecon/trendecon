@@ -137,13 +137,13 @@ retries if no result is returned.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ts_gtrends</span>(
-  <span class='kw'>keyword</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"0"</span>,
-  <span class='kw'>geo</span> <span class='kw'>=</span> <span class='st'>"CH"</span>,
-  <span class='kw'>time</span> <span class='kw'>=</span> <span class='st'>"today+5-y"</span>,
-  <span class='kw'>retry</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  keyword = <span class='fl'>NA</span>,
+  category = <span class='st'>"0"</span>,
+  geo = <span class='st'>"CH"</span>,
+  time = <span class='st'>"today+5-y"</span>,
+  retry = <span class='fl'>5</span>,
+  wait = <span class='fl'>5</span>,
+  quiet = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -170,7 +170,7 @@ default is <code>"CH"</code>. Passed to <code><a href='https://rdrr.io/pkg/gtren
       <th>time</th>
       <td><p>A string specifying the time span of the query. Possible values
   are:</p>
-<p></p><dl'>
+<p></p><dl>
 <dt>"now 1-H"</dt><dd><p>Last hour</p></dd> <dt>"now 4-H"</dt><dd><p>Last four hours</p></dd>
   <dt>"now 1-d"</dt><dd><p>Last day</p></dd> <dt>"now 7-d"</dt><dd><p>Last seven days</p></dd> <dt>"today
   1-m"</dt><dd><p>Past 30 days</p></dd> <dt>"today 3-m"</dt><dd><p>Past 90 days</p></dd> <dt>"today
@@ -215,20 +215,23 @@ either the keyword, or the category.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ts_gtrends</span>(<span class='st'>"Rezession"</span>)</div><div class='output co'>#&gt; <span class='message'>Downloading data for today+5-y</span></div><div class='input'><span class='no'>x</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 260 x 2</span><span>
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ts_gtrends</span>(<span class='st'>"Rezession"</span>)
+</div><div class='output co'>#&gt; <span class='message'>Downloading data for today+5-y</span></div><div class='input'><span class='kw'>x</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 260 x 2</span><span>
 #&gt;    time       value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2015-09-13     3
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2015-09-20     0
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2015-09-13     6
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2015-09-20     4
 #&gt; </span><span style='color: #555555;'> 3</span><span> 2015-09-27     4
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2015-10-04     2
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2015-10-11     6
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2015-10-18     2
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2015-10-25     3
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2015-11-01     2
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2015-11-08     6
-#&gt; </span><span style='color: #555555;'>10</span><span> 2015-11-15     2
-#&gt; </span><span style='color: #555555;'># … with 250 more rows</span><span></div><div class='input'><span class='kw pkg'>tsbox</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tsbox/man/ts_plot.html'>ts_plot</a></span>(<span class='no'>x</span>)</div><div class='img'><img src='ts_gtrends-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2015-10-04     3
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2015-10-11     3
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2015-10-18     5
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2015-10-25     6
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2015-11-01     5
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2015-11-08     9
+#&gt; </span><span style='color: #555555;'>10</span><span> 2015-11-15     3
+#&gt; </span><span style='color: #555555;'># … with 250 more rows</span><span></div><div class='input'><span class='kw'>tsbox</span>::<span class='fu'><a href='https://rdrr.io/pkg/tsbox/man/ts_plot.html'>ts_plot</a></span>(<span class='kw'>x</span>)
+</div><div class='img'><img src='ts_gtrends-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -244,7 +247,7 @@ either the keyword, or the category.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

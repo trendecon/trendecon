@@ -93,17 +93,21 @@
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
 <p>You can install the trendecon package from GitHub.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"trendecon/trendecon"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install.packages("remotes")</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"trendecon/trendecon"</span>)
+</pre></div>
 </div>
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h3>
 <p>To download a series from Google Trends:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trendecon</span>)
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ts_gtrends.html">ts_gtrends</a></span>(<span class="st">"cinema"</span>, <span class="kw">geo</span> <span class="kw">=</span> <span class="st">"CH"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://www.trendecon.org">trendecon</a></span>)
+<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ts_gtrends.html">ts_gtrends</a></span>(<span class="st">"cinema"</span>, geo = <span class="st">"CH"</span>)
 <span class="co">#&gt; Downloading data for today+5-y</span>
-<span class="kw pkg">tsbox</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="no">x</span>)</pre></div>
+<span class="kw">tsbox</span>::<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="kw">x</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 </div>
 <div id="documentation" class="section level3">
@@ -163,7 +167,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

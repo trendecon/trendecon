@@ -105,33 +105,41 @@
 <a href="#using-trendecon-to-obtain-google-trends-data" class="anchor"></a>Using trendecon to obtain Google Trends data</h2>
 <p>The main function <code><a href="../reference/ts_gtrends.html">ts_gtrends()</a></code> takes one or multiple search term keywords and a geographical location as main arguments and downloads data from the Google Trends API.</p>
 <p>Suppose we are interested in the demand for cultural events in Switzerland. Think of what people would google if they want to go to a cultural event. For instance, they might google “cinema”, “oper”, “kino” and “theater”. The following command downloads the Google Trends data for these search terms:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trendecon</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://www.trendecon.org">trendecon</a></span>)
 
-<span class="no">gt_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ts_gtrends.html">ts_gtrends</a></span>(
-  <span class="kw">keyword</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cinema"</span>, <span class="st">"oper"</span>, <span class="st">"kino"</span>, <span class="st">"theater"</span>),
-  <span class="kw">geo</span>     <span class="kw">=</span> <span class="st">"CH"</span>,
+<span class="kw">gt_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ts_gtrends.html">ts_gtrends</a></span>(
+  keyword = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cinema"</span>, <span class="st">"oper"</span>, <span class="st">"kino"</span>, <span class="st">"theater"</span>),
+  geo     = <span class="st">"CH"</span>,
 )
 <span class="co">#&gt; Downloading data for today+5-y</span>
 <span class="co">#&gt; Downloading data for today+5-y</span>
 <span class="co">#&gt; Downloading data for today+5-y</span>
-<span class="co">#&gt; Downloading data for today+5-y</span></pre></body></html></div>
+<span class="co">#&gt; Downloading data for today+5-y</span>
+</pre></div>
 <p>By default, a weekly timeseries for the last 5 years is obtained but this interval can be changed by adjusting the <code>time</code> argument (See “Further Help” for more). The output will be a “tibble” table with 3 columns: id (keyword), time (date), and value (relative popularity score):</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">gt_data</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">gt_data</span>)
 <span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;   id     time       value</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;int&gt;</span>
-<span class="co">#&gt; 1 cinema 2015-09-13    44</span>
-<span class="co">#&gt; 2 cinema 2015-09-20    40</span>
-<span class="co">#&gt; 3 cinema 2015-09-27    51</span>
-<span class="co">#&gt; 4 cinema 2015-10-04    56</span>
-<span class="co">#&gt; 5 cinema 2015-10-11    56</span>
-<span class="co">#&gt; 6 cinema 2015-10-18    55</span></pre></body></html></div>
+<span class="co">#&gt; 1 cinema 2015-09-13    43</span>
+<span class="co">#&gt; 2 cinema 2015-09-20    42</span>
+<span class="co">#&gt; 3 cinema 2015-09-27    47</span>
+<span class="co">#&gt; 4 cinema 2015-10-04    51</span>
+<span class="co">#&gt; 5 cinema 2015-10-11    71</span>
+<span class="co">#&gt; 6 cinema 2015-10-18    59</span>
+</pre></div>
 <p>We can then plot the time series using a <code><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot()</a></code> function from the <code>tsbox</code> package:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tsbox</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="no">gt_data</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://www.tsbox.help">tsbox</a></span>)
+<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="kw">gt_data</span>)
+</pre></div>
 <p><img src="intro_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>To retrieve the common signal of all four time series we can, for instance, use the first principal component:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_pick.html">ts_pick</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_examples.html">ts_prcomp</a></span>(<span class="no">gt_data</span>), <span class="st">"PC1"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_plot.html">ts_plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_pick.html">ts_pick</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/tsbox/man/ts_examples.html">ts_prcomp</a></span>(<span class="kw">gt_data</span>), <span class="st">"PC1"</span>))
+</pre></div>
 <p><img src="intro_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>Alternatively, <code><a href="../reference/ts_gtrends.html">ts_gtrends()</a></code> function can accept Google Trends categories instead of search term keywords. Unlike with search terms, Google Trends categories are expressed with category numbers. Such a category number can be specified instead of a keyword in which case the trend data for the predefined Google search category will be retrieved.</p>
 <p>Under the hood it wraps around the <code>gtrends()</code> function from the <a href="https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf"><em>gtrendsR</em></a> package and modifies it by a) vectorizing it so that multiple keywords can be requested in one go, b) returning the output in a “tibble” form that can be passed to functions from the “tsbox” package, c) automatically retrying in case of failures.</p>
@@ -163,7 +171,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

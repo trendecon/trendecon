@@ -111,7 +111,9 @@
 <h2 class="hasAnchor">
 <a href="#initial-download" class="anchor"></a>Initial download</h2>
 <p>To include a new series, each keyword must first be initiated. Our goal is to produce long daily time series, ideally ranging from 2006. However, Google does not provide daily or weekly data for such a long time period. Hence, we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period. So be careful, as this causes a lot of queries to Google and might result in a temporary IP address ban.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)
+</pre></div>
 <p>After running the code above we will have the aggregated series at daily, weekly and monthly frequency, stored in the <code>raw</code> folder. In this example the following files: <code>raw/ch/Rezession_d.csv</code>, <code>raw/ch/Rezession_w.csv</code>, and <code>raw/ch/Rezession_m.csv</code> will be created.</p>
 </div>
 <div id="updating-trendecon-indicators" class="section level2">
@@ -119,7 +121,9 @@
 <a href="#updating-trendecon-indicators" class="anchor"></a>Updating trendecon indicators</h2>
 <p>Once all the keywords are initiated and the raw data is obtained we need to process it. <code>trendecon</code> includes a few functions that process a collection of keywords. These functions produce the final indicators that we show on <a href="https://www.trendecon.org/">trendecon.org</a>. These are called by an automated process which is set up on GitHub, so we do not need to call them manually when updating the data.</p>
 <p>For example, in order to process all Swiss indicators of trendecon, run:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch</a></span>()
+</pre></div>
 <p>This function updates the series for each keyword, and produces the indicators. In the final step all the specified Swiss indicators will be processed and the final data is stored in the <code>data/ch</code> folder. The list of active Swiss indicators can be found within the code of <code><a href="../reference/proc_trendecon_ch.html">proc_trendecon_ch()</a></code> function.</p>
 </div>
 <div id="preprocessing-indicators-step-by-step" class="section level2">
@@ -130,7 +134,9 @@
 <h3 class="hasAnchor">
 <a href="#step-1-update-with-latest-data" class="anchor"></a>Step 1: update with latest data</h3>
 <p>In the first step, the raw data series for each keyword are updated with the latest daily, weekly, and monthly data. For example, to update the raw series for keyword <code>"Rezession"</code> for Switzerland, the script calls the following internal function:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)
+</pre></div>
 <p>This function downloads raw daily, weekly, and monthly data for the specified pair of keyword and geo location. If the data for a particular keyword is not yet available, <code><a href="../reference/proc_keyword_init.html">proc_keyword_init()</a></code> should be called instead.</p>
 </div>
 <div id="step-2-bending" class="section level3">
@@ -138,14 +144,18 @@
 <a href="#step-2-bending" class="anchor"></a>Step 2: bending</h3>
 <p>To combine the three frequencies (monthly, weekly, and daily), we apply the following methodology: in a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monthly values.</p>
 <p>To combine the three frequencies for a given keyword, the script calls another internal function:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu">proc_combine_freq</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)
+</pre></div>
 </div>
 <div id="step-3-seasonal-adjustment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-3-seasonal-adjustment" class="anchor"></a>Step 3: seasonal adjustment</h3>
 <p>Some keywords’ time series might display seasonal patterns. For example it is not surprising that searches for gardening are higher in spring. In order to make meaningful comparisons over time such seasonal patterns, present within the data, need to be removed. To achieve this <code>trendecon</code> uses the “Prophet” procedure for estimating an additive model where non-linear trends are fit with yearly and weekly seasonality and the holiday effects.</p>
 <p>To seasonally adjust a combined keyword, the script calls the following internal function:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu">proc_seas_adj</span>(<span class="st">"Rezession"</span>, <span class="st">"CH"</span>)
+</pre></div>
 </div>
 <div id="step-4-combining" class="section level3">
 <h3 class="hasAnchor">
@@ -177,7 +187,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

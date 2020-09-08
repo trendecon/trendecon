@@ -133,10 +133,10 @@
     </div>
 
     <pre class="usage"><span class='fu'>ts_gtrends_index</span>(
-  <span class='no'>keyword</span>,
-  <span class='kw'>time</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"2007-01-01"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()),
-  <span class='no'>...</span>,
-  <span class='kw'>sadj</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>keyword</span>,
+  time = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"2007-01-01"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()),
+  <span class='kw'>...</span>,
+  sadj = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -153,7 +153,7 @@ normalized.</p></td>
       <th>time</th>
       <td><p>A string specifying the time span of the query. Possible values
   are:</p>
-<p></p><dl'>
+<p></p><dl>
 <dt>"now 1-H"</dt><dd><p>Last hour</p></dd> <dt>"now 4-H"</dt><dd><p>Last four hours</p></dd>
   <dt>"now 1-d"</dt><dd><p>Last day</p></dd> <dt>"now 7-d"</dt><dd><p>Last seven days</p></dd> <dt>"today
   1-m"</dt><dd><p>Past 30 days</p></dd> <dt>"today 3-m"</dt><dd><p>Past 90 days</p></dd> <dt>"today
@@ -178,7 +178,8 @@ normalized.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw pkg'>tsbox</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tsbox/man/ts_plot.html'>ts_plot</a></span>(<span class='fu'>ts_gtrends_index</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='st'>"Mango"</span>, <span class='st'>"Zara"</span>)))</div><div class='output co'>#&gt; <span class='message'>Downloading data for 2007-01-01 2020-09-07</span></div><div class='output co'>#&gt; <span class='message'>Downloading data for 2007-01-01 2020-09-07</span></div><div class='img'><img src='ts_gtrends_index-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>tsbox</span>::<span class='fu'><a href='https://rdrr.io/pkg/tsbox/man/ts_plot.html'>ts_plot</a></span>(<span class='fu'>ts_gtrends_index</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='st'>"Mango"</span>, <span class='st'>"Zara"</span>)))
+</div><div class='output co'>#&gt; <span class='message'>Downloading data for 2007-01-01 2020-09-08</span></div><div class='output co'>#&gt; <span class='message'>Downloading data for 2007-01-01 2020-09-08</span></div><div class='img'><img src='ts_gtrends_index-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -194,7 +195,7 @@ normalized.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
