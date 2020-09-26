@@ -134,12 +134,12 @@ and writes the data to csv files." />
 and writes the data to csv files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_keyword_init</span>(
-  keyword = <span class='st'>"Insolvenz"</span>,
-  geo = <span class='st'>"CH"</span>,
-  from = <span class='st'>"2006-01-01"</span>,
-  indicator_raw = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>proc_keyword_init</span><span class='op'>(</span>
+  keyword <span class='op'>=</span> <span class='st'>"Insolvenz"</span>,
+  geo <span class='op'>=</span> <span class='st'>"CH"</span>,
+  from <span class='op'>=</span> <span class='st'>"2006-01-01"</span>,
+  indicator_raw <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,12 +174,12 @@ contains a subdirectory of each country.</p>
     <div class='dont-index'><p><a href='ts_gtrends_windows.html'>ts_gtrends_windows</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># run once</span>
-<span class='fu'>proc_keyword_init</span>(keyword = <span class='st'>"Insolvenz"</span>, <span class='st'>"AT"</span>)
+<span class='fu'>proc_keyword_init</span><span class='op'>(</span>keyword <span class='op'>=</span> <span class='st'>"Insolvenz"</span>, <span class='st'>"AT"</span><span class='op'>)</span>
 <span class='co'># run every day</span>
-<span class='fu'><a href='proc_keyword_latest.html'>proc_keyword_latest</a></span>(keyword = <span class='st'>"Insolvenz"</span>, <span class='st'>"AT"</span>)
-}
+<span class='fu'><a href='proc_keyword_latest.html'>proc_keyword_latest</a></span><span class='op'>(</span>keyword <span class='op'>=</span> <span class='st'>"Insolvenz"</span>, <span class='st'>"AT"</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
