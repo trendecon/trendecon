@@ -134,7 +134,7 @@ In order to add the series used in the example to this script 3 changes are need
    )
    ```
 
-And all is set.
+After that simply add the updated version of this scrip to [trendecon/trendecon](https://github.com/trendecon/trendecon) repository and all is set.
 
 The `proc_trendecon_` functions produce the final indicators that we show on [trendecon.org](https://www.trendecon.org/).
 They are called by an automated process which is set up on GitHub, so we do not need to call them manually when updating the data.
