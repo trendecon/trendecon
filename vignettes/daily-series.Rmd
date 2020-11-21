@@ -102,7 +102,8 @@ P.S. The same function `proc_index()` is also used for updating the data of an e
 ### 4) Adding daily updates ###
 
 Last step is to include the newly created series into a daily-update script.
-In order to do this the file `proc_trendecon_ch.R` in the [trendecon/trendecon](https://github.com/trendecon/trendecon) repository has to be modified.
+First - all the files prepared in steps 1-3 need to be added to [trendecon/data](https://github.com/trendecon/data) repository.
+Then, in order to schedule daily updates, the script `proc_trendecon_ch.R` in the [trendecon/trendecon](https://github.com/trendecon/trendecon) repository has to be modified.
 Note that the end of the file ("ch") specifies geographic location and so for other locations (like "de") there will be a separate file (i.e. `proc_trendecon_de.R`)
 
 In order to add the series used in the example to this script 3 changes are needed:
