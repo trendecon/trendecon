@@ -70,6 +70,13 @@ proc_trendecon_ch <- function() {
     "g\u00FCnstige fl\u00FCge"
   )
 
+  kw_homeoffice <- c(
+    "headset",
+    "monitor",
+    "maus",
+    "hdmi"
+  )
+
   kw_trendecon <- c(
     "Wirtschaftskrise",
     "Kurzarbeit",
@@ -86,6 +93,7 @@ proc_trendecon_ch <- function() {
   proc_index(kw_travel, "CH", 'travel')
   proc_index(kw_trendecon, "CH", 'trendecon')
   proc_index(kw_fooddelivery, "CH", 'fooddelivery')
+  proc_index(kw_homeoffice, "CH", 'homeoffice')
 
 
   indices_in_production <- c(
@@ -96,7 +104,8 @@ proc_trendecon_ch <- function() {
     "social",
     "travel",
     "trendecon",
-    "fooddelivery"
+    "fooddelivery",
+    "homeoffice"
   )
 
   # copy to data/ch
