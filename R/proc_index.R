@@ -1,5 +1,25 @@
-# keywords <- c( "Mango", "Zara", "H&M", "PKZ", "Blue Tomato","Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
-# proc_index(keywords, "ch", "clothing")
+#' Prepare an index.
+#'
+#' Creates or updates an index using data from already downloaded keywords.
+#'
+#' This function assumes the data for all keywords exists.
+#' Then it proceeds to go through several steps:
+#' 1) updates all the keywords by downloading newest Google trends data.
+#' 2) combines monthly, weekly, and daily frequencies.
+#' 3) runs seasonal adjustment steps.
+#' 4) combines all the keywords into one index using principal components.
+#' 5) writes the produced index to a file
+#'
+#' @param keywords A vector of keyword names comprising the index.
+#' @param geo A character vector denoting geographic region.
+#' @param index_name The name given to the index.
+#'
+#' @examples
+#' \dontrun{
+#' keywords <- c( "Mango", "Zara", "H&M", "PKZ", "Blue Tomato","Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
+#' proc_index(keywords, "ch", "clothing")
+#' }
+#' @export
 proc_index <- function(keywords, geo, index_name) {
 
   lapply(keywords, proc_keyword, geo = geo)
