@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-Once the combination of useful keywords is selected we might want to use them as economic indicators in production and display them on [trendecon.org](https://www.trendecon.org/). This vignette describes the steps for adding new indicators to the production processes of "Trendecon".
+Once the combination of useful keywords is selected we might want to use them as economic indicators in production and display them on [trendecon.org](https://www.trendecon.org/).
+This vignette describes the steps for adding new indicators to the production processes of "Trendecon".
 
 ## Directory structure ##
 
@@ -39,8 +40,22 @@ Thus, in the end, if we used Swiss and Austrian indicators, we would end up with
     └── ch
 ```
 
+## Creating a new series ##
 
-## Initial download ##
+In order to create a new series we need to go through several steps:
+
+1. Select a set of Google Trends keywords comprising the new series
+2. Download the data for each keyword and store it in the [trendecon/data](https://github.com/trendecon/data) repository.
+3. Create the series using the downloaded data files.
+4. Include the series and its keywords within the daily updates.
+
+
+### 1) Selecting keywords ###
+
+As a rule an series is composed of multiple related keywords and a geographical location.
+For example purposes an series "homeoffice" will be created for "ch" (Switzerland) using "headset", "monitor", "maus", and "hdmi" keywords.
+
+### 2) Downloading data ###
 
 To include a new series, each keyword must first be initiated.
 Our goal is to produce long daily time series, ideally ranging from 2006.
@@ -48,38 +63,88 @@ However, Google does not provide daily or weekly data for such a long time perio
 Hence, we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period.
 So be careful, as this causes a lot of queries to Google and might result in a temporary IP address ban.
 
+The commands below will download the data for our example series:
+
 ```r
-proc_keyword_init("Rezession", "CH")
+proc_keyword_init("headset", "CH")
+proc_keyword_init("monitor", "CH")
+proc_keyword_init("maus", "CH")
+proc_keyword_init("hdmi", "CH")
 ```
 
 After running the code above we will have the aggregated series at daily, weekly and monthly frequency, stored in the `raw` folder.
-In this example the following files: `raw/ch/Rezession_d.csv`, `raw/ch/Rezession_w.csv`, and `raw/ch/Rezession_m.csv` will be created.
+For example, the files of the "headset" keyword will be stored under: `raw/ch/headset_d.csv`, `raw/ch/headset_w.csv`, and `raw/ch/headset_m.csv`.
+Analogous files will be present for the remaining 3 keywords.
 
+### 3) Creating a series ###
 
-## Updating trendecon indicators ##
+Four actions need to be performed in order to combine multiple keywords under a single series:
 
-Once all the keywords are initiated and the raw data is obtained we need to process it.
-`trendecon` includes a few functions that process a collection of keywords.
-These functions produce the final indicators that we show on [trendecon.org](https://www.trendecon.org/).
-These are called by an automated process which is set up on GitHub, so we do not need to call them manually when updating the data.
+1. Update each keyword by downloading the latest data.
+2. Combine daily, weekly, and monthly frequencies within each keyword.
+3. Remove seasonal patterns from the keyword data.
+4. Combine all the prepared keywords and create a series.
 
-For example, in order to process all Swiss indicators of trendecon, run:
+All the above steps are performed by a single function call:
 
 ```r
-proc_trendecon_ch()
+proc_index(c("headset", "monitor", "maus", "hdmi"), "CH", "homeoffice")
 ```
 
-This function updates the series for each keyword, and produces the indicators.
-In the final step all the specified Swiss indicators will be processed and the final data is stored in the `data/ch` folder.
-The list of active Swiss indicators can be found within the code of `proc_trendecon_ch()` function.
+This function will combine the keywords passed as the first argument and store the resulting series under the name specified by the third argument.
+In this example a new file holding the data for "homeoffice" series will be created under `data/ch/homeoffice_sa_csv`.
+In addition, for each series, two intermediate preparation files will also be created, i.e. `raw/ch/headset_mwd.csv` and `raw/ch/headset_sa.csv`.
+Here "mwd" stores the combined monthly/weekly/daily data and "sa" contains the values after seasonal adjustment.
+
+P.S. The same function `proc_index()` is also used for updating the data of an existing data series.
 
 
-## Preprocessing indicators step by step  ##
+### 4) Adding daily updates ###
 
-While `proc_trendecon_ch()` automatically updates the indicators it cannot add new indicators to production.
-In order to be able to introduce new indicators it is insightful to walk through the different steps performed by `proc_trendecon_ch()`.
-The same steps will be required to build indicators from other sets of keywords or for other countries.
-The steps of such preparation are outlined below.
+Last step is to include the newly created series into a daily-update script.
+In order to do this the file `proc_trendecon_ch.R` in the [trendecon/trendecon](https://github.com/trendecon/trendecon) repository has to be modified.
+Note that the end of the file ("ch") specifies geographic location and so for other locations (like "de") there will be a separate file (i.e. `proc_trendecon_de.R`)
+
+In order to add the series used in the example to this script 3 changes are needed:
+
+1. create a variable holding the set of keywords used for the series:
+
+   ```r
+   kw_homeoffice <- c(
+     "headset",
+     "monitor",
+     "maus",
+     "hdmi"
+   )
+   ```
+
+2. add a function call that creates/updates this series:
+
+   ```r
+   proc_index(kw_homeoffice, "CH", "homeoffice")
+   ```
+
+3. add the name of this series to production list:
+
+   ```r
+   indices_in_production <- c(
+     <...>,
+     "homeoffice"
+   )
+   ```
+
+And all is set.
+
+The `proc_trendecon_` functions produce the final indicators that we show on [trendecon.org](https://www.trendecon.org/).
+They are called by an automated process which is set up on GitHub, so we do not need to call them manually when updating the data.
+The full list of active Swiss indicators can be found within the code of `proc_trendecon_ch()` function.
+
+
+## Series creation steps ##
+
+To get a better understanding of how multiple keywords are combined into a single series we need to examine the inner working of `proc_index()` function.
+The steps of series preparation are outlined below.
+Note that the functions displayed in this section are internal and typically are not called by the users.
 
 ### Step 1: update with latest data ###
 
@@ -133,3 +198,4 @@ Finally the prepared index is saved to a file in the data folder:
 ```
 write_keyword(prepared_data, "indicator", "CH")
 ```
+
