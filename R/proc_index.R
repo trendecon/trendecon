@@ -27,7 +27,10 @@ proc_index <- function(keywords, geo, index_name) {
   data <- read_keywords(keywords, geo = geo, id = "seas_adj")
 
   # check if they have the same span
-  stopifnot(nrow(distinct(ts_summary(data), start, end)) == 1)
+  if(nrow(distinct(ts_summary(data), start, end)) != 1) {
+    print(ts_summary(data))
+    stop("error")
+  }
 
   x_prcomp <- filter(ts_prcomp(data), id == "PC1") %>%
     select(-id) %>%
