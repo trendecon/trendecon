@@ -32,7 +32,7 @@ proc_keyword <- function(keyword = "Insolvenz",
 
     proc_seas_adj(keyword = keyword, geo = geo)
 
-    store globally: next proc_keyword() run will only update if newer
+    # store globally: next proc_keyword() run will only update if newer
     .latest_google_date <<- latest_google_date(keyword, geo)
     return(invisible(TRUE))
   }
