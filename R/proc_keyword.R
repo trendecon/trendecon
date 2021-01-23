@@ -19,12 +19,12 @@ proc_keyword <- function(keyword = "Insolvenz",
                          n_windows = 2) {
   stop_if_no_data(keyword, geo)
 
-  # previous_google_date <- check_when_last_processed(keyword, geo)
+  previous_google_date <- check_when_last_processed(keyword, geo)
 
-  # if (previous_google_date == .latest_google_date) {
-    # message("keyword ", keyword, " already processed today. skipping.")
-    # return(TRUE)
-  # } else {
+  if (previous_google_date == .latest_google_date) {
+    message("keyword ", keyword, " already processed today. skipping.")
+    return(TRUE)
+  } else {
 
     proc_keyword_latest(keyword = keyword, geo = geo, n_windows = n_windows)
 
@@ -32,10 +32,10 @@ proc_keyword <- function(keyword = "Insolvenz",
 
     proc_seas_adj(keyword = keyword, geo = geo)
 
-    # store globally: next proc_keyword() run will only update if newer
-    # .latest_google_date <<- latest_google_date(keyword, geo)
+    store globally: next proc_keyword() run will only update if newer
+    .latest_google_date <<- latest_google_date(keyword, geo)
     return(invisible(TRUE))
-  # }
+  }
 }
 
 stop_if_no_data <- function(keyword, geo) {
