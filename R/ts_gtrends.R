@@ -42,7 +42,7 @@
 #' x
 #' tsbox::ts_plot(x)
 #' @import dplyr tidyr tsbox gtrendsR readr tempdisagg
-ts_gtrends <- function(keyword = NA,
+ts_gtrends <- function(keyword,
                        category = "0",
                        geo = "CH",
                        time = "today+5-y",
@@ -72,6 +72,10 @@ ts_gtrends <- function(keyword = NA,
       z <- transmute(x$interest_over_time, time = as.Date(date), value = ensure_numeric(hits))
     }
     z
+  }
+
+  if (missing(keyword)) {
+    stop("argument \"keyword\" is missing, with no default")
   }
 
   if ((length(keyword) > 1) && (length(category) > 1)) {
