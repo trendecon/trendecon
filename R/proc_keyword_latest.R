@@ -37,6 +37,22 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
   }
 
   message("Downloading keyword: ", keyword)
+
+  message("Downloading hourly data")
+  h <- ts_gtrends(
+    keyword = keyword,
+    geo = geo,
+    time = "now 7-d",
+    wait = 20,
+    retry = 20,
+  )
+  h <- h %>%
+    group_by(time) %>%
+    summarize(value = mean(value, na.rm=TRUE)) %>%
+    mutate(n = 1)
+  # NOTE: this data is intentionally not re-written on every update, not aggregated with the rest
+  write_keyword(h, keyword, geo, "h")
+
   message("Downloading daily data")
   d <- ts_gtrends_windows(
     keyword = keyword,
