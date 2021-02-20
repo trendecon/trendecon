@@ -5,7 +5,7 @@
 #'
 #' See the working paper for details on the methodology.
 #'
-#' @inheritParams
+#' @inheritParams ts_gtrends
 #' @export
 ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
 
