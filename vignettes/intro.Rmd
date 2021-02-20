@@ -80,7 +80,5 @@ c) automatically retrying in case of failures.
 
 ## Further Help ##
 
-- For a list of available product categories see `data("categories")`.
-- For a list of available geographical regions see `data("countries)`.
 - For more details about the time interval specification see `help(gtrends)`.
 - For an explanation of additional parameters accepted by the `ts_gtrends()` function see `help(ts_gtrends)`.

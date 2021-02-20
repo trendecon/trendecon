@@ -1,5 +1,12 @@
-#' Download a time series comprised of daily, weekly and monthly Google Trends
-#' data for a keyword.
+#' Robust and Consistent Time Series from Google Trends
+#'
+#' Construct a robust and consistent daily Time Series from Google Trends data.
+#' Daily, weekly and monthly Data is downloaded and consistently aggregated, using the Chow-Lin methodology.
+#'
+#' See the working paper for details on the methodology.
+#'
+#' @inheritParams
+#' @export
 ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
 
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")

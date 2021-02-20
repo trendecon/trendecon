@@ -53,6 +53,13 @@ tsbox::ts_plot(x)
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
+To construct a robust and consistent daily Time Series from Google
+Trends data:
+
+``` r
+ts_gtrends_mwd("cinema", geo = "CH")
+```
+
 ### Documentation
 
 The [introductory

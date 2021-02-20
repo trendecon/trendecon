@@ -5,7 +5,7 @@
 \title{Download Google Trend Data}
 \usage{
 ts_gtrends(
-  keyword = NA,
+  keyword,
   category = "0",
   geo = "CH",
   time = "today+5-y",

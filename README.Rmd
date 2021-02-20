@@ -48,6 +48,12 @@ x <- ts_gtrends("cinema", geo = "CH")
 tsbox::ts_plot(x)
 ```
 
+To construct a robust and consistent daily Time Series from Google Trends data:
+
+```r
+ts_gtrends_mwd("cinema", geo = "CH")
+```
+
 ### Documentation
 
 The [introductory vignette](https://trendecon.github.io/trendecon/articles/intro.html) describes the basic use of the package.
