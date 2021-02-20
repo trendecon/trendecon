@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Processes the data for a single keyword. — proc_keyword • trendecon</title>
+<title>Robust and Consistent Time Series from Google Trends — ts_gtrends_mwd • trendecon</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,9 @@
 
 
 
-<meta property="og:title" content="Processes the data for a single keyword. — proc_keyword" />
-<meta property="og:description" content="Processing includes
-donwloading the latest data
-aggregating
-combining
-seasonal adjustment
-
-" />
+<meta property="og:title" content="Robust and Consistent Time Series from Google Trends — ts_gtrends_mwd" />
+<meta property="og:description" content="Construct a robust and consistent daily Time Series from Google Trends data.
+Daily, weekly and monthly Data is downloaded and consistently aggregated, using the Chow-Lin methodology." />
 
 
 
@@ -129,45 +124,38 @@ seasonal adjustment
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Processes the data for a single keyword.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_keyword.R'><code>R/proc_keyword.R</code></a></small>
-    <div class="hidden name"><code>proc_keyword.Rd</code></div>
+    <h1>Robust and Consistent Time Series from Google Trends</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/ts_gtrends_mwd.R'><code>R/ts_gtrends_mwd.R</code></a></small>
+    <div class="hidden name"><code>ts_gtrends_mwd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Processing includes</p><ul>
-<li><p>donwloading the latest data</p></li>
-<li><p>aggregating</p></li>
-<li><p>combining</p></li>
-<li><p>seasonal adjustment</p></li>
-</ul>
-
+    <p>Construct a robust and consistent daily Time Series from Google Trends data.
+Daily, weekly and monthly Data is downloaded and consistently aggregated, using the Chow-Lin methodology.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_keyword</span><span class='op'>(</span>keyword <span class='op'>=</span> <span class='st'>"Insolvenz"</span>, geo <span class='op'>=</span> <span class='st'>"CH"</span>, n_windows <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ts_gtrends_mwd</span><span class='op'>(</span>keyword <span class='op'>=</span> <span class='st'>"Insolvenz"</span>, geo <span class='op'>=</span> <span class='st'>"CH"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>keyword</th>
-      <td><p>A single keyword for which to process the data.</p></td>
+      <td><p>A character vector with the actual Google Trends query
+keywords. Contrary to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code>, if different keywords are used,
+mulitple queries are sent to Google, and each series is individually
+normalized.</p></td>
     </tr>
     <tr>
       <th>geo</th>
-      <td><p>A character vector denoting the geographic region.
-Default is "CH".</p></td>
-    </tr>
-    <tr>
-      <th>n_windows</th>
-      <td><p>Number of windows, passed to <a href='ts_gtrends_windows.html'>ts_gtrends_windows</a>, used
-when downloading the latest data.</p></td>
+      <td><p>A character vector denoting geographic regions for the query,
+default is <code>"CH"</code>. Passed to <code><a href='https://rdrr.io/pkg/gtrendsR/man/gtrends.html'>gtrendsR::gtrends()</a></code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p><a href='ts_gtrends_windows.html'>ts_gtrends_windows</a></p></div>
+    <p>See the working paper for details on the methodology.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Processes the data for a single keyword. — proc_keyword • trendecon</title>
+<title>Prepare an index. — proc_index • trendecon</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,8 @@
 
 
 
-<meta property="og:title" content="Processes the data for a single keyword. — proc_keyword" />
-<meta property="og:description" content="Processing includes
-donwloading the latest data
-aggregating
-combining
-seasonal adjustment
-
-" />
+<meta property="og:title" content="Prepare an index. — proc_index" />
+<meta property="og:description" content="Creates or updates an index using data from already downloaded keywords." />
 
 
 
@@ -129,46 +123,52 @@ seasonal adjustment
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Processes the data for a single keyword.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_keyword.R'><code>R/proc_keyword.R</code></a></small>
-    <div class="hidden name"><code>proc_keyword.Rd</code></div>
+    <h1>Prepare an index.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trendecon/trendecon/blob/master/R/proc_index.R'><code>R/proc_index.R</code></a></small>
+    <div class="hidden name"><code>proc_index.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Processing includes</p><ul>
-<li><p>donwloading the latest data</p></li>
-<li><p>aggregating</p></li>
-<li><p>combining</p></li>
-<li><p>seasonal adjustment</p></li>
-</ul>
-
+    <p>Creates or updates an index using data from already downloaded keywords.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>proc_keyword</span><span class='op'>(</span>keyword <span class='op'>=</span> <span class='st'>"Insolvenz"</span>, geo <span class='op'>=</span> <span class='st'>"CH"</span>, n_windows <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>proc_index</span><span class='op'>(</span><span class='va'>keywords</span>, <span class='va'>geo</span>, <span class='va'>index_name</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>keyword</th>
-      <td><p>A single keyword for which to process the data.</p></td>
+      <th>keywords</th>
+      <td><p>A vector of keyword names comprising the index.</p></td>
     </tr>
     <tr>
       <th>geo</th>
-      <td><p>A character vector denoting the geographic region.
-Default is "CH".</p></td>
+      <td><p>A character vector denoting geographic region.</p></td>
     </tr>
     <tr>
-      <th>n_windows</th>
-      <td><p>Number of windows, passed to <a href='ts_gtrends_windows.html'>ts_gtrends_windows</a>, used
-when downloading the latest data.</p></td>
+      <th>index_name</th>
+      <td><p>The name given to the index.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p><a href='ts_gtrends_windows.html'>ts_gtrends_windows</a></p></div>
+    <p>This function assumes the data for all keywords exists.
+Then it proceeds to go through several steps:</p><ol>
+<li><p>updates all the keywords by downloading newest Google trends data.</p></li>
+<li><p>combines monthly, weekly, and daily frequencies.</p></li>
+<li><p>runs seasonal adjustment steps.</p></li>
+<li><p>combines all the keywords into one index using principal components.</p></li>
+<li><p>writes the produced index to a file</p></li>
+</ol>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>keywords</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span> <span class='st'>"Mango"</span>, <span class='st'>"Zara"</span>, <span class='st'>"H&amp;M"</span>, <span class='st'>"PKZ"</span>, <span class='st'>"Blue Tomato"</span>,<span class='st'>"Dosenbach"</span>, <span class='st'>"Schuhe kaufen"</span>, <span class='st'>"Ochsner Schuhe"</span><span class='op'>)</span>
+<span class='fu'>proc_index</span><span class='op'>(</span><span class='va'>keywords</span>, <span class='st'>"ch"</span>, <span class='st'>"clothing"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
