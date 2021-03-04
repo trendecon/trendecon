@@ -22,9 +22,9 @@
 #' @export
 proc_index <- function(keywords, geo, index_name) {
 
-  lapply(remove_slash(keywords), proc_keyword, geo = geo)
+  lapply(keywords, proc_keyword, geo = geo)
 
-  data <- read_keywords(remove_slash(keywords), geo = geo, id = "seas_adj")
+  data <- read_keywords(keywords, geo = geo, id = "seas_adj")
 
   # make sure all keywords have the same span
   data <- data %>%

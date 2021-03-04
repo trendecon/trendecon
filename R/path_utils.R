@@ -165,12 +165,14 @@ write_keyword <- function(x, keyword, geo, suffix = "sa") {
 #' `/{base_dir}/data-raw/indicator_raw/{keyword}_{suffix}.csv`.
 #'
 #' @param x Tibble of data to write to file.
-#' @param suffix Character vector for file suffix, defaults to `"sa"`.
+#' @param suffix Character vector for file suffix.
 #' @inheritParams path_keyword
 #' @seealso [path_keyword]
 #' @export
-write_raw_keyword <- function(x, keyword, geo) {
-  write_csv(d, path_draws(tolower(geo), paste0(remove_slash(keyword), "_d.csv")))
+write_raw_keyword <- function(x, keyword, geo, suffix) {
+  path <- path_draws(tolower(geo), paste0(remove_slash(keyword), sprintf("_%s.csv", suffix)))
+  create_dir_if_needed(dirname(path))
+  write_csv(x, path)
 }
 
 
