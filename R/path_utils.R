@@ -105,7 +105,7 @@ remove_slash <- function(keyword) {
 #' @seealso [path_trendecon]
 #' @export
 path_keyword <- function(keyword, geo = "CH", suffix = "sa") {
-  normalizePath(path_raw(tolower(geo), remove_slash(keyword), "_", suffix, ".csv")), mustWork = FALSE)
+  normalizePath(path_raw(tolower(geo), paste0(remove_slash(keyword), "_", suffix, ".csv")), mustWork = FALSE)
 }
 
 # read_keyword("Insolvenz")
@@ -162,19 +162,13 @@ write_keyword <- function(x, keyword, geo, suffix = "sa") {
 #' Write csv file for raw keyword indicator
 #'
 #' Writes csv file for raw keyword indicator to
-#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv`.
+#' `/{base_dir}/data-raw/indicator_raw/{keyword}_{suffix}.csv`.
 #'
 #' @param x Tibble of data to write to file.
 #' @param suffix Character vector for file suffix, defaults to `"sa"`.
 #' @inheritParams path_keyword
 #' @seealso [path_keyword]
 #' @export
-write_keyword <- function(x, keyword, geo, suffix = "sa") {
-  path <- path_keyword(keyword, geo, suffix)
-  create_dir_if_needed(dirname(path))
-  write_csv(x, path)
-}
-
 write_raw_keyword <- function(x, keyword, geo) {
   write_csv(d, path_draws(tolower(geo), paste0(remove_slash(keyword), "_d.csv")))
 }
