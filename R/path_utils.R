@@ -89,6 +89,10 @@ create_data_dirs <- function(){
   create_dir_if_needed(path_raw())
 }
 
+remove_slash <- function(keyword) {
+  gsub("/", "", keyword)
+}
+
 #' Build path to indicator data file
 #'
 #' Builds path to indicator files of the form
@@ -101,12 +105,12 @@ create_data_dirs <- function(){
 #' @seealso [path_trendecon]
 #' @export
 path_keyword <- function(keyword, geo = "CH", suffix = "sa") {
-  normalizePath(path_raw(tolower(geo), paste0(keyword, "_", suffix, ".csv")), mustWork = FALSE)
+  normalizePath(path_raw(tolower(geo), remove_slash(keyword), "_", suffix, ".csv")), mustWork = FALSE)
 }
 
 # read_keyword("Insolvenz")
 read_keyword <- function(keyword, geo = "CH", suffix = "sa") {
-  readr::read_csv(path_keyword(keyword, geo, suffix), col_types = cols())
+  readr::read_csv(path_keyword(remove_slash(keyword), geo, suffix), col_types = cols())
 }
 
 #' Read keyword indicator data from disk
@@ -155,8 +159,25 @@ write_keyword <- function(x, keyword, geo, suffix = "sa") {
   write_csv(x, path)
 }
 
+#' Write csv file for raw keyword indicator
+#'
+#' Writes csv file for raw keyword indicator to
+#' `/{base_dir}/data-raw/indicator/{keyword}_{suffix}.csv`.
+#'
+#' @param x Tibble of data to write to file.
+#' @param suffix Character vector for file suffix, defaults to `"sa"`.
+#' @inheritParams path_keyword
+#' @seealso [path_keyword]
+#' @export
+write_keyword <- function(x, keyword, geo, suffix = "sa") {
+  path <- path_keyword(keyword, geo, suffix)
+  create_dir_if_needed(dirname(path))
+  write_csv(x, path)
+}
 
-
+write_raw_keyword <- function(x, keyword, geo) {
+  write_csv(d, path_draws(tolower(geo), paste0(remove_slash(keyword), "_d.csv")))
+}
 
 
 
