@@ -90,7 +90,7 @@ create_data_dirs <- function(){
 }
 
 remove_slash <- function(keyword) {
-  gsub("/", "", keyword)
+  gsub("[/=]", "", keyword)
 }
 
 #' Build path to indicator data file
