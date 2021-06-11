@@ -39,11 +39,11 @@ proc_keyword <- function(keyword = "Insolvenz",
 }
 
 stop_if_no_data <- function(keyword, geo) {
-  files_indicator <- grep(keyword,
+  files_indicator <- grep(remove_slash(keyword),
                           list.files(path_raw(tolower(geo))),
                           value = TRUE,
                           fixed = TRUE)
-  files_indicator_raw <- grep(keyword,
+  files_indicator_raw <- grep(remove_slash(keyword),
                               list.files(path_draws(tolower(geo))),
                               value = TRUE,
                               fixed = TRUE)

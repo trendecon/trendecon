@@ -48,7 +48,7 @@ proc_keyword_init <- function(keyword = "Insolvenz",
 
   # for now, we store all windows
   # (if we are confident that storing the averages is sufficient, we can stop that)
-  if (indicator_raw) write_csv(d, path_draws(tolower(geo), paste0(keyword, "_d.csv")))
+  if (indicator_raw) write_raw_keyword(d, keyword, geo, "d")
   write_keyword(aggregate_windows(d), keyword, geo, "d")
 
   message("Downloading weekly data")
@@ -59,7 +59,7 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     n_windows = 68, wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
-  if (indicator_raw) write_csv(w, path_draws(tolower(geo), paste0(keyword, "_w.csv")))
+  if (indicator_raw)  write_raw_keyword(d, keyword, geo, "w")
   write_keyword(aggregate_windows(w), keyword, geo, "w")
 
   message("Downloading monthly data")
@@ -70,6 +70,6 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     n_windows = 12, wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
   )
-  if (indicator_raw) write_csv(m, path_draws(tolower(geo), paste0(keyword, "_m.csv")))
+  if (indicator_raw)  write_raw_keyword(d, keyword, geo, "m")
   write_keyword(aggregate_windows(m), keyword, geo, "m")
 }

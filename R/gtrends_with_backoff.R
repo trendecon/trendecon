@@ -28,6 +28,11 @@ gtrends_with_backoff <- function(keyword = NA,
     msg("Attempt ", attempt, "/", retry)
   }
 
+  if (grepl("^cat=[0-9]+$", keyword)) {
+    category <- gsub("^cat=", "", keyword)
+    keyword <- "*"
+  }
+  
   tryCatch(
     gtrends(keyword, geo, time, gprop, category, hl, low_search_volume, cookie_url, tz, onlyInterest),
     error = function(e) {
