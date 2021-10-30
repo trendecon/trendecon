@@ -27,9 +27,13 @@ gtrends_with_backoff <- function(keyword = NA,
   } else {
     msg("Attempt ", attempt, "/", retry)
   }
-
   tryCatch(
-    gtrends(keyword, geo, time, gprop, category, hl, low_search_volume, cookie_url, tz, onlyInterest),
+    gtrends(
+      keyword = keyword, geo = geo, time = time, gprop = gprop,
+      category = category, hl = hl,
+      low_search_volume = low_search_volume, cookie_url = cookie_url,
+      tz = tz, onlyInterest = onlyInterest
+    ),
     error = function(e) {
       if (grepl("== 200", e)) {
         if (attempt == 1) {
