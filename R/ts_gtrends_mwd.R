@@ -18,7 +18,8 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
     keyword = keyword,
     geo = geo,
     from = from, stepsize = "15 days", windowsize = "6 months",
-    n_windows = 348, wait = 20, retry = 10,
+    n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / 15),
+    wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
   d2 <- ts_gtrends_windows(
@@ -31,20 +32,21 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
   )
   dd <- aggregate_averages(aggregate_windows(d), aggregate_windows(d2))
 
-  # download weakly series
+  # download weekly series
   w <- ts_gtrends_windows(
     keyword = keyword,
     geo = geo,
     from = from, stepsize = "11 weeks", windowsize = "5 years",
-    n_windows = 68, wait = 20, retry = 10,
+    n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / (11 * 7)),
+    wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
   w2 <- ts_gtrends_windows(
     keyword = keyword,
     geo = geo,
-    from = seq(Sys.Date(), length.out = 2, by = "-1 year")[2],
-    stepsize = "1 week", windowsize = "1 year",
-    n_windows = 12, wait = 20, retry = 10,
+    from = seq(Sys.Date(), length.out = 2, by = "-2 year")[2],
+    stepsize = "1 week", windowsize = "2 year",
+    n_windows = 24, wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
   )
   ww <- aggregate_averages(aggregate_windows(w), aggregate_windows(w2))
@@ -54,7 +56,8 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
     keyword = keyword,
     geo = geo,
     from = from, stepsize = "1 month", windowsize = "15 years",
-    n_windows = 12, wait = 20, retry = 10,
+    n_windows = ceiling(as.numeric(Sys.Date() - as.Date(from)) / (15 * 365) * 12),
+    wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
   )
   m2 <- ts_gtrends_windows(
