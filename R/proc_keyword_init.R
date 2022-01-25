@@ -42,7 +42,8 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     keyword = keyword,
     geo = geo,
     from = from, stepsize = "15 days", windowsize = "6 months",
-    n_windows = 348, wait = 20, retry = 10,
+    n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / 15),
+    wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
 
@@ -56,7 +57,8 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     keyword = keyword,
     geo = geo,
     from = from, stepsize = "11 weeks", windowsize = "5 years",
-    n_windows = 68, wait = 20, retry = 10,
+    n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / (11 * 7)),
+    wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
   if (indicator_raw) write_csv(w, path_draws(tolower(geo), paste0(keyword, "_w.csv")))
@@ -67,7 +69,8 @@ proc_keyword_init <- function(keyword = "Insolvenz",
     keyword = keyword,
     geo = geo,
     from = from, stepsize = "1 month", windowsize = "15 years",
-    n_windows = 12, wait = 20, retry = 10,
+    n_windows = ceiling(as.numeric(Sys.Date() - as.Date(from)) / (15 * 365) * 12),
+    wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
   )
   if (indicator_raw) write_csv(m, path_draws(tolower(geo), paste0(keyword, "_m.csv")))
