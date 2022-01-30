@@ -13,7 +13,8 @@ Authors@R: c(
     person("Stefan", "Legge", role = "ctb"),
     person("Isabel", "Martinez", role = "ctb", comment = c(ORCID = "0000-0002-5215-9844")),
     person("Furkan", "Oguz", role = "ctb"),
-    person("Kristina", "Schuepbach", role = "ctb")
+    person("Kristina", "Schuepbach", role = "ctb"),
+    person("Sebastian", "Ankargren", role = "ctb")
     )
 Description: To construct long daily time series from Google Trends. Robustness of the data is achieved by querying Google mulitple times. The queries are sampled at daily, weekly and monthy frequencies and then harmonized such that the long term trend is preserved.
 Imports:
