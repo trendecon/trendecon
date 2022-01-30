@@ -4,7 +4,7 @@
 \alias{ts_gtrends_mwd}
 \title{Robust and Consistent Time Series from Google Trends}
 \usage{
-ts_gtrends_mwd(keyword = "Insolvenz", geo = "CH")
+ts_gtrends_mwd(keyword = NA, category = "0", geo = "CH")
 }
 \arguments{
 \item{keyword}{A character vector with the actual Google Trends query
@@ -12,6 +12,9 @@ keywords. Defaults to NA which searches for the whole category. Contrary
 to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if different keywords are used,
 mulitple queries are sent to Google, and each series is individually
 normalized.}
+
+\item{category}{A character vector, listing the categories, defaults to
+\code{"0"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
 \item{geo}{A character vector denoting geographic regions for the query,
 default is \code{"CH"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
