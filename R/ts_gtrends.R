@@ -79,8 +79,8 @@ ts_gtrends <- function(keyword = NA,
     stop("argument \"keyword\" is missing")
   }
 
-  if (is.na(keyword) & category == "0") {
-    stop("cannot supply all keywords AND all categories - choose at least one concrete keyword or category")
+  if (any(is.na(keyword)) & any(category == "0")) {
+    stop("cannot supply all keywords (NA) AND all categories (0) at the same time")
   }
 
   if ((length(keyword) > 1) && (length(category) > 1)) {
