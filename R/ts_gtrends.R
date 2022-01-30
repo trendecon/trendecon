@@ -7,7 +7,8 @@
 #' @inheritParams gtrendsR::gtrends
 #'
 #' @param keyword A character vector with the actual Google Trends query
-#'  keywords. Contrary to [gtrendsR::gtrends()], if different keywords are used,
+#'  keywords. Defaults to NA which searches for the whole category. Contrary
+#'  to [gtrendsR::gtrends()], if different keywords are used,
 #'  mulitple queries are sent to Google, and each series is individually
 #'  normalized.
 #'
@@ -42,7 +43,7 @@
 #' x
 #' tsbox::ts_plot(x)
 #' @import dplyr tidyr tsbox gtrendsR readr tempdisagg
-ts_gtrends <- function(keyword,
+ts_gtrends <- function(keyword = NA,
                        category = "0",
                        geo = "CH",
                        time = "today+5-y",
@@ -74,8 +75,12 @@ ts_gtrends <- function(keyword,
     z
   }
 
-  if (missing(keyword)) {
-    stop("argument \"keyword\" is missing, with no default")
+  if (length(keyword) == 0) {
+    stop("argument \"keyword\" is missing")
+  }
+
+  if (is.na(keyword) & category == "0") {
+    stop("cannot supply all keywords AND all categories - choose at least one concrete keyword or category")
   }
 
   if ((length(keyword) > 1) && (length(category) > 1)) {

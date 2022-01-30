@@ -8,7 +8,8 @@ ts_gtrends_mwd(keyword = "Insolvenz", geo = "CH")
 }
 \arguments{
 \item{keyword}{A character vector with the actual Google Trends query
-keywords. Contrary to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if different keywords are used,
+keywords. Defaults to NA which searches for the whole category. Contrary
+to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}, if different keywords are used,
 mulitple queries are sent to Google, and each series is individually
 normalized.}
 
