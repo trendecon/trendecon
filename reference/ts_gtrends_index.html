@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">trendecon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
       </span>
     </div>
 
@@ -75,7 +75,8 @@
     <h2>Arguments</h2>
     <dl><dt>keyword</dt>
 <dd><p>A character vector with the actual Google Trends query
-keywords. Contrary to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code>, if different keywords are used,
+keywords. Defaults to NA which searches for the whole category. Contrary
+to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code>, if different keywords are used,
 mulitple queries are sent to Google, and each series is individually
 normalized.</p></dd>
 <dt>time</dt>
