@@ -7,15 +7,20 @@
 #'
 #' @inheritParams ts_gtrends
 #' @export
-ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
+ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH") {
 
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")
+  if (length(category) > 1) stop("Only a single category is allowed.")
+  if (is.na(keyword) & category == "0") {
+    stop("cannot supply all keywords (NA) AND all categories (0) at the same time")
+  }
 
   from <- "2006-01-01"
 
   # download daily series
   d <- ts_gtrends_windows(
     keyword = keyword,
+    category = category,
     geo = geo,
     from = from, stepsize = "15 days", windowsize = "6 months",
     n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / 15),
@@ -24,6 +29,7 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
   )
   d2 <- ts_gtrends_windows(
     keyword = keyword,
+    category = category,
     geo = geo,
     from = seq(Sys.Date(), length.out = 2, by = "-90 days")[2],
     stepsize = "1 day", windowsize = "3 months",
@@ -35,6 +41,7 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
   # download weekly series
   w <- ts_gtrends_windows(
     keyword = keyword,
+    category = category,
     geo = geo,
     from = from, stepsize = "11 weeks", windowsize = "5 years",
     n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / (11 * 7)),
@@ -43,6 +50,7 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
   )
   w2 <- ts_gtrends_windows(
     keyword = keyword,
+    category = category,
     geo = geo,
     from = seq(Sys.Date(), length.out = 2, by = "-2 year")[2],
     stepsize = "1 week", windowsize = "2 year",
@@ -54,6 +62,7 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
   # download monthly series
   m <- ts_gtrends_windows(
     keyword = keyword,
+    category = category,
     geo = geo,
     from = from, stepsize = "1 month", windowsize = "15 years",
     n_windows = ceiling(as.numeric(Sys.Date() - as.Date(from)) / (15 * 365) * 12),
@@ -62,6 +71,7 @@ ts_gtrends_mwd <- function(keyword = "Insolvenz", geo = "CH") {
   )
   m2 <- ts_gtrends_windows(
     keyword = keyword,
+    category = category,
     geo = geo,
     from = from,
     stepsize = "1 month", windowsize = "20 years",
