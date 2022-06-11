@@ -90,35 +90,58 @@ keywords. Defaults to NA which searches for the whole category. Contrary
 to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code>, if different keywords are used,
 mulitple queries are sent to Google, and each series is individually
 normalized.</p></dd>
+
+
 <dt>category</dt>
 <dd><p>A character vector, listing the categories, defaults to
 <code>"0"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code></p></dd>
+
+
 <dt>geo</dt>
 <dd><p>A character vector denoting geographic regions for the query,
 default is <code>"CH"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code></p></dd>
+
+
 <dt>from</dt>
 <dd><p>Start of timeframe in YYYY-mm-dd form.</p></dd>
+
+
 <dt>prevent_window_shrinkage</dt>
 <dd><p>If <code>TRUE</code>, ensures that the last time-window
 is large enough to yield the desired frequency. Default is <code>FALSE</code>.</p></dd>
+
+
 <dt>stepsize</dt>
 <dd><p>Number of days (integer) between the start days of the
 respective time-windows.</p></dd>
+
+
 <dt>windowsize</dt>
 <dd><p>Number of days (integer) from start date to end date of
 each window.</p></dd>
+
+
 <dt>n_windows</dt>
 <dd><p>Number (integer) of time-windows.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>If TRUE won't display messages related to server interactions. Default is FALSE.</p></dd>
+
+
 <dt>wait</dt>
 <dd><p>Seconds to wait between attempts, where waiting time is <code>attempt * wait</code>.</p></dd>
+
+
 <dt>retry</dt>
 <dd><p>Number of attempts, in case the query request does not succeed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A tibble of time series with columns <em>window</em>, <em>time</em>, <em>value</em>,
+    
+
+<p>A tibble of time series with columns <em>window</em>, <em>time</em>, <em>value</em>,
 where <em>window</em> is the time window
 indicated by start and end date of the window.</p>
     </div>
@@ -145,7 +168,7 @@ indicated by start and end date of the window.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

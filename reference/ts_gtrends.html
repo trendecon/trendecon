@@ -86,12 +86,18 @@ keywords. Defaults to NA which searches for the whole category. Contrary
 to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code>, if different keywords are used,
 mulitple queries are sent to Google, and each series is individually
 normalized.</p></dd>
+
+
 <dt>category</dt>
 <dd><p>A character vector, listing the categories, defaults to
 <code>"0"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code></p></dd>
+
+
 <dt>geo</dt>
 <dd><p>A character vector denoting geographic regions for the query,
 default is <code>"CH"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code></p></dd>
+
+
 <dt>time</dt>
 <dd><p>A string specifying the time span of the query. Possible values
   are:</p>
@@ -122,16 +128,25 @@ default is <code>"CH"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtren
 <dd><p>Time span between two dates (ex.: "2010-01-01 2010-04-03")</p></dd>
  
 </dl></dd>
+
+
 <dt>retry</dt>
 <dd><p>Number of attempts, in case the query request does not succeed.</p></dd>
+
+
 <dt>wait</dt>
 <dd><p>Seconds to wait between attempts, where waiting time is <code>attempt * wait</code>.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>If TRUE won't display messages related to server interactions. Default is FALSE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A tibble of time series for the different keywords or categories. If only a single keyword and a single
+    
+
+<p>A tibble of time series for the different keywords or categories. If only a single keyword and a single
 category are specified, the tibble has columns <em>time</em> and <em>value</em>. If either more
 than one keyword, or more than one category are given, an additional column <em>id</em> indicates
 either the keyword, or the category.</p>
@@ -159,7 +174,7 @@ either the keyword, or the category.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    time       value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2017-06-11     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2017-06-18     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2017-06-18     5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2017-06-25     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2017-07-02     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2017-07-09     2</span>
@@ -185,7 +200,7 @@ either the keyword, or the category.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
