@@ -1,8 +1,8 @@
 pandoc: 2.14.2
-pkgdown: 2.0.4
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   daily-series: daily-series.html
   intro: intro.html
-last_built: 2022-06-23T04:45Z
+last_built: 2022-06-24T04:45Z
 
