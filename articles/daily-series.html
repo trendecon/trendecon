@@ -124,10 +124,10 @@
 <p>To include a new series, each keyword must first be initiated. Our goal is to produce long daily time series, ideally ranging from 2006. However, Google does not provide daily or weekly data for such a long time period. Hence, we need to circumvent the problem by applying a moving window of daily and weekly queries over the whole time period. So be careful, as this causes a lot of queries to Google and might result in a temporary IP address ban.</p>
 <p>The commands below will download the data for our example series:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"headset"</span>, <span class="st">"CH"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"monitor"</span>, <span class="st">"CH"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"maus"</span>, <span class="st">"CH"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"hdmi"</span>, <span class="st">"CH"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"headset"</span>, <span class="st">"CH"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"monitor"</span>, <span class="st">"CH"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"maus"</span>, <span class="st">"CH"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/proc_keyword_init.html">proc_keyword_init</a></span><span class="op">(</span><span class="st">"hdmi"</span>, <span class="st">"CH"</span><span class="op">)</span></span></code></pre></div>
 <p>After running the code above we will have the aggregated series at daily, weekly and monthly frequency, stored in the <code>raw</code> folder. For example, the files of the “headset” keyword will be stored under: <code>raw/ch/headset_d.csv</code>, <code>raw/ch/headset_w.csv</code>, and <code>raw/ch/headset_m.csv</code>. Analogous files will be present for the remaining 3 keywords.</p>
 </div>
 <div class="section level3">
@@ -142,7 +142,7 @@
 </ol>
 <p>All the above steps are performed by a single function call:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/proc_index.html">proc_index</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"headset"</span>, <span class="st">"monitor"</span>, <span class="st">"maus"</span>, <span class="st">"hdmi"</span><span class="op">)</span>, <span class="st">"CH"</span>, <span class="st">"homeoffice"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/proc_index.html">proc_index</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"headset"</span>, <span class="st">"monitor"</span>, <span class="st">"maus"</span>, <span class="st">"hdmi"</span><span class="op">)</span>, <span class="st">"CH"</span>, <span class="st">"homeoffice"</span><span class="op">)</span></span></code></pre></div>
 <p>This function will combine the keywords passed as the first argument and store the resulting series under the name specified by the third argument. In this example a new file holding the data for “homeoffice” series will be created under <code>data/ch/homeoffice_sa_csv</code>. In addition, for each series, two intermediate preparation files will also be created, i.e. <code>raw/ch/headset_mwd.csv</code> and <code>raw/ch/headset_sa.csv</code>. Here “mwd” stores the combined monthly/weekly/daily data and “sa” contains the values after seasonal adjustment.</p>
 <p>P.S. The same function <code><a href="../reference/proc_index.html">proc_index()</a></code> is also used for updating the data of an existing data series.</p>
 </div>
@@ -155,17 +155,17 @@
 <li>
 <p>create a variable holding the set of keywords used for the series:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">kw_homeoffice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"headset"</span>,
-  <span class="st">"monitor"</span>,
-  <span class="st">"maus"</span>,
-  <span class="st">"hdmi"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">kw_homeoffice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"headset"</span>,</span>
+<span>  <span class="st">"monitor"</span>,</span>
+<span>  <span class="st">"maus"</span>,</span>
+<span>  <span class="st">"hdmi"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>add a function call that creates/updates this series:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/proc_index.html">proc_index</a></span><span class="op">(</span><span class="va">kw_homeoffice</span>, <span class="st">"CH"</span>, <span class="st">"homeoffice"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/proc_index.html">proc_index</a></span><span class="op">(</span><span class="va">kw_homeoffice</span>, <span class="st">"CH"</span>, <span class="st">"homeoffice"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>add the name of this series to production list:</p>
@@ -188,7 +188,7 @@
 </h3>
 <p>In the first step, the raw data series for each keyword are updated with the latest daily, weekly, and monthly data. For example, to update the raw series for keyword <code>"Rezession"</code> for Switzerland, the script calls the following internal function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span><span class="op">(</span><span class="st">"Rezession"</span>, <span class="st">"CH"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/proc_keyword_latest.html">proc_keyword_latest</a></span><span class="op">(</span><span class="st">"Rezession"</span>, <span class="st">"CH"</span><span class="op">)</span></span></code></pre></div>
 <p>This function downloads raw daily, weekly, and monthly data for the specified pair of keyword and geo location. If the data for a particular keyword is not yet available, <code><a href="../reference/proc_keyword_init.html">proc_keyword_init()</a></code> should be called instead.</p>
 </div>
 <div class="section level3">
@@ -197,7 +197,7 @@
 <p>To combine the three frequencies (monthly, weekly, and daily), we apply the following methodology: in a first step, we “bend” the daily series to the weekly values, by applying a variant of the Chow-Lin (1971) method. This preserves the movement of the daily series and ensures that weekly averages are identical to the original weekly series. We then use the same methodology to bend the series to the monthly values.</p>
 <p>To combine the three frequencies for a given keyword, the script calls another internal function:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">proc_combine_freq</span><span class="op">(</span><span class="st">"Rezession"</span>, <span class="st">"CH"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">proc_combine_freq</span><span class="op">(</span><span class="st">"Rezession"</span>, <span class="st">"CH"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="step-3-seasonal-adjustment">Step 3: seasonal adjustment<a class="anchor" aria-label="anchor" href="#step-3-seasonal-adjustment"></a>
@@ -205,7 +205,7 @@
 <p>Some keywords’ time series might display seasonal patterns. For example it is not surprising that searches for gardening are higher in spring. In order to make meaningful comparisons over time such seasonal patterns, present within the data, need to be removed. To achieve this <code>trendecon</code> uses the “Prophet” procedure for estimating an additive model where non-linear trends are fit with yearly and weekly seasonality and the holiday effects.</p>
 <p>To seasonally adjust a combined keyword, the script calls the following internal function:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">proc_seas_adj</span><span class="op">(</span><span class="st">"Rezession"</span>, <span class="st">"CH"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">proc_seas_adj</span><span class="op">(</span><span class="st">"Rezession"</span>, <span class="st">"CH"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="step-4-combining">Step 4: combining<a class="anchor" aria-label="anchor" href="#step-4-combining"></a>
@@ -217,7 +217,7 @@
 <h3 id="step-5-writing-the-data">Step 5: writing the data<a class="anchor" aria-label="anchor" href="#step-5-writing-the-data"></a>
 </h3>
 <p>Finally the prepared index is saved to a file in the data folder:</p>
-<pre><code><span class="fu"><a href="../reference/write_keyword.html">write_keyword</a></span><span class="op">(</span><span class="va">prepared_data</span>, <span class="st">"indicator"</span>, <span class="st">"CH"</span><span class="op">)</span></code></pre>
+<pre><code><span><span class="fu"><a href="../reference/write_keyword.html">write_keyword</a></span><span class="op">(</span><span class="va">prepared_data</span>, <span class="st">"indicator"</span>, <span class="st">"CH"</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
   </div>
