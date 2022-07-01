@@ -6,16 +6,15 @@
 #' See the working paper for details on the methodology.
 #'
 #' @inheritParams ts_gtrends
+#' @param from A character string specifying the starting date for the obtained time series, defaults to 2006-01-01
 #' @export
-ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH") {
+ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "2006-01-01") {
 
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")
   if (length(category) > 1) stop("Only a single category is allowed.")
   if (is.na(keyword) & category == "0") {
     stop("cannot supply all keywords (NA) AND all categories (0) at the same time")
   }
-
-  from <- "2006-01-01"
 
   # download daily series
   d <- ts_gtrends_windows(

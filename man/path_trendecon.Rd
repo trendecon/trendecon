@@ -20,8 +20,8 @@ option is not present, the base directory defaults to the parent directory
 of the current working directory. To set the option, run
 }
 \details{
-\preformatted{options(path_trendecon = "~/path/to/base/dir")
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{options(path_trendecon = "~/path/to/base/dir")
+}\if{html}{\out{</div>}}
 }
 \examples{
 path_trendecon("data-raw")
