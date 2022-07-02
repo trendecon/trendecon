@@ -4,6 +4,13 @@
 #'
 proc_trendecon_ch <- function() {
 
+  kw_inflationrate <- c(
+    "inflation",
+    "preise",
+    "benzinpreis",
+    "mietzins"
+  )
+
   kw_clothing <- c(
     "Mango",
     "Zara",
@@ -85,6 +92,7 @@ proc_trendecon_ch <- function() {
   )
 
 
+  proc_index(kw_inflationrate, "CH", 'inflationrate')
   proc_index(kw_clothing, "CH", 'clothing')
   proc_index(kw_garden, "CH", 'garden')
   proc_index(kw_luxury, "CH", 'luxury')
@@ -97,6 +105,7 @@ proc_trendecon_ch <- function() {
 
 
   indices_in_production <- c(
+    "inflationrate",
     "clothing",
     "garden",
     "luxury",
