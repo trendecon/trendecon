@@ -4,6 +4,13 @@
 #'
 proc_trendecon_de <- function() {
 
+  kw_inflationrate <- c(
+    "inflation",
+    "preise",
+    "benzinpreis",
+    "mietzins"
+  )
+
   kw_trendecon <- c(
     "Wirtschaftskrise",
     "Kurzarbeit",
@@ -12,8 +19,10 @@ proc_trendecon_de <- function() {
   )
 
   proc_index(kw_trendecon, "DE", 'trendecon')
+  proc_index(kw_inflationrate, "DE", 'inflationrate')
 
   indices_in_production <- c(
+    "inflationrate",
     "trendecon"
   )
 
