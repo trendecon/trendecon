@@ -2,6 +2,11 @@
 #
 # seas_adj_file("Insolvenz")
 proc_seas_adj <- function(keyword = "Insolvenz", geo = "ch") {
+  if (geo == "") {
+    message("skipping seasonal adjustment: can only be performed on a per-country basis.")
+    return(TRUE)
+  }
+
   message("seasonal adjustment keyword: ", keyword)
 
   tsbox::load_suggested("prophet")
