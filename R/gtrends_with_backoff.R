@@ -35,44 +35,39 @@ gtrends_with_backoff <- function(keyword = NA,
       tz = tz, onlyInterest = onlyInterest
     ),
     error = function(e) {
-      if (grepl("== 200", e)) {
-        if (attempt == 1) {
-          msg("Oh noes, they don't like us anymore...")
-        } else {
-          msg("Nope, still nothing...")
-        }
-
-        t <- attempt * wait
-
-        # Exponential backoff. Neat but not really suitable here.
-        # t <- wait*ceiling(runif(1)*(2^attempt-1))
-
-        msg("Waiting for ", t, " seconds")
-        Sys.sleep(t)
-        msg("Retrying...")
-
-        # Error handling by recurshian... xD
-        # TODO: Could replace this with a while(attemt < retry && !is.tibble(result)) { result <- tryCatch(call, error = function(e) FALSE)}
-        # construct. easier on the stack if retry gets large
-        gtrends_with_backoff(
-          keyword,
-          geo,
-          time,
-          gprop,
-          category,
-          hl,
-          low_search_volume,
-          cookie_url,
-          tz,
-          onlyInterest,
-          retry,
-          wait,
-          quiet,
-          attempt + 1
-        )
+      if (grepl("== 200 is not TRUE", e)) {
+        msg("Server is not accepting requests")
+      } else if (grepl("code\\:429", e)) {
+        msg("Server response: 429 - too many requests")
+      } else if (grepl("code\\:500", e)) {
+        msg("Server response: 500 - internal server error")
       } else {
         stop(e)
       }
+
+      t <- attempt * wait
+
+      msg("Waiting for ", t, " seconds")
+      Sys.sleep(t)
+      msg("Retrying...")
+
+      # Error handling by recursion
+      gtrends_with_backoff(
+        keyword,
+        geo,
+        time,
+        gprop,
+        category,
+        hl,
+        low_search_volume,
+        cookie_url,
+        tz,
+        onlyInterest,
+        retry,
+        wait,
+        quiet,
+        attempt + 1
+      )
     }
   )
 }
