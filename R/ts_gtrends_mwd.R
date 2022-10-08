@@ -7,14 +7,19 @@
 #'
 #' @inheritParams ts_gtrends
 #' @param from A character string specifying the starting date for the obtained time series, defaults to 2006-01-01
+#' @param to A character string specifying the ending date for the obtained time series, defaults to current day
 #' @export
-ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "2006-01-01") {
+ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "2006-01-01", to = Sys.Date()) {
+
+  from <- as.Date(from)
+  to   <- as.Date(to)
 
   if (length(keyword) > 1) stop("Only a single keyword is allowed.")
   if (length(category) > 1) stop("Only a single category is allowed.")
   if (is.na(keyword) & category == "0") {
     stop("cannot supply all keywords (NA) AND all categories (0) at the same time")
   }
+  if (from > to) stop("'from' date must be earler than 'to'")
 
   # download daily series
   d <- ts_gtrends_windows(
@@ -22,7 +27,7 @@ ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "200
     category = category,
     geo = geo,
     from = from, stepsize = "15 days", windowsize = "6 months",
-    n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / 15),
+    n_windows = floor(as.numeric(to - from) / 15),
     wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
@@ -30,7 +35,7 @@ ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "200
     keyword = keyword,
     category = category,
     geo = geo,
-    from = seq(Sys.Date(), length.out = 2, by = "-90 days")[2],
+    from = seq(to, length.out = 2, by = "-90 days")[2],
     stepsize = "1 day", windowsize = "3 months",
     n_windows = 12, wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
@@ -43,7 +48,7 @@ ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "200
     category = category,
     geo = geo,
     from = from, stepsize = "11 weeks", windowsize = "5 years",
-    n_windows = floor(as.numeric(Sys.Date() - as.Date(from)) / (11 * 7)),
+    n_windows = floor(as.numeric(to - from) / (11 * 7)),
     wait = 20, retry = 10,
     prevent_window_shrinkage = TRUE
   )
@@ -51,7 +56,7 @@ ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "200
     keyword = keyword,
     category = category,
     geo = geo,
-    from = seq(Sys.Date(), length.out = 2, by = "-2 year")[2],
+    from = seq(to, length.out = 2, by = "-2 year")[2],
     stepsize = "1 week", windowsize = "2 year",
     n_windows = 24, wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
@@ -64,7 +69,7 @@ ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "200
     category = category,
     geo = geo,
     from = from, stepsize = "1 month", windowsize = "15 years",
-    n_windows = ceiling(as.numeric(Sys.Date() - as.Date(from)) / (15 * 365) * 12),
+    n_windows = ceiling(as.numeric(to - from) / (15 * 365) * 12),
     wait = 20, retry = 10,
     prevent_window_shrinkage = FALSE
   )
@@ -79,6 +84,10 @@ ts_gtrends_mwd <- function(keyword = NA, category = "0", geo = "CH", from = "200
   )
   mm <- aggregate_averages(aggregate_windows(m), aggregate_windows(m2))
 
+  # cap at selected date
+  dd <- filter(dd, time <= to)
+  ww <- filter(ww, time <= to)
+  mm <- filter(ww, time <= to)
 
   dd <- select(dd, -n)
   ww <- select(ww, -n)
