@@ -2,10 +2,6 @@
 #
 # seas_adj_file("Insolvenz")
 proc_seas_adj <- function(keyword = "Insolvenz", geo = "ch") {
-  if (geo == "") {
-    message("skipping seasonal adjustment: can only be performed on a per-country basis.")
-    return(TRUE)
-  }
 
   message("seasonal adjustment keyword: ", keyword)
 
@@ -23,11 +19,13 @@ proc_seas_adj <- function(keyword = "Insolvenz", geo = "ch") {
   generated_holidays <- prophet::generated_holidays
   assign("generated_holidays", prophet::generated_holidays, envir = globalenv())
 
-  m <-
-    # prophet(holidays = holidays, daily.seasonality = FALSE) %>%
-    prophet::prophet(daily.seasonality = FALSE) %>%
-    prophet::add_country_holidays(country_name = toupper(geo)) %>%
-    prophet::fit.prophet(df)
+  m <- prophet::prophet(daily.seasonality = FALSE)
+  if (toupper(geo) %in% generated_holidays$country) {
+    m <- prophet::add_country_holidays(m, country_name = toupper(geo))
+  } else {
+    message("no country holidays available for geo: '", geo, "'. Seasonal adjustment will be performed without using holiday information.")
+  }
+  m <- prophet::fit.prophet(m, df)
 
   # forecast <- predict(m, df)
   # prophet_plot_components(m, forecast)
