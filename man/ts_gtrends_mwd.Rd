@@ -4,7 +4,13 @@
 \alias{ts_gtrends_mwd}
 \title{Robust and Consistent Time Series from Google Trends}
 \usage{
-ts_gtrends_mwd(keyword = NA, category = "0", geo = "CH", from = "2006-01-01")
+ts_gtrends_mwd(
+  keyword = NA,
+  category = "0",
+  geo = "CH",
+  from = "2006-01-01",
+  to = Sys.Date()
+)
 }
 \arguments{
 \item{keyword}{A character vector with the actual Google Trends query
@@ -20,6 +26,8 @@ normalized.}
 default is \code{"CH"}. Passed to \code{\link[gtrendsR:gtrends]{gtrendsR::gtrends()}}}
 
 \item{from}{A character string specifying the starting date for the obtained time series, defaults to 2006-01-01}
+
+\item{to}{A character string specifying the ending date for the obtained time series, defaults to current day}
 }
 \description{
 Construct a robust and consistent daily Time Series from Google Trends data.
