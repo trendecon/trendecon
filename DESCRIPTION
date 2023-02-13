@@ -39,4 +39,4 @@ URL: https://www.trendecon.org
 BugReports: https://github.com/trendecon/trendecon/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

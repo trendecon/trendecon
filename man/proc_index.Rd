@@ -29,7 +29,7 @@ Then it proceeds to go through several steps:
 }
 \examples{
 \dontrun{
-keywords <- c( "Mango", "Zara", "H&M", "PKZ", "Blue Tomato","Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
+keywords <- c("Mango", "Zara", "H&M", "PKZ", "Blue Tomato", "Dosenbach", "Schuhe kaufen", "Ochsner Schuhe")
 proc_index(keywords, "ch", "clothing")
 }
 }
