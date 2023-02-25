@@ -69,15 +69,22 @@ prepare_windows_tbl <- function(from,
                                 windowsize) {
   # prepare tibble with single column *windows* which for each time-window
   # contains a string with start-date and end-date
+
+  # get current date in UTC timezone
+  # NOTE: this is necessary for filtering-out windows that are in the future.
+  current_date_utc <- Sys.time()
+  attr(current_date_utc, "tzone") <- "UTC"
+  current_date_utc <- as.Date(current_date_utc)
+
   tbl <- tibble(
     start_date = seq(as.Date(from), by = stepsize, length.out = n_windows)
   ) %>%
     rowwise() %>%
-    filter(start_date<=Sys.Date()) %>%
+    filter(start_date <= current_date_utc) %>%
     mutate(end_date = seq(start_date, length.out = 2, by = windowsize)[2]) %>%
     ungroup() %>%
     mutate(end_date = as.Date(as.numeric(end_date), origin = "1970-01-01")) %>%
-    mutate(end_date = if_else(end_date > Sys.Date(), Sys.Date(), end_date)) %>%
+    mutate(end_date = if_else(end_date > current_date_utc, current_date_utc, end_date)) %>%
     (function(x) {
       if (prevent_window_shrinkage) {
         dplyr::distinct(x, end_date, .keep_all = TRUE)
@@ -87,7 +94,7 @@ prepare_windows_tbl <- function(from,
     }) %>%
     # Make sure the last window is large enough to yield the desired frequency
     rowwise() %>%
-    mutate(start_date = ifelse(prevent_window_shrinkage & end_date == Sys.Date(),
+    mutate(start_date = ifelse(prevent_window_shrinkage & end_date == current_date_utc,
       seq(start_date,
         length.out = 2,
         by = paste0("-", windowsize)
