@@ -1,6 +1,6 @@
 Package: trendecon
 Title: Create Daily Series from Google Trends
-Version: 0.2.7
+Version: 0.2.8
 Authors@R: c(
     person("Angelica", "Becerra", role = "aut"),
     person("Nina", "Mühlebach", role = "aut"),
