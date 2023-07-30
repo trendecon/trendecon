@@ -132,20 +132,8 @@ for these search terms:</p>
 <span>  geo     <span class="op">=</span> <span class="st">"CH"</span>,</span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Downloading data for today+5-y</span></span>
-<span><span class="co">#&gt; Server response: 429 - too many requests</span></span>
-<span><span class="co">#&gt; Waiting for 5 seconds</span></span>
-<span><span class="co">#&gt; Retrying...</span></span>
-<span><span class="co">#&gt; Attempt 2/5</span></span>
 <span><span class="co">#&gt; Downloading data for today+5-y</span></span>
-<span><span class="co">#&gt; Server response: 429 - too many requests</span></span>
-<span><span class="co">#&gt; Waiting for 5 seconds</span></span>
-<span><span class="co">#&gt; Retrying...</span></span>
-<span><span class="co">#&gt; Attempt 2/5</span></span>
 <span><span class="co">#&gt; Downloading data for today+5-y</span></span>
-<span><span class="co">#&gt; Server response: 429 - too many requests</span></span>
-<span><span class="co">#&gt; Waiting for 5 seconds</span></span>
-<span><span class="co">#&gt; Retrying...</span></span>
-<span><span class="co">#&gt; Attempt 2/5</span></span>
 <span><span class="co">#&gt; Downloading data for today+5-y</span></span></code></pre></div>
 <p>By default, a weekly timeseries for the last 5 years is obtained but
 this interval can be changed by adjusting the <code>time</code> argument
@@ -157,12 +145,12 @@ score):</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   id     time       value</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> cinema 2018-07-29     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> cinema 2018-08-05     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> cinema 2018-08-12     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> cinema 2018-08-19     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> cinema 2018-08-26     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> cinema 2018-09-02     0</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> cinema 2018-08-05    52</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> cinema 2018-08-12    49</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> cinema 2018-08-19    46</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> cinema 2018-08-26    46</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> cinema 2018-09-02    47</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> cinema 2018-09-09    29</span></span></code></pre></div>
 <p>We can then plot the time series using a <code><a href="https://docs.ropensci.org/tsbox/reference/ts_plot.html" class="external-link">ts_plot()</a></code>
 function from the <code>tsbox</code> package:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
