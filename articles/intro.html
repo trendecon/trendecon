@@ -144,13 +144,13 @@ score):</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gt_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   id     time       value</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> cinema 2018-08-19     7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> cinema 2018-08-26     8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> cinema 2018-09-02     8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> cinema 2018-09-09     5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> cinema 2018-09-16     6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> cinema 2018-09-23     5</span></span></code></pre></div>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> cinema 2018-08-19    51</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> cinema 2018-08-26    51</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> cinema 2018-09-02    50</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> cinema 2018-09-09    32</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> cinema 2018-09-16    40</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> cinema 2018-09-23    36</span></span></code></pre></div>
 <p>We can then plot the time series using a <code><a href="https://docs.ropensci.org/tsbox/reference/ts_plot.html" class="external-link">ts_plot()</a></code>
 function from the <code>tsbox</code> package:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
