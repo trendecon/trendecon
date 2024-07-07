@@ -5,7 +5,7 @@ retries if no result is returned."><!-- mathjax --><script src="https://cdnjs.cl
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -30,7 +30,7 @@ retries if no result is returned."><!-- mathjax --><script src="https://cdnjs.cl
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -43,20 +43,20 @@ retries if no result is returned."><!-- mathjax --><script src="https://cdnjs.cl
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trendecon/trendecon/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download Google Trend Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trendecon/trendecon/blob/HEAD/R/ts_gtrends.R" class="external-link"><code>R/ts_gtrends.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trendecon/trendecon/blob/master/R/ts_gtrends.R" class="external-link"><code>R/ts_gtrends.R</code></a></small>
     <div class="hidden name"><code>ts_gtrends.Rd</code></div>
     </div>
 
@@ -80,7 +80,9 @@ retries if no result is returned.</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>keyword</dt>
+
+
+<dl><dt id="arg-keyword">keyword<a class="anchor" aria-label="anchor" href="#arg-keyword"></a></dt>
 <dd><p>A character vector with the actual Google Trends query
 keywords. Defaults to NA which searches for the whole category. Contrary
 to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code>, if different keywords are used,
@@ -88,17 +90,17 @@ mulitple queries are sent to Google, and each series is individually
 normalized.</p></dd>
 
 
-<dt>category</dt>
+<dt id="arg-category">category<a class="anchor" aria-label="anchor" href="#arg-category"></a></dt>
 <dd><p>A character vector, listing the categories, defaults to
 <code>"0"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code></p></dd>
 
 
-<dt>geo</dt>
+<dt id="arg-geo">geo<a class="anchor" aria-label="anchor" href="#arg-geo"></a></dt>
 <dd><p>A character vector denoting geographic regions for the query,
 default is <code>"CH"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtrendsR/man/gtrends.html" class="external-link">gtrendsR::gtrends()</a></code></p></dd>
 
 
-<dt>time</dt>
+<dt id="arg-time">time<a class="anchor" aria-label="anchor" href="#arg-time"></a></dt>
 <dd><p>A string specifying the time span of the query. Possible values
   are:</p>
 <p></p><dl><dt>"now 1-H"</dt>
@@ -126,34 +128,32 @@ default is <code>"CH"</code>. Passed to <code><a href="https://rdrr.io/pkg/gtren
  <dt>"Y-m-d
   Y-m-d"</dt>
 <dd><p>Time span between two dates (ex.: "2010-01-01 2010-04-03")</p></dd>
- 
+
 </dl></dd>
 
 
-<dt>retry</dt>
+<dt id="arg-retry">retry<a class="anchor" aria-label="anchor" href="#arg-retry"></a></dt>
 <dd><p>Number of attempts, in case the query request does not succeed.</p></dd>
 
 
-<dt>wait</dt>
+<dt id="arg-wait">wait<a class="anchor" aria-label="anchor" href="#arg-wait"></a></dt>
 <dd><p>Seconds to wait between attempts, where waiting time is <code>attempt * wait</code>.</p></dd>
 
 
-<dt>quiet</dt>
+<dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
 <dd><p>If TRUE won't display messages related to server interactions. Default is FALSE.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A tibble of time series for the different keywords or categories. If only a single keyword and a single
+    <p>A tibble of time series for the different keywords or categories. If only a single keyword and a single
 category are specified, the tibble has columns <em>time</em> and <em>value</em>. If either more
 than one keyword, or more than one category are given, an additional column <em>id</em> indicates
 either the keyword, or the category.</p>
     </div>
     <div id="notes">
     <h2>Notes</h2>
-    
+
 
 <ul><li><p>The function takes the id's as strings, not the names. For example, "Arts &amp; Entertainment" has to be specified as "2".</p></li>
 <li><p>Multiple keywords or multiple categories can be specified, but not both.</p></li>
@@ -173,16 +173,16 @@ either the keyword, or the category.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 262 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    time       value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2019-06-30     5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2019-07-07     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2019-07-14     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2019-07-21     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2019-07-28     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2019-08-04     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2019-08-11    21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2019-08-18    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2019-08-25     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2019-09-01    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2019-07-07     6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2019-07-14     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2019-07-21     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2019-07-28     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2019-08-04     8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2019-08-11    21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2019-08-18    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2019-08-25    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2019-09-01    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2019-09-08     7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 252 more rows</span></span>
 <span class="r-in"><span><span class="fu">tsbox</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/tsbox/reference/ts_plot.html" class="external-link">ts_plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ts_gtrends-1.png" alt="" width="700" height="433"></span>
@@ -200,15 +200,15 @@ either the keyword, or the category.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
