@@ -23,7 +23,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
@@ -31,6 +31,9 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           Ncpus: 4
+
+      - name: "[Stage] Install tic"
+        run: Rscript -e "install.packages('tic', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
       - name: "[Stage] Dependencies"
         run: |
