@@ -74,6 +74,9 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
+      - name: Install some Headers
+        run: sudo apt-get install libcurl4-openssl-dev libgit2-dev
+
       - name: "[Stage] Install tic"
         run: Rscript -e "install.packages('tic', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
