@@ -32,6 +32,19 @@ test_that("gives up with an informative error after `retry` attempts", {
   expect_equal(calls, 4L)
 })
 
+test_that("a persistent 'no data' result is returned as empty, not an error", {
+  fake <- function(...) {
+    stop("No data returned by the query. Consider changing search parameters.")
+  }
+  local_mocked_bindings(gtrends = fake, .package = "trendecon")
+
+  res <- gtrends_with_backoff(
+    "x", wait = 0.001, max_wait = 0.002, retry = 3, quiet = TRUE
+  )
+
+  expect_null(res$interest_over_time)
+})
+
 test_that("unexpected (non-classified) errors are retried too", {
   calls <- 0L
   fake <- function(...) {

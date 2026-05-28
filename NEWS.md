@@ -1,3 +1,19 @@
+# trendecon 0.3.1
+
+## Rate-limit resilience
+
+* `gtrends_with_backoff()` now paces queries via
+  `options(trendecon.query_pause = <seconds>)` to stay under Google's rate
+  limiter (off by default). Pacing prevents rate limits far more reliably than
+  recovering from them, which matters for high-volume bursts like the gap
+  backfill.
+* A query that still returns "no data" after exhausting retries is treated as a
+  genuinely empty (zero-volume) window instead of aborting the keyword. Retries
+  first give a transient rate limit - which can also present as "no data" - a
+  chance to recover. This stops a single low-volume keyword from freezing an
+  entire index (which truncates to its weakest keyword's last date).
+* `proc_keyword_backfill_daily()` retries more generously by default.
+
 # trendecon 0.3.0
 
 ## Resilience

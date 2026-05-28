@@ -24,8 +24,8 @@
 proc_keyword_backfill_daily <- function(keyword = "Insolvenz",
                                          geo = "CH",
                                          from = NULL,
-                                         wait = 5,
-                                         retry = 10) {
+                                         wait = 10,
+                                         retry = 20) {
   d_old <- dplyr::mutate(read_keyword(keyword, geo, "d"), n = as.integer(n))
   last <- max(d_old$time)
 

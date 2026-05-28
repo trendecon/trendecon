@@ -63,6 +63,12 @@ gtrends_with_backoff <- function(keyword = NA,
 
   if (attempt == 1) {
     msg("Downloading data for ", time)
+    # Baseline pacing between distinct queries to stay under Google's rate
+    # limiter (set via options(trendecon.query_pause = <seconds>); 0 = off).
+    # Pacing prevents rate limits far more reliably than recovering from them,
+    # which matters for high-volume bursts such as the gap backfill.
+    pause <- getOption("trendecon.query_pause", 0)
+    if (is.numeric(pause) && pause > 0) Sys.sleep(pause)
   } else {
     msg("Attempt ", attempt, "/", retry)
   }
@@ -84,7 +90,22 @@ gtrends_with_backoff <- function(keyword = NA,
         msg("Server response: ", reason)
       }
 
+      empty_result <- grepl(
+        "No data returned|Consider changing search parameters",
+        m,
+        ignore.case = TRUE
+      )
+
       if (attempt >= retry) {
+        # If a query still returns "no data" after exhausting retries, treat it
+        # as a genuinely empty (zero-volume) window rather than aborting the
+        # keyword: return a NULL interest_over_time, which the callers already
+        # handle by substituting a zero series. Retries first give a transient
+        # rate limit (which can also present as "no data") a chance to recover.
+        if (empty_result) {
+          msg("Still no data after ", attempt, " attempts; treating window as empty")
+          return(list(interest_over_time = NULL))
+        }
         stop(
           "Retries exhausted after ", attempt, " attempts (last: ",
           reason, " - ", m, ")",
