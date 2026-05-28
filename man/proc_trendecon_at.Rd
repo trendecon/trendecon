@@ -2,10 +2,18 @@
 % Please edit documentation in R/proc_trendecon_at.R
 \name{proc_trendecon_at}
 \alias{proc_trendecon_at}
-\title{Calculate Trendecon Main Indices for Germany}
+\title{Calculate Trendecon Main Indices for Austria}
 \usage{
-proc_trendecon_at()
+proc_trendecon_at(backfill_from = NULL)
+}
+\arguments{
+\item{backfill_from}{Optional start date (\code{YYYY-mm-dd}); see
+\code{\link[=proc_trendecon_ch]{proc_trendecon_ch()}}.}
+}
+\value{
+Invisibly, a per-index status data frame.
 }
 \description{
-Calculate Trendecon Main Indices for Germany
+Updates every Austrian index from Google Trends and copies the seasonally
+adjusted series into \code{data/at}. See \code{\link[=proc_trendecon]{proc_trendecon()}} for details.
 }

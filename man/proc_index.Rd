@@ -4,7 +4,7 @@
 \alias{proc_index}
 \title{Prepare an index.}
 \usage{
-proc_index(keywords, geo, index_name)
+proc_index(keywords, geo, index_name, backfill_from = NULL)
 }
 \arguments{
 \item{keywords}{A vector of keyword names comprising the index.}
@@ -12,6 +12,10 @@ proc_index(keywords, geo, index_name)
 \item{geo}{A character vector denoting geographic region.}
 
 \item{index_name}{The name given to the index.}
+
+\item{backfill_from}{Optional start date (\code{YYYY-mm-dd}). If supplied, the
+daily series of each keyword is backfilled from this date before the regular
+update (see \code{\link[=proc_keyword_backfill_daily]{proc_keyword_backfill_daily()}}). Use once after an outage.}
 }
 \description{
 Creates or updates an index using data from already downloaded keywords.

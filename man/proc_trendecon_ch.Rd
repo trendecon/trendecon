@@ -2,10 +2,21 @@
 % Please edit documentation in R/proc_trendecon_ch.R
 \name{proc_trendecon_ch}
 \alias{proc_trendecon_ch}
-\title{Calculate Trendecon Main Indices for Switzeland}
+\title{Calculate Trendecon Main Indices for Switzerland}
 \usage{
-proc_trendecon_ch()
+proc_trendecon_ch(backfill_from = NULL)
+}
+\arguments{
+\item{backfill_from}{Optional start date (\code{YYYY-mm-dd}). If supplied, each
+keyword's daily series is backfilled from this date before the regular
+update, to repair a gap left by an outage. Use once, then omit.}
+}
+\value{
+Invisibly, a per-index status data frame.
 }
 \description{
-Calculate Trendecon Main Indices for Switzeland
+Updates every Swiss index from Google Trends and copies the seasonally
+adjusted series into \code{data/ch}. Indices are processed independently, so a
+failure in one does not prevent the others from updating. See
+\code{\link[=proc_trendecon]{proc_trendecon()}} for details.
 }

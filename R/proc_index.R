@@ -13,6 +13,9 @@
 #' @param keywords A vector of keyword names comprising the index.
 #' @param geo A character vector denoting geographic region.
 #' @param index_name The name given to the index.
+#' @param backfill_from Optional start date (`YYYY-mm-dd`). If supplied, the
+#'   daily series of each keyword is backfilled from this date before the regular
+#'   update (see [proc_keyword_backfill_daily()]). Use once after an outage.
 #'
 #' @examples
 #' \dontrun{
@@ -20,9 +23,30 @@
 #' proc_index(keywords, "ch", "clothing")
 #' }
 #' @export
-proc_index <- function(keywords, geo, index_name) {
+proc_index <- function(keywords, geo, index_name, backfill_from = NULL) {
 
-  lapply(keywords, proc_keyword, geo = geo)
+  # Isolate each keyword: a failed download (exhausted retries, etc.) must not
+  # abort the whole index. The PCA below then runs over whatever data exists on
+  # disk - freshly downloaded where it worked, previous values where it didn't.
+  for (kw in keywords) {
+    tryCatch(
+      {
+        # one-off: fill a daily gap left by an outage before the regular update
+        if (!is.null(backfill_from)) {
+          proc_keyword_backfill_daily(kw, geo = geo, from = backfill_from)
+        }
+        proc_keyword(kw, geo = geo)
+      },
+      error = function(e) {
+        warning(
+          "keyword '", kw, "' (", geo, "/", index_name,
+          ") could not be updated, keeping existing data: ",
+          conditionMessage(e),
+          call. = FALSE
+        )
+      }
+    )
+  }
 
   data <- read_keywords(keywords, geo = geo, id = "seas_adj")
 

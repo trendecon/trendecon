@@ -1,26 +1,22 @@
-#' Calculate Trendecon Main Indices for Germany
+#' Calculate Trendecon Main Indices for Austria
 #'
+#' Updates every Austrian index from Google Trends and copies the seasonally
+#' adjusted series into `data/at`. See [proc_trendecon()] for details.
+#'
+#' @param backfill_from Optional start date (`YYYY-mm-dd`); see
+#'   [proc_trendecon_ch()].
+#' @return Invisibly, a per-index status data frame.
 #' @export
-#'
-proc_trendecon_at <- function() {
+proc_trendecon_at <- function(backfill_from = NULL) {
 
-  kw_trendecon <- c(
-    "Wirtschaftskrise",
-    "Kurzarbeit",
-    "arbeitslos",
-    "Insolvenz"
+  indices <- list(
+    trendecon = c(
+      "Wirtschaftskrise",
+      "Kurzarbeit",
+      "arbeitslos",
+      "Insolvenz"
+    )
   )
 
-  proc_index(kw_trendecon, "AT", 'trendecon')
-
-  indices_in_production <- c(
-    "trendecon"
-  )
-
-  # copy to data/ch
-  lapply(indices_in_production, function(e) fs::file_copy(path_keyword(e, "at", "sa"), path_data("at"), overwrite = TRUE))
-
-  # FIXME: also store d, w, m, f in data/de
+  proc_trendecon("AT", indices, backfill_from = backfill_from)
 }
-
-

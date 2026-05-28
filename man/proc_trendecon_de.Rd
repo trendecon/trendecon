@@ -4,8 +4,17 @@
 \alias{proc_trendecon_de}
 \title{Calculate Trendecon Main Indices for Germany}
 \usage{
-proc_trendecon_de()
+proc_trendecon_de(backfill_from = NULL)
+}
+\arguments{
+\item{backfill_from}{Optional start date (\code{YYYY-mm-dd}); see
+\code{\link[=proc_trendecon_ch]{proc_trendecon_ch()}}.}
+}
+\value{
+Invisibly, a per-index status data frame.
 }
 \description{
-Calculate Trendecon Main Indices for Germany
+Updates every German index from Google Trends and copies the seasonally
+adjusted series into \code{data/de}. Indices are processed independently. See
+\code{\link[=proc_trendecon]{proc_trendecon()}} for details.
 }

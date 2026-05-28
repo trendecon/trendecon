@@ -43,8 +43,8 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     keyword = keyword,
     geo = geo,
     time = "now 7-d",
-    wait = 20,
-    retry = 20,
+    wait = 5,
+    retry = 10,
   )
   h <- h %>%
     group_by(time) %>%
@@ -59,7 +59,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     geo = geo,
     from = seq(today, length.out = 2, by = "-90 days")[2],
     stepsize = "1 day", windowsize = "3 months",
-    n_windows = n_windows, wait = 20, retry = 20,
+    n_windows = n_windows, wait = 5, retry = 10,
     prevent_window_shrinkage = FALSE
   )
   enhance_keyword(d, keyword, geo, "d")
@@ -70,7 +70,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     geo = geo,
     from = seq(today, length.out = 2, by = "-1 year")[2],
     stepsize = "1 week", windowsize = "1 year",
-    n_windows = n_windows, wait = 20, retry = 20,
+    n_windows = n_windows, wait = 5, retry = 10,
     prevent_window_shrinkage = FALSE
   )
   enhance_keyword(w, keyword, geo, "w")
@@ -81,7 +81,7 @@ proc_keyword_latest <- function(keyword = "Insolvenz",
     geo = geo,
     from = "2006-01-01",
     stepsize = "1 month", windowsize = "20 years",
-    n_windows = n_windows, wait = 20, retry = 20,
+    n_windows = n_windows, wait = 5, retry = 10,
     prevent_window_shrinkage = FALSE
   )
   enhance_keyword(m, keyword, geo, "m")
