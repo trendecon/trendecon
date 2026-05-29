@@ -1,3 +1,21 @@
+# trendecon 0.3.2
+
+## Faster, bounded rate-limit handling
+
+* `gtrends_with_backoff()` now gives "no data returned" responses their own
+  short retry budget (`empty_retry`, default 4) instead of the full hard-error
+  `retry` ladder. A genuinely empty (zero-volume) window never recovers, so
+  retrying it 10-20 times only wastes time; a few quick attempts still let a
+  transient rate limit (which can present as "no data") recover, then the window
+  is accepted as empty.
+* Hard errors (429 / 5xx / network) now fail fast: `retry` lowered to 6 and
+  `max_wait` to 30s. An exhausted hard error still aborts the keyword (caught by
+  `proc_index()`, which keeps the keyword's existing data) - deliberately, so a
+  rate-limited keyword stays unchanged rather than being overwritten with zeros.
+  A re-run on a fresh runner IP then fills it in cleanly. Together this keeps a
+  throttled backfill from grinding for hours (previously ~40 min per throttled
+  query) and makes it safe to simply re-run until every index comes through.
+
 # trendecon 0.3.1
 
 ## Rate-limit resilience

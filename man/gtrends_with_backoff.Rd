@@ -15,9 +15,10 @@ gtrends_with_backoff(
   cookie_url = "http://trends.google.com/Cookies/NID",
   tz = 0,
   onlyInterest = FALSE,
-  retry = 10,
-  wait = 5,
-  max_wait = 120,
+  retry = 6,
+  empty_retry = 4,
+  wait = 4,
+  max_wait = 30,
   quiet = FALSE,
   attempt = 1
 )
@@ -65,7 +66,15 @@ to UTC. Note the parameter 'time' above is specified in UTC. E.g. choosing
 
 \item{onlyInterest}{If you only want the interest over time set it to TRUE.}
 
-\item{retry}{Maximum number of attempts before giving up.}
+\item{retry}{Maximum number of attempts before giving up on a hard error
+(429, 5xx, network, ...).}
+
+\item{empty_retry}{Maximum attempts for a "no data returned" response before
+accepting the window as genuinely empty (zero volume). Kept small: a truly
+empty window never recovers, so retrying it the full \code{retry} ladder just
+wastes time; a few quick attempts still let a \emph{transient} rate limit (which
+can also surface as "no data") recover. This is the lever that keeps a
+rate-limited backfill from grinding for hours.}
 
 \item{wait}{Base wait in seconds. The wait before attempt \code{n} grows
 exponentially (\code{wait * 2^(n - 1)}), is capped at \code{max_wait}, and has random

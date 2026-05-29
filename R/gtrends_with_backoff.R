@@ -7,7 +7,14 @@
 #' waits is far more robust than failing on the first hiccup.
 #'
 #' @inheritParams gtrendsR::gtrends
-#' @param retry Maximum number of attempts before giving up.
+#' @param retry Maximum number of attempts before giving up on a hard error
+#'   (429, 5xx, network, ...).
+#' @param empty_retry Maximum attempts for a "no data returned" response before
+#'   accepting the window as genuinely empty (zero volume). Kept small: a truly
+#'   empty window never recovers, so retrying it the full `retry` ladder just
+#'   wastes time; a few quick attempts still let a *transient* rate limit (which
+#'   can also surface as "no data") recover. This is the lever that keeps a
+#'   rate-limited backfill from grinding for hours.
 #' @param wait Base wait in seconds. The wait before attempt `n` grows
 #'   exponentially (`wait * 2^(n - 1)`), is capped at `max_wait`, and has random
 #'   jitter added to avoid synchronized retries hammering the server.
@@ -26,9 +33,10 @@ gtrends_with_backoff <- function(keyword = NA,
                                  cookie_url = "http://trends.google.com/Cookies/NID",
                                  tz = 0,
                                  onlyInterest = FALSE,
-                                 retry = 10,
-                                 wait = 5,
-                                 max_wait = 120,
+                                 retry = 6,
+                                 empty_retry = 4,
+                                 wait = 4,
+                                 max_wait = 30,
                                  quiet = FALSE,
                                  attempt = 1) {
   msg <- function(...) {
@@ -96,16 +104,16 @@ gtrends_with_backoff <- function(keyword = NA,
         ignore.case = TRUE
       )
 
-      if (attempt >= retry) {
-        # If a query still returns "no data" after exhausting retries, treat it
-        # as a genuinely empty (zero-volume) window rather than aborting the
-        # keyword: return a NULL interest_over_time, which the callers already
-        # handle by substituting a zero series. Retries first give a transient
-        # rate limit (which can also present as "no data") a chance to recover.
-        if (empty_result) {
-          msg("Still no data after ", attempt, " attempts; treating window as empty")
-          return(list(interest_over_time = NULL))
-        }
+      # "No data" gets its own, much shorter budget: after a few quick attempts
+      # accept the window as genuinely empty (return NULL interest_over_time,
+      # which callers already substitute with a zero series). This is what stops
+      # a rate-limited run from grinding the full `retry` ladder per query.
+      if (empty_result && attempt >= empty_retry) {
+        msg("Still no data after ", attempt, " attempts; treating window as empty")
+        return(list(interest_over_time = NULL))
+      }
+
+      if (!empty_result && attempt >= retry) {
         stop(
           "Retries exhausted after ", attempt, " attempts (last: ",
           reason, " - ", m, ")",
@@ -132,6 +140,7 @@ gtrends_with_backoff <- function(keyword = NA,
         tz = tz,
         onlyInterest = onlyInterest,
         retry = retry,
+        empty_retry = empty_retry,
         wait = wait,
         max_wait = max_wait,
         quiet = quiet,

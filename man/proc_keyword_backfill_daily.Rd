@@ -8,8 +8,8 @@ proc_keyword_backfill_daily(
   keyword = "Insolvenz",
   geo = "CH",
   from = NULL,
-  wait = 10,
-  retry = 20
+  wait = 4,
+  retry = 6
 )
 }
 \arguments{
