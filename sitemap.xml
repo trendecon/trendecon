@@ -6,13 +6,17 @@
 <url><loc>/articles/intro.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/gtrends_with_backoff.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/path_keyword.html</loc></url>
 <url><loc>/reference/path_trendecon.html</loc></url>
 <url><loc>/reference/proc_index.html</loc></url>
 <url><loc>/reference/proc_keyword.html</loc></url>
+<url><loc>/reference/proc_keyword_backfill_daily.html</loc></url>
 <url><loc>/reference/proc_keyword_init.html</loc></url>
 <url><loc>/reference/proc_keyword_latest.html</loc></url>
+<url><loc>/reference/proc_trendecon.html</loc></url>
 <url><loc>/reference/proc_trendecon_at.html</loc></url>
 <url><loc>/reference/proc_trendecon_ch.html</loc></url>
 <url><loc>/reference/proc_trendecon_de.html</loc></url>

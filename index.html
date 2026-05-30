@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">trendecon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
       </span>
     </div>
 
@@ -56,6 +56,9 @@
       <a href="articles/intro.html">Introduction to trendecon</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -84,14 +87,15 @@
 
 <p>This package contains R code to construct long daily time series from Google Trends. Robustness of the data is achieved by querying Google mulitple times. The queries are sampled at daily, weekly and monthy frequencies and then harmonized such that the long term trend is preserved. The download itself relies on the <a href="https://CRAN.R-project.org/package=gtrendsR" class="external-link">gtrendsR</a> package by Philippe Massicotte and Dirk Eddelbuettel.</p>
 <p>The website <a href="https://www.trendecon.org" class="external-link">www.trendecon.org</a> applies the package and provides a set of indicators for Switzerland and is updated daily. During the Covid-19 pandemic, such high-frequency indicators have been in high demand. We use Google search trends to create meaningful indicators that don’t suffer from this problem. In particular, we extract daily search data on keywords reflecting consumers’ perception of the economic situation.</p>
-<p>The project was inititated during the <a href="https://www.versusvirus.ch" class="external-link">#versusvirus</a> and got <a href="https://www.versusvirus.ch/funding" class="external-link">funding</a> from the hackathon.</p>
+<p>The project was initiated during the <a href="https://www.versusvirus.ch" class="external-link">#versusvirus</a> hackathon, from which it received <a href="https://www.versusvirus.ch/funding" class="external-link">funding</a>.</p>
+<p>The method is described in Eichenauer, Indergand, Martínez &amp; Sax (2022), <em>Obtaining consistent time series from Google Trends</em>, Economic Inquiry 60(2), 694–705, <a href="https://doi.org/10.1111/ecin.13049" class="external-link">doi:10.1111/ecin.13049</a>.</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
 <p>You can install the trendecon package from GitHub.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"trendecon/trendecon"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"trendecon/trendecon"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -158,9 +162,8 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/trendecon/trendecon/actions" class="external-link"><img src="https://github.com/trendecon/trendecon/workflows/tic/badge.svg?branch=master" alt="tic"></a></li>
-<li><a href="https://travis-ci.com/trendecon/trendecon" class="external-link"><img src="https://travis-ci.com/trendecon/trendecon.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://milano-r.github.io/erum2020-covidr-contest/trendecon.html" class="external-link"><img src="https://badgen.net/https/runkit.io/erum2020-covidr/badge/branches/master/trendecon?cache=300" alt="eRum2020::CovidR"></a></li>
+<li><a href="https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://milano-r.github.io/erum2020-covidr-contest/trendecon.html" class="external-link"><img src="https://img.shields.io/badge/eRum2020::CovidR-awardee-3aaf5c.svg" alt="eRum2020::CovidR"></a></li>
 </ul>
 </div>
 

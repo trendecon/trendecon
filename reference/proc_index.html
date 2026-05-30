@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">trendecon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
       </span>
     </div>
 
@@ -38,6 +38,9 @@
       <a href="../articles/intro.html">Introduction to trendecon</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trendecon/trendecon/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -63,7 +66,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">proc_index</span><span class="op">(</span><span class="va">keywords</span>, <span class="va">geo</span>, <span class="va">index_name</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">proc_index</span><span class="op">(</span><span class="va">keywords</span>, <span class="va">geo</span>, <span class="va">index_name</span>, backfill_from <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,6 +83,12 @@
 
 <dt id="arg-index-name">index_name<a class="anchor" aria-label="anchor" href="#arg-index-name"></a></dt>
 <dd><p>The name given to the index.</p></dd>
+
+
+<dt id="arg-backfill-from">backfill_from<a class="anchor" aria-label="anchor" href="#arg-backfill-from"></a></dt>
+<dd><p>Optional start date (<code>YYYY-mm-dd</code>). If supplied, the
+daily series of each keyword is backfilled from this date before the regular
+update (see <code><a href="proc_keyword_backfill_daily.html">proc_keyword_backfill_daily()</a></code>). Use once after an outage.</p></dd>
 
 </dl></div>
     <div id="details">
