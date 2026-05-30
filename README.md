@@ -5,9 +5,7 @@
 
 <!-- badges: start -->
 
-[![tic](https://github.com/trendecon/trendecon/workflows/tic/badge.svg?branch=master)](https://github.com/trendecon/trendecon/actions)
-[![Travis build
-status](https://travis-ci.com/trendecon/trendecon.svg?branch=master)](https://travis-ci.com/trendecon/trendecon)
+[![R-CMD-check](https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml)
 [![eRum2020::CovidR](https://badgen.net/https/runkit.io/erum2020-covidr/badge/branches/master/trendecon?cache=300)](https://milano-r.github.io/erum2020-covidr-contest/trendecon.html)
 <!-- badges: end -->
 
@@ -27,9 +25,13 @@ indicators that don’t suffer from this problem. In particular, we
 extract daily search data on keywords reflecting consumers’ perception
 of the economic situation.
 
-The project was inititated during the
-[\#versusvirus](https://www.versusvirus.ch) and got
-[funding](https://www.versusvirus.ch/funding) from the hackathon.
+The project was initiated during the
+[\#versusvirus](https://www.versusvirus.ch) hackathon, from which it
+received [funding](https://www.versusvirus.ch/funding).
+
+The method is described in Eichenauer, Indergand, Martínez & Sax (2022),
+*Obtaining consistent time series from Google Trends*, Economic Inquiry
+60(2), 694–705, [doi:10.1111/ecin.13049](https://doi.org/10.1111/ecin.13049).
 
 ### Installation
 

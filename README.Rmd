@@ -16,8 +16,7 @@ knitr::opts_chunk$set(
 ## Create Daily Series from Google Trends
 
 <!-- badges: start -->
-[![tic](https://github.com/trendecon/trendecon/workflows/tic/badge.svg?branch=master)](https://github.com/trendecon/trendecon/actions)
-[![Travis build status](https://travis-ci.com/trendecon/trendecon.svg?branch=master)](https://travis-ci.com/trendecon/trendecon)
+[![R-CMD-check](https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml)
 [![eRum2020::CovidR](https://badgen.net/https/runkit.io/erum2020-covidr/badge/branches/master/trendecon?cache=300)](https://milano-r.github.io/erum2020-covidr-contest/trendecon.html)
 <!-- badges: end -->
 
@@ -25,7 +24,9 @@ This package contains R code to construct long daily time series from Google Tre
 
 The website [www.trendecon.org](https://www.trendecon.org) applies the package and provides a set of indicators for Switzerland and is updated daily. During the Covid-19 pandemic, such high-frequency indicators have been in high demand. We use Google search trends to create meaningful indicators that don't suffer from this problem. In particular, we extract daily search data on keywords reflecting consumers' perception of the economic situation.
 
-The project was inititated during the [#versusvirus](https://www.versusvirus.ch) and got [funding](https://www.versusvirus.ch/funding) from the hackathon.
+The project was initiated during the [#versusvirus](https://www.versusvirus.ch) hackathon, from which it received [funding](https://www.versusvirus.ch/funding).
+
+The method is described in Eichenauer, Indergand, Martínez & Sax (2022), *Obtaining consistent time series from Google Trends*, Economic Inquiry 60(2), 694–705, [doi:10.1111/ecin.13049](https://doi.org/10.1111/ecin.13049).
 
 ### Installation
 
