@@ -3,7 +3,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trendecon/trendecon/actions/workflows/R-CMD-check.yaml)
-[![eRum2020::CovidR](https://badgen.net/https/runkit.io/erum2020-covidr/badge/branches/master/trendecon?cache=300)](https://milano-r.github.io/erum2020-covidr-contest/trendecon.html)
+[![eRum2020::CovidR](https://img.shields.io/badge/eRum2020::CovidR-awardee-3aaf5c.svg)](https://milano-r.github.io/erum2020-covidr-contest/trendecon.html)
 <!-- badges: end -->
 
 This package contains R code to construct long daily time series from
